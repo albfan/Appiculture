@@ -5,20 +5,19 @@ import com.base.controllers.DBmanager;
 import com.base.models.Apiaries;
 import com.base.models.structure.BaseController;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController extends BaseController implements Initializable {
@@ -47,12 +46,25 @@ public class MainController extends BaseController implements Initializable {
 
     @FXML
     public void deleteApiariesListView(){
-        DBmanager.getINSTANCE().deleteApiariesInDB(apiariesListView.getSelectionModel().getSelectedItems());
-        refreshApiariesListView();
+
+        if(apiariesListView.getSelectionModel().getSelectedItems().size()>0) {
+            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmation.setTitle(null);
+            confirmation.setHeaderText(null);
+            confirmation.setContentText("¿Está seguro de borrar los apiarios seleccionados?");
+            Optional<ButtonType> result = confirmation.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                DBmanager.getINSTANCE().deleteApiariesInDB(apiariesListView.getSelectionModel().getSelectedItems());
+                refreshApiariesListView();
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
+        }
+
     }
 
     @FXML
-    public void openFormApiary(ActionEvent actionEvent){//todo Arreglar este evento. No lo quiere coger el fxml
+    public void openFormApiary(ActionEvent actionEvent){
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormApiary.fxml"));
         try {
@@ -71,13 +83,17 @@ public class MainController extends BaseController implements Initializable {
 
                 //this is to check if user had multiple selection on apiaries list. Only 1 allowed to be modified.
                 ObservableList<Apiaries> modList=apiariesListView.getSelectionModel().getSelectedItems();
-                if (modList.size()!= 1){
-                    alert.setContentText("Debe seleccionar solo 1 apiario");
-                }else{
+                if (modList.size()> 1){
+                    alert.setContentText("Solo puede modificar los apiarios de uno en uno");
+                    alert.show();
+                }else if(modList.size()== 1){
                     fa.setApiary(modList.get(0));
+                    stage.showAndWait();
                 }
+            }else{
+                stage.showAndWait();
             }
-            stage.showAndWait();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

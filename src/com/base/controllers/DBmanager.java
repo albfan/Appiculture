@@ -97,6 +97,21 @@ public class DBmanager {
         }
     }
 
+    public void modifyApiaryInDB(Apiaries a){
+        try {
+
+            s = "UPDATE apiaries SET name=?, address=? WHERE id=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setString(1, a.getName());
+            preparedStatement.setString(2, a.getAdress());
+            preparedStatement.setInt(3,a.getId());
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteApiariesInDB(ObservableList<Apiaries> delList){
         if (delList.size()>0){
             try {

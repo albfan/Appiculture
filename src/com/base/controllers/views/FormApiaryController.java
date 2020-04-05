@@ -32,11 +32,7 @@ public class FormApiaryController extends BaseController implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(null!=apiary){
-            TFname.setText(apiary.getName());
-            TFaddress.setText(apiary.getAdress());
-            id=apiary.getId();
-        }
+
     }
 
     @FXML
@@ -47,8 +43,10 @@ public class FormApiaryController extends BaseController implements Initializabl
         ap.setAdress(TFaddress.getText());
         if(id!=-2){
             ap.setId(id);
+            DBmanager.getINSTANCE().modifyApiaryInDB(ap);
+        }else {
+            DBmanager.getINSTANCE().insertApiaryInDB(ap);
         }
-        DBmanager.getINSTANCE().insertApiaryInDB(ap);
 
         actualStage.close();
     }
@@ -59,5 +57,8 @@ public class FormApiaryController extends BaseController implements Initializabl
 
     public void setApiary(Apiaries apiary) {
         this.apiary = apiary;
+        TFname.setText(apiary.getName());
+        TFaddress.setText(apiary.getAdress());
+        id=apiary.getId();
     }
 }
