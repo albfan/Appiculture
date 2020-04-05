@@ -1,0 +1,63 @@
+package com.base.controllers.views;
+
+import com.base.controllers.DBmanager;
+import com.base.models.Apiaries;
+import com.base.models.structure.BaseController;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class FormApiaryController extends BaseController implements Initializable {
+    @FXML
+    private TextField TFname;
+
+    @FXML
+    private TextField TFaddress;
+
+    @FXML
+    private Button BtnOk;
+
+    @FXML
+    private Button BtnCancel;
+
+    /**
+     * This apiary is in case we use this form to modify instead of creating
+     */
+    private Apiaries apiary=null;
+    private int id=-2;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(null!=apiary){
+            TFname.setText(apiary.getName());
+            TFaddress.setText(apiary.getAdress());
+            id=apiary.getId();
+        }
+    }
+
+    @FXML
+    public void createNewApiary(){
+
+        Apiaries ap= new Apiaries();
+        ap.setName(TFname.getText());
+        ap.setAdress(TFaddress.getText());
+        if(id!=-2){
+            ap.setId(id);
+        }
+        DBmanager.getINSTANCE().insertApiaryInDB(ap);
+
+        actualStage.close();
+    }
+
+    public Apiaries getApiary() {
+        return apiary;
+    }
+
+    public void setApiary(Apiaries apiary) {
+        this.apiary = apiary;
+    }
+}
