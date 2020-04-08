@@ -1,7 +1,8 @@
 package com.base.models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
+
 
 public class Beehives implements Serializable {
 
@@ -12,7 +13,7 @@ public class Beehives implements Serializable {
     private int id_apiary;
 
     //this is the date where hive was starting to be used in an Apiary
-    private LocalDate date;
+    private Date date;
 
     //this is the type of hive. You have diferent models in the market
     private String type;
@@ -22,7 +23,7 @@ public class Beehives implements Serializable {
     public Beehives() {
     }
 
-    public Beehives(int number, int id_apiary, LocalDate date, String type, boolean favorite) {
+    public Beehives(int number, int id_apiary, Date date, String type, boolean favorite) {
         this.number = number;
         this.id_apiary = id_apiary;
         this.date = date;
@@ -46,11 +47,11 @@ public class Beehives implements Serializable {
         this.id_apiary = id_apiary;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -60,5 +61,13 @@ public class Beehives implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }

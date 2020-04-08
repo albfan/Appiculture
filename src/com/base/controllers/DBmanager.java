@@ -1,10 +1,12 @@
 package com.base.controllers;
 
 import com.base.models.Apiaries;
+import com.base.models.Beehives;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+
 
 public class DBmanager {
 
@@ -15,11 +17,13 @@ public class DBmanager {
     private Statement statement;
     private ResultSet resultSet;
     private ObservableList<Apiaries> apiariesList;
+    private ObservableList<Beehives> beehivesList;
 
 
     //Constructor--------------
     private DBmanager() {
         apiariesList = FXCollections.observableArrayList();
+        beehivesList = FXCollections.observableArrayList();
     }
 
     //Singleton Method-------------
@@ -57,7 +61,7 @@ public class DBmanager {
         }
     }
 
-    //APIARIES-------(id, name, adress) id is autoincremental-----------------
+    //APIARIES-------(id, name, adress) id is PK and autoincremental-----------------
     public void insertApiaryInDB(Apiaries ap) {
 
         try {
@@ -128,5 +132,51 @@ public class DBmanager {
         }
     }
 
+    // BEEHIVES---(number,id_apiary,date,type,favorite) number is PK and autoincremental
 
+    public ObservableList<Beehives> getHivesFromDB(Apiaries ap){
+
+        try {
+
+            beehivesList.clear();
+            s = "SELECT * FROM beehives WHERE id_apiary = "+ap.getId();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(s);
+            while (resultSet.next()) {
+
+                Beehives bh = new Beehives();
+                bh.setNumber(resultSet.getInt(1));
+                bh.setId_apiary(resultSet.getInt(2));
+                bh.setDate(resultSet.getDate(3));
+                bh.setType(resultSet.getString(4));
+                bh.setFavorite(resultSet.getBoolean(5));
+                beehivesList.add(bh);
+            }
+            return beehivesList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String insertBeehiveInDB(Beehives bh){//todo pendiente de completar con las verificaciónes de si existen ya los numeros de colmena
+
+        try {
+
+            s = "INSERT INTO beehives VALUES( ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, bh.getNumber());
+            preparedStatement.setInt(2, bh.getId_apiary());
+            preparedStatement.setDate(3, bh.getDate());
+            preparedStatement.setString(4, bh.getType());
+            preparedStatement.setBoolean(5, bh.isFavorite());
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
 }

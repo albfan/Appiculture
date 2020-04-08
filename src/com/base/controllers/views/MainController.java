@@ -22,13 +22,24 @@ import java.util.ResourceBundle;
 
 public class MainController extends BaseController implements Initializable {
 
-    //Apiaries variables ----------------
+    //Apiaries nodes ----------------
     @FXML
     private Button btnAddApiary;
     @FXML
     private Button btnRmvApiary;
     @FXML
     private ListView<Apiaries> apiariesListView;
+    @FXML
+    private Button btnModApiary;
+    //Beehives nodes----------------
+    @FXML
+    private Button btnAddHive;
+    @FXML
+    private Button btnModHive;
+    @FXML
+    private Button btnDelHive;
+    @FXML
+    private Button btnShowAllHives;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,7 +47,7 @@ public class MainController extends BaseController implements Initializable {
 
 
     }
-    //Apiraires methods =======================================================
+    //Apiaries methods =======================================================
     private void refreshApiariesListView(){
 
         apiariesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -45,7 +56,7 @@ public class MainController extends BaseController implements Initializable {
     }
 
     @FXML
-    public void deleteApiariesListView(){
+    public void deleteApiaries(){
 
         if(apiariesListView.getSelectionModel().getSelectedItems().size()>0) {
             Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
@@ -99,4 +110,27 @@ public class MainController extends BaseController implements Initializable {
         }
         refreshApiariesListView();
     }
+
+    //Beehives methods =================================================================================
+
+    public void refreshHivesTableView(){
+
+        ObservableList<Apiaries> templist=apiariesListView.getSelectionModel().getSelectedItems();
+        //we only refresh the table when we select 1 apiary
+        if(templist.size()==1){
+            Apiaries ap = templist.get(0);
+        }
+
+    }
+
+    @FXML
+    public void deleteHives(){
+
+    }
+
+    @FXML
+    public void openFormHives(ActionEvent actionEvent){
+
+    }
+
 }
