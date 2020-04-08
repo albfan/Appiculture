@@ -84,7 +84,7 @@
                                           <TextField layoutX="331.0" layoutY="51.0" prefHeight="25.0" prefWidth="76.0" />
                                           <Label layoutX="418.0" layoutY="55.0" prefHeight="17.0" prefWidth="36.0" text="tipo:" />
                                           <ComboBox layoutX="447.0" layoutY="51.0" prefHeight="25.0" prefWidth="147.0" />
-                                          <Button fx:id="btnAddHive" layoutY="25.0" mnemonicParsing="false" text="Añadir" />
+                                          <Button fx:id="btnAddHive" layoutY="25.0" mnemonicParsing="false" onAction="#openFormHives" text="Añadir" />
                                           <Button fx:id="btnModHive" layoutX="51.0" layoutY="25.0" mnemonicParsing="false" text="Modificar" />
                                           <Button fx:id="btnDelHive" layoutX="118.0" layoutY="25.0" mnemonicParsing="false" text="Quitar" />
                                           <Button fx:id="btnShowAllHives" layoutX="188.0" layoutY="25.0" mnemonicParsing="false" text="Ver todas las colmenas" />

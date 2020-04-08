@@ -26,4 +26,9 @@ public class BaseController {
         }
     }
 
+    @FXML
+    public void validate(){
+
+    }
+
 }

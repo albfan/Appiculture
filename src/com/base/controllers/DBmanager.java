@@ -101,14 +101,14 @@ public class DBmanager {
         }
     }
 
-    public void modifyApiaryInDB(Apiaries a){
+    public void modifyApiaryInDB(Apiaries a) {
         try {
 
             s = "UPDATE apiaries SET name=?, address=? WHERE id=?";
             preparedStatement = connection.prepareStatement(s);
             preparedStatement.setString(1, a.getName());
             preparedStatement.setString(2, a.getAdress());
-            preparedStatement.setInt(3,a.getId());
+            preparedStatement.setInt(3, a.getId());
             int i = preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -116,17 +116,17 @@ public class DBmanager {
         }
     }
 
-    public void deleteApiariesInDB(ObservableList<Apiaries> delList){
-        if (delList.size()>0){
+    public void deleteApiariesInDB(ObservableList<Apiaries> delList) {
+        if (delList.size() > 0) {
             try {
                 for (Apiaries ap : delList) {
 
                     s = "DELETE FROM apiaries where id= ?";
                     preparedStatement = connection.prepareStatement(s);
-                    preparedStatement.setInt(1,ap.getId());
+                    preparedStatement.setInt(1, ap.getId());
                     preparedStatement.execute();
                 }
-            }catch (SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -134,12 +134,23 @@ public class DBmanager {
 
     // BEEHIVES---(number,id_apiary,date,type,favorite) number is PK and autoincremental
 
-    public ObservableList<Beehives> getHivesFromDB(Apiaries ap){
+    /**
+     * Return a list with all beehives in database if parameter is null or the
+     * beehives owned by the parameter apiary if not null.
+     * @param ap
+     * @return beehivesList
+     */
+    public ObservableList<Beehives> getHivesFromDB(Apiaries ap) {
 
         try {
 
             beehivesList.clear();
-            s = "SELECT * FROM beehives WHERE id_apiary = "+ap.getId();
+
+            if(null==ap){
+                s = "SELECT * FROM beehives";
+            }else{
+                s = "SELECT * FROM beehives WHERE id_apiary = " + ap.getId();
+            }
             statement = connection.createStatement();
             resultSet = statement.executeQuery(s);
             while (resultSet.next()) {
@@ -160,7 +171,7 @@ public class DBmanager {
         }
     }
 
-    public String insertBeehiveInDB(Beehives bh){//todo pendiente de completar con las verificaciónes de si existen ya los numeros de colmena
+    public String insertBeehiveInDB(Beehives bh) {//todo pendiente de completar con las verificaciónes de si existen ya los numeros de colmena
 
         try {
 

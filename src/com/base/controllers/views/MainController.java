@@ -47,8 +47,9 @@ public class MainController extends BaseController implements Initializable {
 
 
     }
+
     //Apiaries methods =======================================================
-    private void refreshApiariesListView(){
+    private void refreshApiariesListView() {
 
         apiariesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         apiariesListView.setItems(DBmanager.getINSTANCE().getApiariesFromDB());
@@ -56,9 +57,9 @@ public class MainController extends BaseController implements Initializable {
     }
 
     @FXML
-    public void deleteApiaries(){
+    public void deleteApiaries() {
 
-        if(apiariesListView.getSelectionModel().getSelectedItems().size()>0) {
+        if (apiariesListView.getSelectionModel().getSelectedItems().size() > 0) {
             Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
             confirmation.setTitle(null);
             confirmation.setHeaderText(null);
@@ -75,7 +76,7 @@ public class MainController extends BaseController implements Initializable {
     }
 
     @FXML
-    public void openFormApiary(ActionEvent actionEvent){
+    public void openFormApiary(ActionEvent actionEvent) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormApiary.fxml"));
         try {
@@ -90,18 +91,18 @@ public class MainController extends BaseController implements Initializable {
             stage.sizeToScene();
 
             //this part is used when we will modify an apiary instead creating a new one
-            if( ((Button)actionEvent.getSource()).getId().equalsIgnoreCase("btnModApiary")){
+            if (((Button) actionEvent.getSource()).getId().equalsIgnoreCase("btnModApiary")) {
 
                 //this is to check if user had multiple selection on apiaries list. Only 1 allowed to be modified.
-                ObservableList<Apiaries> modList=apiariesListView.getSelectionModel().getSelectedItems();
-                if (modList.size()> 1){
+                ObservableList<Apiaries> modList = apiariesListView.getSelectionModel().getSelectedItems();
+                if (modList.size() > 1) {
                     alert.setContentText("Solo puede modificar los apiarios de uno en uno");
                     alert.show();
-                }else if(modList.size()== 1){
+                } else if (modList.size() == 1) {
                     fa.setApiary(modList.get(0));
                     stage.showAndWait();
                 }
-            }else{
+            } else {
                 stage.showAndWait();
             }
 
@@ -113,24 +114,57 @@ public class MainController extends BaseController implements Initializable {
 
     //Beehives methods =================================================================================
 
-    public void refreshHivesTableView(){
+    public void refreshHivesTableView() {
 
-        ObservableList<Apiaries> templist=apiariesListView.getSelectionModel().getSelectedItems();
+        ObservableList<Apiaries> templist = apiariesListView.getSelectionModel().getSelectedItems();
         //we only refresh the table when we select 1 apiary
-        if(templist.size()==1){
-            Apiaries ap = templist.get(0);
+        if (templist.size() == 1) {
+            Apiaries ap = templist.get(0);//todo pendiente terminar este método
         }
 
     }
 
     @FXML
-    public void deleteHives(){
+    public void deleteHives() {
 
     }
 
     @FXML
-    public void openFormHives(ActionEvent actionEvent){
+    public void openFormHives(ActionEvent actionEvent) {
 
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormBeehives.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
+            FormBeehivesController fb = fxmlLoader.getController();
+            Stage stage = new Stage();
+            fb.setActualStage(stage);
+            Scene scene = new Scene(root);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.sizeToScene();
+
+//            //this part is used when we will modify an apiary instead creating a new one
+//            if( ((Button)actionEvent.getSource()).getId().equalsIgnoreCase("btnModApiary")){
+//
+//                //this is to check if user had multiple selection on apiaries list. Only 1 allowed to be modified.
+//                ObservableList<Apiaries> modList=apiariesListView.getSelectionModel().getSelectedItems();
+//                if (modList.size()> 1){
+//                    alert.setContentText("Solo puede modificar los apiarios de uno en uno");
+//                    alert.show();
+//                }else if(modList.size()== 1){
+//                    fb.setApiary(modList.get(0));
+//                    stage.showAndWait();
+//                }
+//            }else{
+//                stage.showAndWait();
+//            }
+
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

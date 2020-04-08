@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -53,7 +54,7 @@
                               </Label>
                               <ListView fx:id="apiariesListView" layoutY="78.0" prefHeight="447.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
                               <Button fx:id="btnAddApiary" layoutY="25.0" mnemonicParsing="false" onAction="#openFormApiary" prefHeight="25.0" prefWidth="87.0" text="Añadir" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
-                              <Button fx:id="btnRmvApiary" layoutX="88.0" layoutY="25.0" mnemonicParsing="false" onAction="#deleteApiariesListView" prefHeight="25.0" prefWidth="87.0" text="Quitar" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+                              <Button fx:id="btnRmvApiary" layoutX="88.0" layoutY="25.0" mnemonicParsing="false" onAction="#deleteApiaries" prefHeight="25.0" prefWidth="87.0" text="Quitar" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
                               <Button fx:id="btnModApiary" layoutY="50.0" mnemonicParsing="false" onAction="#openFormApiary" prefHeight="25.0" prefWidth="176.0" text="Modificar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                            </children></AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="404.0" prefWidth="886.0">
@@ -67,7 +68,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TableView layoutX="-1.0" layoutY="50.0" prefHeight="473.0" prefWidth="849.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                          <TableView layoutX="-1.0" layoutY="76.0" prefHeight="447.0" prefWidth="849.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
                                             <columns>
                                               <TableColumn prefWidth="106.0" text="Numero" />
                                               <TableColumn prefWidth="197.0" text="Apiario" />
@@ -77,12 +78,17 @@
                                                 <TableColumn prefWidth="118.0" text="Favoritas" />
                                             </columns>
                                           </TableView>
-                                          <Label layoutX="7.0" layoutY="25.0" prefHeight="25.0" prefWidth="188.0" text="Buscar por el número de colmena:" />
-                                          <TextField layoutX="195.0" layoutY="25.0" prefHeight="25.0" prefWidth="100.0" />
-                                          <Label layoutX="302.0" layoutY="29.0" prefHeight="17.0" prefWidth="36.0" text="edad:" />
-                                          <TextField layoutX="338.0" layoutY="25.0" prefHeight="25.0" prefWidth="76.0" />
-                                          <Label layoutX="425.0" layoutY="29.0" prefHeight="17.0" prefWidth="36.0" text="tipo:" />
-                                          <ComboBox layoutX="454.0" layoutY="25.0" prefHeight="25.0" prefWidth="147.0" />
+                                          <Label layoutY="51.0" prefHeight="25.0" prefWidth="188.0" text="Buscar por el número de colmena:" />
+                                          <TextField layoutX="188.0" layoutY="51.0" prefHeight="25.0" prefWidth="100.0" />
+                                          <Label layoutX="295.0" layoutY="55.0" prefHeight="17.0" prefWidth="36.0" text="edad:" />
+                                          <TextField layoutX="331.0" layoutY="51.0" prefHeight="25.0" prefWidth="76.0" />
+                                          <Label layoutX="418.0" layoutY="55.0" prefHeight="17.0" prefWidth="36.0" text="tipo:" />
+                                          <ComboBox layoutX="447.0" layoutY="51.0" prefHeight="25.0" prefWidth="147.0" />
+                                          <Button fx:id="btnAddHive" layoutY="25.0" mnemonicParsing="false" onAction="#openFormHives" text="Añadir" />
+                                          <Button fx:id="btnModHive" layoutX="51.0" layoutY="25.0" mnemonicParsing="false" text="Modificar" />
+                                          <Button fx:id="btnDelHive" layoutX="118.0" layoutY="25.0" mnemonicParsing="false" text="Quitar" />
+                                          <Button fx:id="btnShowAllHives" layoutX="188.0" layoutY="25.0" mnemonicParsing="false" text="Ver todas las colmenas" />
+                                          <Separator layoutX="175.0" layoutY="25.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="5.0" />
                                        </children></AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>

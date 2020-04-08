@@ -36,7 +36,8 @@ public class FormApiaryController extends BaseController implements Initializabl
     }
 
     @FXML
-    public void createNewApiary(){
+    @Override
+    public void validate(){
 
         Apiaries ap= new Apiaries();
         ap.setName(TFname.getText());
