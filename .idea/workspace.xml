@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25c144a3-4e67-4380-bef4-71e0e0cf12f5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/base/controllers/views/FormBeehivesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/base/views/FormBeehives.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Appiculture/db/datab.db" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Appiculture/db/datab.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/db/datab.db" beforeDir="false" afterPath="$PROJECT_DIR$/resources/db/datab.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/DBmanager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/base/controllers/DBmanager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormApiaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/base/controllers/views/FormApiaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/base/controllers/views/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/structure/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/base/models/structure/BaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/FormApiary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/base/views/FormApiary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/base/views/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormBeehivesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/base/controllers/views/FormBeehivesController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,29 +112,29 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="416" height="466" key="DebuggerActiveHint/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586112544496" />
-    <state x="864" y="270" key="FileChooserDialogImpl" timestamp="1585848596071">
+    <state x="864" y="270" key="FileChooserDialogImpl" timestamp="1586710726234">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="864" y="270" key="FileChooserDialogImpl/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1585848596071" />
-    <state width="1877" height="155" key="GridCell.Tab.0.bottom" timestamp="1586364269372">
+    <state x="864" y="270" key="FileChooserDialogImpl/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586710726234" />
+    <state width="1877" height="155" key="GridCell.Tab.0.bottom" timestamp="1586422559111">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="155" key="GridCell.Tab.0.bottom/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586364269372" />
+    <state width="1877" height="155" key="GridCell.Tab.0.bottom/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586422559111" />
     <state width="1877" height="285" key="GridCell.Tab.0.bottom/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1585834298774" />
-    <state width="1877" height="155" key="GridCell.Tab.0.center" timestamp="1586364269370">
+    <state width="1877" height="155" key="GridCell.Tab.0.center" timestamp="1586422559108">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="155" key="GridCell.Tab.0.center/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586364269370" />
+    <state width="1877" height="155" key="GridCell.Tab.0.center/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586422559108" />
     <state width="1877" height="285" key="GridCell.Tab.0.center/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1585834298774" />
-    <state width="1877" height="155" key="GridCell.Tab.0.left" timestamp="1586364269369">
+    <state width="1877" height="155" key="GridCell.Tab.0.left" timestamp="1586422559107">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="155" key="GridCell.Tab.0.left/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586364269369" />
+    <state width="1877" height="155" key="GridCell.Tab.0.left/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586422559107" />
     <state width="1877" height="285" key="GridCell.Tab.0.left/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1585834298774" />
-    <state width="1877" height="155" key="GridCell.Tab.0.right" timestamp="1586364269371">
+    <state width="1877" height="155" key="GridCell.Tab.0.right" timestamp="1586422559108">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="155" key="GridCell.Tab.0.right/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586364269371" />
+    <state width="1877" height="155" key="GridCell.Tab.0.right/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586422559108" />
     <state width="1877" height="285" key="GridCell.Tab.0.right/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1585834298774" />
     <state width="1877" height="223" key="GridCell.Tab.1.bottom" timestamp="1586116209796">
       <screen x="0" y="0" width="1920" height="1050" />
@@ -159,15 +152,19 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1877" height="223" key="GridCell.Tab.1.right/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586116209795" />
-    <state x="656" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1586340977553">
+    <state x="656" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1586710645865">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="656" y="349" key="com.intellij.ide.util.TipDialog/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586340977553" />
+    <state x="656" y="349" key="com.intellij.ide.util.TipDialog/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586710645865" />
     <state x="2576" y="349" key="com.intellij.ide.util.TipDialog/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1585835596350" />
     <state x="664" y="418" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1585837024908">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="664" y="418" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1585837024908" />
+    <state x="342" y="145" key="new project wizard" timestamp="1586710732062">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="342" y="145" key="new project wizard/-1920.0.1536.840/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1586710732062" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
