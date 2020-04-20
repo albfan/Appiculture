@@ -19,7 +19,6 @@ public class DBmanager {
     private ObservableList<Apiaries> apiariesList;
     private ObservableList<Beehives> beehivesList;
 
-
     //Constructor--------------
     private DBmanager() {
         apiariesList = FXCollections.observableArrayList();
@@ -38,7 +37,7 @@ public class DBmanager {
 
         try {
 
-            Class.forName("org.sqlite.JDBC");
+            Class.forName("org.sqlite.JDBC");//todo - Cambiar la ruta a relativa
             connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\stephane\\Desktop\\workspace\\Appiculture\\resources\\db\\datab.db");
             return connection;
 
@@ -171,7 +170,7 @@ public class DBmanager {
         }
     }
 
-    public String insertBeehiveInDB(Beehives bh) {//todo pendiente de completar con las verificaciónes de si existen ya los numeros de colmena
+    public void insertBeehiveInDB(Beehives bh) {//todo pendiente de completar con las verificaciónes de si existen ya los numeros de colmena
 
         try {
 
@@ -188,6 +187,29 @@ public class DBmanager {
             e.printStackTrace();
         }
 
-        return "";
     }
+
+    /**
+     * This method receive the number of a beehive and check in the database if it already exists or not.
+     * Returns true if already exists or false if not.
+     * @param number the id number of the beehive.
+     * @return boolean - true if already exists or false if not
+     */
+    public boolean beehiveExist(int number){
+
+        boolean exist= false;
+        try{
+
+            s= "SELECT * FROM beehives where number ="+number;
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(s);
+            exist=resultSet.next();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return exist;
+    }
+
 }

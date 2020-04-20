@@ -68,7 +68,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TableView layoutX="-1.0" layoutY="76.0" prefHeight="447.0" prefWidth="849.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
+                                          <TableView fx:id="tvBeehives" layoutX="-1.0" layoutY="76.0" prefHeight="447.0" prefWidth="849.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
                                             <columns>
                                               <TableColumn prefWidth="106.0" text="Numero" />
                                               <TableColumn prefWidth="197.0" text="Apiario" />

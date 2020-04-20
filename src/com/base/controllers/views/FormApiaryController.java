@@ -25,7 +25,7 @@ public class FormApiaryController extends BaseController implements Initializabl
     private Button BtnCancel;
 
     /**
-     * This apiary is in case we use this form to modify instead of creating
+     * This apiary variables are in case we use this form to modify instead of creating
      */
     private Apiaries apiary=null;
     private int id=-2;
@@ -42,6 +42,8 @@ public class FormApiaryController extends BaseController implements Initializabl
         Apiaries ap= new Apiaries();
         ap.setName(TFname.getText());
         ap.setAdress(TFaddress.getText());
+        //if we use this form to create a new apiary, the id will be by default -2. if its for modifying it will
+        //be something diferent.
         if(id!=-2){
             ap.setId(id);
             DBmanager.getINSTANCE().modifyApiaryInDB(ap);

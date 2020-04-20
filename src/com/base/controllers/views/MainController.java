@@ -3,6 +3,7 @@ package com.base.controllers.views;
 
 import com.base.controllers.DBmanager;
 import com.base.models.Apiaries;
+import com.base.models.Beehives;
 import com.base.models.structure.BaseController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,6 +34,8 @@ public class MainController extends BaseController implements Initializable {
     private Button btnModApiary;
     //Beehives nodes----------------
     @FXML
+    private TableView<Beehives> tvBeehives;
+    @FXML
     private Button btnAddHive;
     @FXML
     private Button btnModHive;
@@ -44,6 +47,7 @@ public class MainController extends BaseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshApiariesListView();
+        refreshHivesTableView();
 
 
     }
@@ -54,6 +58,10 @@ public class MainController extends BaseController implements Initializable {
         apiariesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         apiariesListView.setItems(DBmanager.getINSTANCE().getApiariesFromDB());
 
+    }
+
+    private void setListenersForApiaryList(){
+        apiariesListView.getSelectionModel(). //todo - terminar este metodo
     }
 
     @FXML
@@ -116,12 +124,13 @@ public class MainController extends BaseController implements Initializable {
 
     public void refreshHivesTableView() {
 
+        //since multiselection is enabled for delete option we need to use a list.
         ObservableList<Apiaries> templist = apiariesListView.getSelectionModel().getSelectedItems();
         //we only refresh the table when we select 1 apiary
         if (templist.size() == 1) {
-            Apiaries ap = templist.get(0);//todo pendiente terminar este método
+            Apiaries ap = templist.get(0);
+            tvBeehives.setItems(DBmanager.getINSTANCE().getHivesFromDB(ap));
         }
-
     }
 
     @FXML
@@ -165,6 +174,7 @@ public class MainController extends BaseController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        refreshHivesTableView();
     }
 
 }

@@ -1,15 +1,26 @@
 package com.base.controllers.views;
 
 import com.base.controllers.DBmanager;
+import com.base.controllers.OperationManager;
 import com.base.models.Apiaries;
+import com.base.models.Beehives;
 import com.base.models.structure.BaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class FormBeehivesController extends BaseController implements Initializable {
@@ -21,10 +32,10 @@ public class FormBeehivesController extends BaseController implements Initializa
     private ComboBox<Apiaries> cbHiveApiary;
 
     @FXML
-    private DatePicker dcHive;
+    private DatePicker dpHive;
 
     @FXML
-    private ComboBox<?> cbHiveType;
+    private ComboBox<String> cbHiveType;
 
     @FXML
     private CheckBox cbFavorite;
@@ -45,6 +56,7 @@ public class FormBeehivesController extends BaseController implements Initializa
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         refreshApiariesComboBox();
+        loadHiveTypesComboBox();
 
     }
 
@@ -61,31 +73,96 @@ public class FormBeehivesController extends BaseController implements Initializa
         }
     }
 
+    private void loadHiveTypesComboBox(){
+        cbHiveType.setItems(OperationManager.getInstance().getHiveTypes());
+        cbHiveType.getSelectionModel().selectFirst();
+    }
+
+    @FXML
+    private void newApiaryForm(ActionEvent actionEvent) {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormApiary.fxml"));
+        try {
+
+            Parent root = fxmlLoader.load();
+            FormApiaryController fa = fxmlLoader.getController();
+            Stage stage = new Stage();
+            fa.setActualStage(stage);
+            Scene scene = new Scene(root);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        refreshApiariesComboBox();
+
+    }
+
     //this method check on the database if the beehives number is already used in that apiary
-    private boolean verifyNumberIsUsed(){
-        //todo hacer este método y el que está abajo de validar
+    private boolean verifyNumberIsUsed() {//todo hacer este método y el que está abajo de validar
 
-
-        return false;
+        return DBmanager.getINSTANCE().beehiveExist(Integer.parseInt(tfHiveNum.getText()));
     }
 
     @FXML
     @Override
-    public void validate() {
+    public void validate() {//todo hacer pruebas de validaciones
 
-        String s="";
+        Apiaries apiary= cbHiveApiary.getSelectionModel().getSelectedItem();
+        int number = Integer.parseInt(tfHiveNum.getText());
+        //this date is to verify the datepicker value
+        LocalDate localDate=dpHive.getValue();
+        //this date is for the beehive
+        Date date = null;
+        String type = null;
+        boolean favorite = false;
+        String s = "";
+
         //we check if apiary is not null
-        if(null==cbHiveApiary.getSelectionModel().getSelectedItem()){
-            s=s+"-Debe elegir un apiario.\n";
-        }else{
+        if (null == apiary ) {
+            s = s + "-Debe elegir un apiario.\n";
+        } else {
             //we check if the number is already used in that apiary
-            if(verifyNumberIsUsed() ){
-                s=s+"-Este numero ya existe en este apiario." +
+            if (verifyNumberIsUsed()) {
+                s = s + "-Este número ya existe en este apiario." +
                         "Elija otro número o cambie de apiario.\n";
-            }else{
+            } else {
 
+                //we verify the something is selected in the datepicker. by default set to current date
+                if ( null==localDate){
+                    date= new Date(System.currentTimeMillis());
+                }else{
+                    date = Date.valueOf(dpHive.getValue());
+                }
+
+                type=cbHiveType.getValue();
+
+                favorite=cbFavorite.isSelected();
 
             }
+        }
+
+        if(!s.equals("")){
+
+            alert.setContentText(s);
+            alert.show();
+
+        }else{
+
+            Beehives beehive= new Beehives();
+            beehive.setId_apiary(apiary.getId());
+            beehive.setNumber(number);
+            beehive.setDate(date);
+            beehive.setType(type);
+            beehive.setFavorite(favorite);
+
+            DBmanager.getINSTANCE().insertBeehiveInDB(beehive);
+
         }
 
     }

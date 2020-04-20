@@ -10,15 +10,6 @@ module Appiculture {
     requires javafx.swt;
     requires sqlite.jdbc;
     requires java.sql;
-//    requires reloj2;
-//
-//    requires org.docgene.help.jfx;
-//    requires javax.mail;
-//    requires org.controlsfx.controls;
-//    requires activation;
-//    requires commons.email;
-//    requires jasperreports;
-//    requires java.sql;
 
     exports com.base.controllers.views;
     exports com.base.models;

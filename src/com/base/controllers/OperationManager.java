@@ -9,14 +9,14 @@ import java.time.LocalDate;
 
 public class OperationManager {
 
-    ObservableList<Apiaries> apiariesList;
+    ObservableList<String> hiveTypes;
 
     private static OperationManager INSTANCE=null;
 
     //Constructor------------------------------------------
     private OperationManager(){
 
-        apiariesList= FXCollections.observableArrayList();
+        createHiveTypesList();
 
     }
     //Singleton Method-------------------------------------
@@ -30,6 +30,14 @@ public class OperationManager {
 
     //Methods-----------------------------------------------
 
+    private void createHiveTypesList(){
 
+        hiveTypes= FXCollections.observableArrayList();
+        hiveTypes.addAll("Langstroth","Dadant", "Layens","Otro");
 
+    }
+
+    public ObservableList<String> getHiveTypes() {
+        return hiveTypes;
+    }
 }

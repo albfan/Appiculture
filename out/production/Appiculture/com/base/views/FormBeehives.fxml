@@ -56,15 +56,15 @@
       </Label>
       <TextField fx:id="tfHiveNum" layoutX="326.0" layoutY="149.0" prefHeight="25.0" prefWidth="264.0" />
       <ComboBox fx:id="cbHiveApiary" layoutX="326.0" layoutY="101.0" prefHeight="25.0" prefWidth="264.0" />
-      <DatePicker fx:id="dcHive" layoutX="326.0" layoutY="198.0" prefHeight="25.0" prefWidth="264.0" />
+      <DatePicker fx:id="dpHive" layoutX="326.0" layoutY="198.0" prefHeight="25.0" prefWidth="264.0" />
       <ComboBox fx:id="cbHiveType" layoutX="326.0" layoutY="250.0" prefHeight="25.0" prefWidth="264.0" />
       <CheckBox fx:id="cbFavorite" layoutX="326.0" layoutY="309.0" mnemonicParsing="false" text="si" />
-      <Button fx:id="btnNewApiary" layoutX="267.0" layoutY="101.0" mnemonicParsing="false" text="Crear">
+      <Button fx:id="btnNewApiary" layoutX="267.0" layoutY="101.0" mnemonicParsing="false" onAction="#newApiaryForm" text="Crear">
          <tooltip>
             <Tooltip text="Abre el formulario de Apiarios para crear uno nuevo directamente" />
          </tooltip>
       </Button>
-      <Button fx:id="btnOk" layoutX="187.0" layoutY="410.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Ok" />
+      <Button fx:id="btnOk" layoutX="187.0" layoutY="410.0" mnemonicParsing="false" onAction="#validate" prefHeight="25.0" prefWidth="62.0" text="Ok" />
       <Button fx:id="btnCancel" layoutX="510.0" layoutY="410.0" mnemonicParsing="false" onAction="#cerrarVentana" text="Cancelar" />
       <Label layoutX="597.0" layoutY="154.0" text="Obligatorio">
          <font>
