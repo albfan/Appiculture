@@ -51,6 +51,7 @@ public class MainController extends BaseController implements Initializable {
     //this is the apiary actually selected in listview
     Apiaries currentApiarySelected = null;
 
+    //todo - pendiente de arreglar que cuando le das al boton de modificar apiarios, te vacía la tableview.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -94,12 +95,7 @@ public class MainController extends BaseController implements Initializable {
 //            refreshHivesTableView();
 //        });
 
-//        lvApiaries.onMouseClickedProperty().addListener(new ChangeListener<EventHandler<? super MouseEvent>>() {
-//            @Override
-//            public void changed(ObservableValue<? extends EventHandler<? super MouseEvent>> observable, EventHandler<? super MouseEvent> oldValue, EventHandler<? super MouseEvent> newValue) {
-//
-//            }
-//        });
+
 
         lvApiaries.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Apiaries>() {
             @Override
@@ -133,6 +129,10 @@ public class MainController extends BaseController implements Initializable {
 
     }
 
+    /**
+     * This method opens a form for creating a new Apiary or to modify an existing one
+     * @param actionEvent
+     */
     @FXML
     public void openFormApiary(ActionEvent actionEvent) {
 
@@ -208,6 +208,10 @@ public class MainController extends BaseController implements Initializable {
 
     }
 
+    /**
+     * Opens a new from window to create or modify a beehive
+     * @param actionEvent
+     */
     @FXML
     public void openFormHives(ActionEvent actionEvent) {
 
@@ -222,8 +226,24 @@ public class MainController extends BaseController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.sizeToScene();
-            fb.selectedListViewApiary(currentApiarySelected);
-            stage.showAndWait();
+            fb.setApiary(currentApiarySelected);
+
+            //this part is used when we will modify a beehive instead creating a new one
+            if (((Button) actionEvent.getSource()).getId().equalsIgnoreCase("btnModHive")) {//todo no funciona la primera vez
+
+                //this is to check if user had multiple selection on beehives tableview. Only 1 allowed to be modified.
+                ObservableList<Beehives> modList = tvBeehives.getSelectionModel().getSelectedItems();
+                if (modList.size() > 1) {
+                    alert.setContentText("Solo puede modificar las colmenas de una en una");
+                    alert.show();
+                } else if (modList.size() == 1) {
+                    fb.setBeehive(modList.get(0));
+                    stage.showAndWait();
+                }
+            } else {
+                stage.showAndWait();
+            }
+
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -73,7 +73,12 @@ public class FormBeehivesController extends BaseController implements Initializa
         }
     }
 
-    public void selectedListViewApiary(Apiaries ap){
+    /**
+     * Receive the selected apiary from the main window and select it by default on the form apiary combobox
+     * @param ap - the apiary from the listview in the main window controller
+     */
+    public void setApiary(Apiaries ap){
+
         cbHiveApiary.getSelectionModel().select(ap);
     }
 
@@ -172,4 +177,6 @@ public class FormBeehivesController extends BaseController implements Initializa
         }
     }
 
+    public void setBeehive(Beehives beehives) {
+    }
 }
