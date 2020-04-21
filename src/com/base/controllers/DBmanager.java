@@ -37,7 +37,7 @@ public class DBmanager {
 
         try { //TODO - poner esta ruta a relativa
 
-            String dbPath="jdbc:sqlite:C:\\Users\\stephane\\Desktop\\workspace\\Appiculture\\resources\\db\\datab.db";
+            String dbPath = "jdbc:sqlite:C:\\Users\\stephane\\Desktop\\workspace\\Appiculture\\resources\\db\\datab.db";
             //String dbPath="../resources/db/datab.db";
             //String dbPath="/../resources/db/datab.db";
             //String dbPath="/db/datab.db";
@@ -65,6 +65,14 @@ public class DBmanager {
 
         try {
 
+            if (null != preparedStatement) {
+                if (!preparedStatement.isClosed())
+                    preparedStatement.close();
+            }
+            if (null != statement) {
+                if (!statement.isClosed())
+                    statement.close();
+            }
             connection.close();
 
         } catch (SQLException e) {
@@ -148,6 +156,7 @@ public class DBmanager {
     /**
      * Return a list with all beehives in database if parameter is null or the
      * beehives owned by the parameter apiary if not null.
+     *
      * @param ap
      * @return beehivesList
      */
@@ -157,9 +166,9 @@ public class DBmanager {
 
             beehivesList.clear();
 
-            if(null==ap){
+            if (null == ap) {
                 s = "SELECT * FROM beehives";
-            }else{
+            } else {
                 s = "SELECT * FROM beehives WHERE id_apiary = " + ap.getId();
             }
             statement = connection.createStatement();
@@ -204,23 +213,24 @@ public class DBmanager {
     /**
      * This method receive the number of a beehive and check in the database if it already exists .
      * Returns true if already exists or false if not.
+     *
      * @param number the id number of the beehive.
      * @return boolean - true if already exists or false if not
      */
-    public boolean beehiveExist(int number,int apiaryID){
+    public boolean beehiveExist(int number, int apiaryID) {
 
-        boolean exist= false;
-        try{
+        boolean exist = false;
+        try {
 
-            s= "SELECT * FROM beehives where number =? and id_apiary=? ";
+            s = "SELECT * FROM beehives where number =? and id_apiary=? ";
             preparedStatement = connection.prepareStatement(s);
             preparedStatement.setInt(1, number);
             preparedStatement.setInt(2, apiaryID);
-            resultSet=preparedStatement.executeQuery(s);//Todo- mirar aquí que devuelve y porque peta
+            resultSet = preparedStatement.executeQuery();//Todo- mirar aquí que devuelve y porque peta
 
 //            statement = connection.createStatement();
 //            resultSet = statement.executeQuery(s);
-            exist=resultSet.next();
+            exist = resultSet.next();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -229,4 +239,21 @@ public class DBmanager {
         return exist;
     }
 
+    public void deleteBeehivesInDB(ObservableList<Beehives> delList) {
+
+        if (delList.size() > 0) {
+            try {
+                for (Beehives bh : delList) {
+
+                    s = "DELETE FROM beehives where number= ? and id_apiary=? ";
+                    preparedStatement = connection.prepareStatement(s);
+                    preparedStatement.setInt(1, bh.getNumber());
+                    preparedStatement.setInt(2, bh.getId_apiary());
+                    preparedStatement.execute();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

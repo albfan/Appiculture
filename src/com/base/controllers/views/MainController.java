@@ -57,6 +57,7 @@ public class MainController extends BaseController implements Initializable {
         setListenersForApiaryList();
         refreshApiariesListView();
         initialApiaryConfig();
+        initialBeehivesConfig();
         refreshHivesTableView();
 
     }
@@ -171,6 +172,10 @@ public class MainController extends BaseController implements Initializable {
 
     //Beehives methods =================================================================================
 
+    private void initialBeehivesConfig(){
+        tvBeehives.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
+
     public void refreshHivesTableView() {
 
         //since multiselection is enabled for delete option we need to use a list to check if
@@ -185,6 +190,21 @@ public class MainController extends BaseController implements Initializable {
 
     @FXML
     public void deleteHives() {
+
+        if (tvBeehives.getSelectionModel().getSelectedItems().size() > 0) {
+            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmation.setTitle(null);
+            confirmation.setHeaderText(null);
+            confirmation.setContentText("¿Está seguro de borrar las colmenas seleccionadas?");
+            Optional<ButtonType> result = confirmation.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                DBmanager.getINSTANCE().deleteApiariesInDB(lvApiaries.getSelectionModel().getSelectedItems());
+                DBmanager.getINSTANCE().deleteBeehivesInDB(tvBeehives.getSelectionModel().getSelectedItems());
+                refreshHivesTableView();
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
+        }
 
     }
 
@@ -202,6 +222,7 @@ public class MainController extends BaseController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.sizeToScene();
+            fb.selectedListViewApiary(currentApiarySelected);
             stage.showAndWait();
 
         } catch (IOException e) {
