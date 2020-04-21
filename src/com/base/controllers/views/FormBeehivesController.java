@@ -106,7 +106,7 @@ public class FormBeehivesController extends BaseController implements Initializa
     //this method check on the database if the beehives number is already used in that apiary
     private boolean verifyNumberIsUsed() {//todo hacer este método y el que está abajo de validar
 
-        return DBmanager.getINSTANCE().beehiveExist(Integer.parseInt(tfHiveNum.getText()));
+        return DBmanager.getINSTANCE().beehiveExist(Integer.parseInt(tfHiveNum.getText()),cbHiveApiary.getSelectionModel().getSelectedItem().getId());
     }
 
     @FXML
@@ -164,6 +164,7 @@ public class FormBeehivesController extends BaseController implements Initializa
             DBmanager.getINSTANCE().insertBeehiveInDB(beehive);
 
         }
+        actualStage.close();
 
     }
 }

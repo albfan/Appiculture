@@ -18,6 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane prefHeight="881.0" prefWidth="1242.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.base.controllers.views.MainController">
    <children>
       <MenuBar layoutX="-51.0" layoutY="2.0" prefHeight="11.0" prefWidth="1197.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -52,7 +53,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <ListView fx:id="apiariesListView" layoutY="78.0" prefHeight="447.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
+                              <ListView fx:id="lvApiaries" layoutY="78.0" prefHeight="447.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
                               <Button fx:id="btnAddApiary" layoutY="25.0" mnemonicParsing="false" onAction="#openFormApiary" prefHeight="25.0" prefWidth="87.0" text="Añadir" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
                               <Button fx:id="btnRmvApiary" layoutX="88.0" layoutY="25.0" mnemonicParsing="false" onAction="#deleteApiaries" prefHeight="25.0" prefWidth="87.0" text="Quitar" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
                               <Button fx:id="btnModApiary" layoutY="50.0" mnemonicParsing="false" onAction="#openFormApiary" prefHeight="25.0" prefWidth="176.0" text="Modificar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
@@ -70,12 +71,36 @@
                                           </Label>
                                           <TableView fx:id="tvBeehives" layoutX="-1.0" layoutY="76.0" prefHeight="447.0" prefWidth="849.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
                                             <columns>
-                                              <TableColumn prefWidth="106.0" text="Numero" />
-                                              <TableColumn prefWidth="197.0" text="Apiario" />
-                                                <TableColumn prefWidth="103.0" text="Edad" />
-                                                <TableColumn prefWidth="157.0" text="Tipo" />
-                                                <TableColumn prefWidth="167.0" text="Enfermas" />
-                                                <TableColumn prefWidth="118.0" text="Favoritas" />
+                                              <TableColumn prefWidth="106.0" text="Numero" >
+                                                  <cellValueFactory>
+                                                      <PropertyValueFactory property="number" />
+                                                  </cellValueFactory>
+                                              </TableColumn>
+                                              <TableColumn prefWidth="197.0" text="Apiario" >
+                                                  <cellValueFactory>
+                                                      <PropertyValueFactory property="id_apiary" />
+                                                  </cellValueFactory>
+                                              </TableColumn>
+                                                <TableColumn prefWidth="103.0" text="Fecha" >
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="date" />
+                                                    </cellValueFactory>
+                                                </TableColumn>
+                                                <TableColumn prefWidth="157.0" text="Tipo" >
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="type" />
+                                                    </cellValueFactory>
+                                                </TableColumn>
+                                                <TableColumn prefWidth="167.0" text="Enfermas" >
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="type" />
+                                                    </cellValueFactory>
+                                                </TableColumn>
+                                                <TableColumn prefWidth="118.0" text="Favoritas" >
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="favorite" />
+                                                    </cellValueFactory>
+                                                </TableColumn>
                                             </columns>
                                           </TableView>
                                           <Label layoutY="51.0" prefHeight="25.0" prefWidth="188.0" text="Buscar por el número de colmena:" />

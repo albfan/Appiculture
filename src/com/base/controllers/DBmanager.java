@@ -35,10 +35,22 @@ public class DBmanager {
     //Methods-------------------
     public Connection openConnection() {
 
-        try {
+        try { //TODO - poner esta ruta a relativa
 
-            Class.forName("org.sqlite.JDBC");//todo - Cambiar la ruta a relativa
-            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\stephane\\Desktop\\workspace\\Appiculture\\resources\\db\\datab.db");
+            String dbPath="jdbc:sqlite:C:\\Users\\stephane\\Desktop\\workspace\\Appiculture\\resources\\db\\datab.db";
+            //String dbPath="../resources/db/datab.db";
+            //String dbPath="/../resources/db/datab.db";
+            //String dbPath="/db/datab.db";
+            //String dbPath="db/datab.db";
+            //String dbPath="resources/db/datab.db";
+            //String dbPath="/resources/db/datab.db";
+            //String dbPath="../../../../resources/db/datab.db";
+            //String dbPath="../../../resources/db/datab.db";
+            //String dbPath="./../../../../resources/db/datab.db";
+
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection(dbPath);
+
             return connection;
 
         } catch (ClassNotFoundException e) {
@@ -170,7 +182,7 @@ public class DBmanager {
         }
     }
 
-    public void insertBeehiveInDB(Beehives bh) {//todo pendiente de completar con las verificaciónes de si existen ya los numeros de colmena
+    public void insertBeehiveInDB(Beehives bh) {
 
         try {
 
@@ -190,19 +202,24 @@ public class DBmanager {
     }
 
     /**
-     * This method receive the number of a beehive and check in the database if it already exists or not.
+     * This method receive the number of a beehive and check in the database if it already exists .
      * Returns true if already exists or false if not.
      * @param number the id number of the beehive.
      * @return boolean - true if already exists or false if not
      */
-    public boolean beehiveExist(int number){
+    public boolean beehiveExist(int number,int apiaryID){
 
         boolean exist= false;
         try{
 
-            s= "SELECT * FROM beehives where number ="+number;
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(s);
+            s= "SELECT * FROM beehives where number =? and id_apiary=? ";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, number);
+            preparedStatement.setInt(2, apiaryID);
+            resultSet=preparedStatement.executeQuery(s);//Todo- mirar aquí que devuelve y porque peta
+
+//            statement = connection.createStatement();
+//            resultSet = statement.executeQuery(s);
             exist=resultSet.next();
 
         } catch (SQLException throwables) {
