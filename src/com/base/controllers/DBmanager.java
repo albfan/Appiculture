@@ -35,19 +35,9 @@ public class DBmanager {
     //Methods-------------------
     public Connection openConnection() {
 
-        try { //TODO - poner esta ruta a relativa
+        try {
 
-            String dbPath = "jdbc:sqlite:C:\\Users\\stephane\\Desktop\\workspace\\Appiculture\\resources\\db\\datab.db";
-            //String dbPath="../resources/db/datab.db";
-            //String dbPath="/../resources/db/datab.db";
-            //String dbPath="/db/datab.db";
-            //String dbPath="db/datab.db";
-            //String dbPath="resources/db/datab.db";
-            //String dbPath="/resources/db/datab.db";
-            //String dbPath="../../../../resources/db/datab.db";
-            //String dbPath="../../../resources/db/datab.db";
-            //String dbPath="./../../../../resources/db/datab.db";
-
+            String dbPath = "jdbc:sqlite:resources/db/datab.db";
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(dbPath);
 
@@ -226,7 +216,7 @@ public class DBmanager {
             preparedStatement = connection.prepareStatement(s);
             preparedStatement.setInt(1, number);
             preparedStatement.setInt(2, apiaryID);
-            resultSet = preparedStatement.executeQuery();//Todo- mirar aquí que devuelve y porque peta
+            resultSet = preparedStatement.executeQuery();
 
 //            statement = connection.createStatement();
 //            resultSet = statement.executeQuery(s);

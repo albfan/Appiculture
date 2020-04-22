@@ -50,16 +50,14 @@ public class MainController extends BaseController implements Initializable {
 
     //this is the apiary actually selected in listview
     Apiaries currentApiarySelected = null;
+    //this is the beehive actually selected in tableview
+    Beehives currentBeehiveSelected = null;
 
-    //todo - pendiente de arreglar que cuando le das al boton de modificar apiarios, te vacía la tableview.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        setListenersForApiaryList();
-        refreshApiariesListView();
         initialApiaryConfig();
         initialBeehivesConfig();
-        refreshHivesTableView();
 
     }
 
@@ -72,6 +70,8 @@ public class MainController extends BaseController implements Initializable {
     private void initialApiaryConfig() {
 
         lvApiaries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        setListenersForApiaryList();
+        refreshApiariesListView();
         ObservableList<Apiaries> list = DBmanager.getINSTANCE().getApiariesFromDB();
         if (list.size() > 0) {
 
@@ -88,14 +88,12 @@ public class MainController extends BaseController implements Initializable {
 
     }
 
-    private void setListenersForApiaryList() {//todo - terminar este metodo
+    private void setListenersForApiaryList() {//todo - revisar más adelante este método para que se active solo al seleccionar un apiario.
 
 //        lvApiaries.onMouseClickedProperty().addListener((observable, oldValue, newValue) -> {
 //            currentApiarySelected= lvApiaries.getSelectionModel().getSelectedItem();
 //            refreshHivesTableView();
 //        });
-
-
 
         lvApiaries.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Apiaries>() {
             @Override
@@ -173,7 +171,44 @@ public class MainController extends BaseController implements Initializable {
     //Beehives methods =================================================================================
 
     private void initialBeehivesConfig(){
+
         tvBeehives.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        setListenersForBeehivesTableView();
+        refreshHivesTableView();
+        ObservableList<Apiaries> list = DBmanager.getINSTANCE().getApiariesFromDB();
+        if (list.size() > 0) {
+
+            lvApiaries.getSelectionModel().select(list.get(0));
+            currentApiarySelected = list.get(0);
+
+        }
+
+    }
+
+    private void setListenersForBeehivesTableView(){
+
+//        lvApiaries.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Apiaries>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Apiaries> observable, Apiaries oldValue, Apiaries newValue) {
+//
+//                if(newValue!=null) {
+//                    currentApiarySelected = newValue;
+//                }
+//                refreshHivesTableView();
+//
+//            }
+//        });
+
+        tvBeehives.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Beehives>() {
+            @Override
+            public void changed(ObservableValue<? extends Beehives> observable, Beehives oldValue, Beehives newValue) {
+
+                if(newValue!=null) {
+                    currentBeehiveSelected = newValue;
+                }
+            }
+        });
+
     }
 
     public void refreshHivesTableView() {
@@ -213,11 +248,12 @@ public class MainController extends BaseController implements Initializable {
      * @param actionEvent
      */
     @FXML
-    public void openFormHives(ActionEvent actionEvent) {
+    public void openFormHives(ActionEvent actionEvent) { //todo no funciona la primera vez
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormBeehives.fxml"));
+
         try {
-            Parent root = fxmlLoader.load();
+            Parent root = fxmlLoader.load(); // <= Aquí me resetea la lista sin saber porqué
             FormBeehivesController fb = fxmlLoader.getController();
             Stage stage = new Stage();
             fb.setActualStage(stage);
@@ -228,8 +264,9 @@ public class MainController extends BaseController implements Initializable {
             stage.sizeToScene();
             fb.setApiary(currentApiarySelected);
 
-            //this part is used when we will modify a beehive instead creating a new one
-            if (((Button) actionEvent.getSource()).getId().equalsIgnoreCase("btnModHive")) {//todo no funciona la primera vez
+
+            //this part is used when we modify a beehive instead creating a new one
+            if (((Button) actionEvent.getSource()).getId().equalsIgnoreCase("btnModHive")) {
 
                 //this is to check if user had multiple selection on beehives tableview. Only 1 allowed to be modified.
                 ObservableList<Beehives> modList = tvBeehives.getSelectionModel().getSelectedItems();
@@ -237,7 +274,7 @@ public class MainController extends BaseController implements Initializable {
                     alert.setContentText("Solo puede modificar las colmenas de una en una");
                     alert.show();
                 } else if (modList.size() == 1) {
-                    fb.setBeehive(modList.get(0));
+                    fb.setBeehive(currentBeehiveSelected);
                     stage.showAndWait();
                 }
             } else {
