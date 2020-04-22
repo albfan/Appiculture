@@ -86,6 +86,10 @@ public class DBmanager {
         }
     }
 
+    /**
+     * Return a list with all the apiaries from the Database
+     * @return ObservableList<Apiaries>
+     */
     public ObservableList<Apiaries> getApiariesFromDB() {
 
         try {
@@ -108,6 +112,29 @@ public class DBmanager {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Apiaries getApiary(int apiaryID){
+
+        try {
+
+            s = "SELECT * FROM apiaries where id=" + apiaryID;
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(s);
+            while (resultSet.next()) {
+
+                Apiaries ap = new Apiaries();
+                ap.setId(resultSet.getInt(1));
+                ap.setName(resultSet.getString(2));
+                ap.setAdress(resultSet.getString(3));
+                return ap;
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 
     public void modifyApiaryInDB(Apiaries a) {
