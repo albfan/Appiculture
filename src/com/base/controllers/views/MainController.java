@@ -248,7 +248,7 @@ public class MainController extends BaseController implements Initializable {
      * @param actionEvent
      */
     @FXML
-    public void openFormHives(ActionEvent actionEvent) { //todo no funciona la primera vez
+    public void openFormHives(ActionEvent actionEvent) { //todo -no funciona la primera vez
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormBeehives.fxml"));
 
