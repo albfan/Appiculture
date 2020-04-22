@@ -33,6 +33,7 @@ public class FormApiaryController extends BaseController implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
     }
 
     @FXML
@@ -44,14 +45,16 @@ public class FormApiaryController extends BaseController implements Initializabl
         ap.setAdress(TFaddress.getText());
         //if we use this form to create a new apiary, the id will be by default -2. if its for modifying it will
         //be something diferent.
-        if(id!=-2){
-            ap.setId(id);
-            DBmanager.getINSTANCE().modifyApiaryInDB(ap);
-        }else {
-            DBmanager.getINSTANCE().insertApiaryInDB(ap);
-        }
+        if(!"".equals(TFname.getText()) || !"".equals(TFaddress.getText())){
+            if(id!=-2){
+                ap.setId(id);
+                DBmanager.getINSTANCE().modifyApiaryInDB(ap);
+            }else {
+                DBmanager.getINSTANCE().insertApiaryInDB(ap);
+            }
 
-        actualStage.close();
+            actualStage.close();
+        }
     }
 
     public Apiaries getApiary() {

@@ -57,6 +57,7 @@ public class FormBeehivesController extends BaseController implements Initializa
 
         refreshApiariesComboBox();
         loadHiveTypesComboBox();
+        configureInputs();
 
     }
 
@@ -80,6 +81,16 @@ public class FormBeehivesController extends BaseController implements Initializa
     public void setApiary(Apiaries ap){
 
         cbHiveApiary.getSelectionModel().select(ap);
+    }
+
+    private void configureInputs(){
+        tfHiveNum.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfHiveNum.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        cbHiveApiary.requestFocus();
+
     }
 
     @FXML
@@ -111,8 +122,6 @@ public class FormBeehivesController extends BaseController implements Initializa
         cbHiveType.setItems(OperationManager.getInstance().getHiveTypes());
         cbHiveType.getSelectionModel().selectFirst();
     }
-
-
 
     //this method check on the database if the beehives number is already used in that apiary
     private boolean verifyNumberIsUsed() {//todo hacer este método y el que está abajo de validar
@@ -178,5 +187,8 @@ public class FormBeehivesController extends BaseController implements Initializa
     }
 
     public void setBeehive(Beehives beehives) {
+
     }
+
+
 }

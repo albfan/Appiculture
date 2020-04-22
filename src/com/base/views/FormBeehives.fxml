@@ -54,9 +54,9 @@
             <Tooltip text="Puede marcar esta colmena como favorita si trabaja frecuentemente con ella. Sirve para acceder a ella más facilmente en el listado." />
          </tooltip>
       </Label>
-      <TextField fx:id="tfHiveNum" layoutX="326.0" layoutY="149.0" prefHeight="25.0" prefWidth="264.0" />
       <ComboBox fx:id="cbHiveApiary" layoutX="326.0" layoutY="101.0" prefHeight="25.0" prefWidth="264.0" />
-      <DatePicker fx:id="dpHive" layoutX="326.0" layoutY="198.0" prefHeight="25.0" prefWidth="264.0" />
+      <TextField fx:id="tfHiveNum" layoutX="326.0" layoutY="149.0" prefHeight="25.0" prefWidth="264.0" promptText="solo números" />
+      <DatePicker fx:id="dpHive" layoutX="326.0" layoutY="198.0" prefHeight="25.0" prefWidth="264.0" promptText="23/11/1998" />
       <ComboBox fx:id="cbHiveType" layoutX="326.0" layoutY="250.0" prefHeight="25.0" prefWidth="264.0" />
       <CheckBox fx:id="cbFavorite" layoutX="326.0" layoutY="309.0" mnemonicParsing="false" text="si" />
       <Button fx:id="btnNewApiary" layoutX="267.0" layoutY="101.0" mnemonicParsing="false" onAction="#newApiaryForm" text="Crear">

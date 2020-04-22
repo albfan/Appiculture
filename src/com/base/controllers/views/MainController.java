@@ -101,9 +101,8 @@ public class MainController extends BaseController implements Initializable {
 
                 if(newValue!=null) {
                     currentApiarySelected = newValue;
+                    refreshHivesTableView();
                 }
-                refreshHivesTableView();
-
             }
         });
     }
@@ -248,12 +247,12 @@ public class MainController extends BaseController implements Initializable {
      * @param actionEvent
      */
     @FXML
-    public void openFormHives(ActionEvent actionEvent) { //todo -no funciona la primera vez
+    public void openFormHives(ActionEvent actionEvent) { 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormBeehives.fxml"));
 
         try {
-            Parent root = fxmlLoader.load(); // <= Aquí me resetea la lista sin saber porqué
+            Parent root = fxmlLoader.load();
             FormBeehivesController fb = fxmlLoader.getController();
             Stage stage = new Stage();
             fb.setActualStage(stage);
