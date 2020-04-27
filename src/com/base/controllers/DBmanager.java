@@ -2,6 +2,7 @@ package com.base.controllers;
 
 import com.base.models.Apiaries;
 import com.base.models.Beehives;
+import com.base.models.Diseases;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -18,11 +19,13 @@ public class DBmanager {
     private ResultSet resultSet;
     private ObservableList<Apiaries> apiariesList;
     private ObservableList<Beehives> beehivesList;
+    private ObservableList<Diseases> diseasesList;
 
     //Constructor--------------
     private DBmanager() {
         apiariesList = FXCollections.observableArrayList();
         beehivesList = FXCollections.observableArrayList();
+        diseasesList = FXCollections.observableArrayList();
     }
 
     //Singleton Method-------------
@@ -88,6 +91,7 @@ public class DBmanager {
 
     /**
      * Return a list with all the apiaries from the Database
+     *
      * @return ObservableList<Apiaries>
      */
     public ObservableList<Apiaries> getApiariesFromDB() {
@@ -114,7 +118,7 @@ public class DBmanager {
         }
     }
 
-    public Apiaries getApiary(int apiaryID){
+    public Apiaries getApiary(int apiaryID) {
 
         try {
 
@@ -168,11 +172,11 @@ public class DBmanager {
         }
     }
 
-    // BEEHIVES---(number,id_apiary,date,type,favorite) number is PK and autoincremental
+    // BEEHIVES---(number,id_apiary,date,type,favorite) number is PK and autoincremental---------------------------
 
     /**
-     * Return a list with all beehives in database if parameter is null or the
-     * beehives owned by the parameter apiary if not null.
+     * Return a list with all beehives in database if parameter is null. Or the
+     * beehives owned by the apiary parameter if parameter is not null.
      *
      * @param ap
      * @return beehivesList
@@ -182,9 +186,8 @@ public class DBmanager {
         try {
 
             beehivesList.clear();
-
             if (null == ap) {
-                s = "SELECT * FROM beehives";
+                s = "SELECT * FROM beehives ";
             } else {
                 s = "SELECT * FROM beehives WHERE id_apiary = " + ap.getId();
             }
@@ -200,6 +203,7 @@ public class DBmanager {
                 bh.setFavorite(resultSet.getBoolean(5));
                 beehivesList.add(bh);
             }
+
             return beehivesList;
 
         } catch (SQLException e) {
@@ -273,4 +277,52 @@ public class DBmanager {
             }
         }
     }
+
+
+    //DISEASES---(id, id_beehive, disease, treatment, start_treat_date, end_treat_date ) id is pk -------------
+
+    /**
+     * If parameter is null, returns all diseases from DB. if parameter is not null, returns the diseases of
+     * beehive from parameter.
+     *
+     * @param beehive
+     * @return
+     */
+    public ObservableList<Diseases> getDiseases(Beehives beehive) {
+
+        try {
+
+            diseasesList.clear();
+            if (null == beehive) {
+                s = "SELECT * FROM diseases";
+            } else {
+                s = "SELECT * FROM diseases WHERE id_beehive=" + beehive.getNumber()
+                        + " AND id_apiary=" + beehive.getId_apiary();
+            }
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(s);
+            while (resultSet.next()) {
+
+                Diseases di = new Diseases();
+                di.setId(resultSet.getInt(1));
+                di.setId_beehive(resultSet.getInt(2));
+                di.setId_apiary(resultSet.getInt(3));
+                di.setDisease(resultSet.getString(4));
+                di.setTreatment(resultSet.getString(5));
+                di.setStartingDate(resultSet.getDate(6));
+                di.setEndingDate(resultSet.getDate(7));
+
+                diseasesList.add(di);
+
+            }
+            return diseasesList;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 }

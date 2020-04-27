@@ -1,5 +1,9 @@
 package com.base.models;
 
+import com.base.controllers.DBmanager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -18,16 +22,30 @@ public class Beehives implements Serializable {
     //this is the type of hive. You have diferent models in the market
     private String type;
 
+    //this tells you if the hive have a disease actually. This parameters is calculated from the table diseases
+    private boolean diseased;
+
+    //this parameter is to print in the mainwindow tableview a message if the the beehive is diseased or not.
+    private String tableViewDiseased;
+
+    //this parameter is to print in the mainwindow tableview a message if the the beehive is favorite or not.
+    private String tableViewFavorite;
+
+    private ObservableList<Diseases> diseasesList;
+
     private boolean favorite;
 
     public Beehives() {
+        diseasesList = FXCollections.observableArrayList();
     }
 
-    public Beehives(int number, int id_apiary, Date date, String type, boolean favorite) {
+    public Beehives(int number, int id_apiary, Date date, String type, boolean diseased, ObservableList<Diseases> diseasesList, boolean favorite) {
         this.number = number;
         this.id_apiary = id_apiary;
         this.date = date;
         this.type = type;
+        this.diseased = diseased;
+        this.diseasesList = diseasesList;
         this.favorite = favorite;
     }
 
@@ -69,5 +87,60 @@ public class Beehives implements Serializable {
 
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public boolean isDiseased() {
+
+        Date actualDate = new Date(System.currentTimeMillis());
+        getDiseasesList();
+        for (Diseases di : diseasesList) {
+
+            if (null != di.getStartingDate() && null == di.getEndingDate()) {
+                diseased = true;
+                return diseased;
+            } else if (null != di.getStartingDate() && null != di.getEndingDate()) {
+                if (di.getEndingDate().compareTo(actualDate) > 0) {
+                    diseased = true;
+                    return diseased;
+                }
+            } else {
+                diseased = false;
+            }
+        }
+
+        return diseased;
+    }
+
+
+    public ObservableList<Diseases> getDiseasesList() {
+
+        diseasesList.clear();
+        diseasesList = DBmanager.getINSTANCE().getDiseases(this);
+
+        return diseasesList;
+    }
+
+    public void setDiseasesList(ObservableList<Diseases> diseasesList) {
+        this.diseasesList = diseasesList;
+    }
+
+    public String getTableViewDiseased() {
+
+        if (isDiseased()) {
+            tableViewDiseased = "enferma";
+        } else {
+            tableViewDiseased = "sana";
+        }
+
+        return tableViewDiseased;
+    }
+
+    public String getTableViewFavorite() {
+        if (isFavorite()) {
+            tableViewFavorite = "si";
+        } else {
+            tableViewFavorite = "";
+        }
+        return tableViewFavorite;
     }
 }

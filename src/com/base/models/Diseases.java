@@ -1,6 +1,7 @@
 package com.base.models;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Diseases implements Serializable {
@@ -11,20 +12,25 @@ public class Diseases implements Serializable {
     //this is the id of the hive to which belongs.
     private int id_beehive;
 
+    //this is the id of the apiary of the beehives. You need this id, and the id_beehive to find the correct beehive
+    //on database.
+    private int id_apiary;
+
     private String disease;
 
     private String treatment;
 
-    private LocalDate startingDate;
+    private Date startingDate;
 
-    private LocalDate endingDate;
+    private Date endingDate;
 
     public Diseases() {
     }
 
-    public Diseases(int id, int id_beehive, String disease, String treatment, LocalDate startingDate, LocalDate endingDate) {
+    public Diseases(int id, int id_beehive, int id_apiary, String disease, String treatment, Date startingDate, Date endingDate) {
         this.id = id;
         this.id_beehive = id_beehive;
+        this.id_apiary = id_apiary;
         this.disease = disease;
         this.treatment = treatment;
         this.startingDate = startingDate;
@@ -63,19 +69,27 @@ public class Diseases implements Serializable {
         this.treatment = treatment;
     }
 
-    public LocalDate getStartingDate() {
+    public Date getStartingDate() {
         return startingDate;
     }
 
-    public void setStartingDate(LocalDate startingDate) {
+    public void setStartingDate(Date startingDate) {
         this.startingDate = startingDate;
     }
 
-    public LocalDate getEndingDate() {
+    public Date getEndingDate() {
         return endingDate;
     }
 
-    public void setEndingDate(LocalDate endingDate) {
+    public void setEndingDate(Date endingDate) {
         this.endingDate = endingDate;
+    }
+
+    public int getId_apiary() {
+        return id_apiary;
+    }
+
+    public void setId_apiary(int id_apiary) {
+        this.id_apiary = id_apiary;
     }
 }

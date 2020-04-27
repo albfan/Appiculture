@@ -93,12 +93,12 @@
                                                 </TableColumn>
                                                 <TableColumn prefWidth="160.0" text="Enfermas">
                                                     <cellValueFactory>
-                                                        <PropertyValueFactory property="type" />
+                                                        <PropertyValueFactory property="tableViewDiseased" />
                                                     </cellValueFactory>
                                                 </TableColumn>
                                                 <TableColumn prefWidth="193.0" text="Favoritas">
                                                     <cellValueFactory>
-                                                        <PropertyValueFactory property="favorite" />
+                                                        <PropertyValueFactory property="tableViewFavorite" />
                                                     </cellValueFactory>
                                                 </TableColumn>
                                             </columns>
