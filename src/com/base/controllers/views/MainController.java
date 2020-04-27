@@ -44,6 +44,8 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     private Button btnModHive;
     @FXML
+    private Button btnDeseases;
+    @FXML
     private Button btnDelHive;
     @FXML
     private Button btnShowAllHives;
@@ -99,7 +101,7 @@ public class MainController extends BaseController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Apiaries> observable, Apiaries oldValue, Apiaries newValue) {
 
-                if(newValue!=null) {
+                if (newValue != null) {
                     currentApiarySelected = newValue;
                     refreshHivesTableView();
                 }
@@ -128,6 +130,7 @@ public class MainController extends BaseController implements Initializable {
 
     /**
      * This method opens a form for creating a new Apiary or to modify an existing one
+     *
      * @param actionEvent
      */
     @FXML
@@ -169,7 +172,7 @@ public class MainController extends BaseController implements Initializable {
 
     //Beehives methods =================================================================================
 
-    private void initialBeehivesConfig(){
+    private void initialBeehivesConfig() {
 
         tvBeehives.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         setListenersForBeehivesTableView();
@@ -184,7 +187,7 @@ public class MainController extends BaseController implements Initializable {
 
     }
 
-    private void setListenersForBeehivesTableView(){
+    private void setListenersForBeehivesTableView() {
 
 //        lvApiaries.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Apiaries>() {
 //            @Override
@@ -202,7 +205,7 @@ public class MainController extends BaseController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Beehives> observable, Beehives oldValue, Beehives newValue) {
 
-                if(newValue!=null) {
+                if (newValue != null) {
                     currentBeehiveSelected = newValue;
                 }
             }
@@ -244,6 +247,7 @@ public class MainController extends BaseController implements Initializable {
 
     /**
      * Opens a new from window to create or modify a beehive
+     *
      * @param actionEvent
      */
     @FXML
@@ -286,5 +290,44 @@ public class MainController extends BaseController implements Initializable {
         }
         refreshHivesTableView();
     }
+
+    @FXML
+    public void openFormDiseases(ActionEvent actionEvent) {
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormDiseases.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
+            FormDiseasesController fd = fxmlLoader.getController();
+            Stage stage = new Stage();
+            fd.setActualStage(stage);
+            Scene scene = new Scene(root);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.sizeToScene();
+
+            //this part is used when we will modify an apiary instead creating a new one
+            if (((Button) actionEvent.getSource()).getId().equalsIgnoreCase("btnDeseases")) {
+
+                //this is to check if user had multiple selection on apiaries list. Only 1 allowed to be modified.
+                ObservableList<Apiaries> modList = lvApiaries.getSelectionModel().getSelectedItems();
+                if (modList.size() > 1) {
+                    alert.setContentText("Seleccione una sola colmena.");
+                    alert.show();
+                } else if (modList.size() == 1) {
+                    //fd.setApiary(modList.get(0));
+                    stage.showAndWait();
+                }
+            } else {
+                stage.showAndWait();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
