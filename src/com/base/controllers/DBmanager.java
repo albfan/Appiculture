@@ -324,5 +324,9 @@ public class DBmanager {
         return null;
     }
 
+    public void insertDiseaseInDB(Diseases disease){
+
+    }
+
 
 }

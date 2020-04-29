@@ -1,24 +1,19 @@
 package com.base.controllers;
 
-import com.base.models.Apiaries;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.input.KeyEvent;
-
-import java.awt.*;
-import java.sql.Date;
-import java.time.LocalDate;
 
 public class OperationManager {
 
     ObservableList<String> hiveTypes;
+    ObservableList<String> diseaseTypes;
 
     private static OperationManager INSTANCE=null;
 
     //Constructor------------------------------------------
     private OperationManager(){
 
-        createHiveTypesList();
+        createLists();
 
     }
     //Singleton Method-------------------------------------
@@ -32,17 +27,23 @@ public class OperationManager {
 
     //Methods-----------------------------------------------
 
-    private void createHiveTypesList(){
+    private void createLists(){
 
         hiveTypes= FXCollections.observableArrayList();
         hiveTypes.addAll("Langstroth","Dadant", "Layens","Otro");
 
+        diseaseTypes=FXCollections.observableArrayList();
+        diseaseTypes.addAll("Varroosis","Acarapisosis","Loque americana","Loque europea"
+                ,"Escarabajo (Aethina tumida)","Ácaro Tropilaelaps","Otro");
+
     }
+
 
     public ObservableList<String> getHiveTypes() {
         return hiveTypes;
     }
 
-
-
+    public ObservableList<String> getDiseaseTypes() {
+        return diseaseTypes;
+    }
 }

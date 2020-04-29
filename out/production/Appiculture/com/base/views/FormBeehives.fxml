@@ -65,7 +65,7 @@
          </tooltip>
       </Button>
       <Button fx:id="btnOk" layoutX="187.0" layoutY="410.0" mnemonicParsing="false" onAction="#validate" prefHeight="25.0" prefWidth="62.0" text="Ok" />
-      <Button fx:id="btnCancel" layoutX="510.0" layoutY="410.0" mnemonicParsing="false" onAction="#cerrarVentana" text="Cancelar" />
+      <Button fx:id="btnCancel" layoutX="510.0" layoutY="410.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancelar" />
       <Label layoutX="597.0" layoutY="154.0" text="Obligatorio">
          <font>
             <Font size="10.0" />

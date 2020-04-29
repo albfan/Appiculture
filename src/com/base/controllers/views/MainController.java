@@ -9,14 +9,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -292,42 +290,36 @@ public class MainController extends BaseController implements Initializable {
     }
 
     @FXML
-    public void openFormDiseases(ActionEvent actionEvent) {
+    public void openDiseasesManager(ActionEvent actionEvent) {
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormDiseases.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/DiseasesManager.fxml"));
         try {
             Parent root = fxmlLoader.load();
-            FormDiseasesController fd = fxmlLoader.getController();
+            DiseasesManagerController dm = fxmlLoader.getController();
             Stage stage = new Stage();
-            fd.setActualStage(stage);
+            dm.setActualStage(stage);
             Scene scene = new Scene(root);
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.sizeToScene();
 
-            //this part is used when we will modify an apiary instead creating a new one
-            if (((Button) actionEvent.getSource()).getId().equalsIgnoreCase("btnDeseases")) {
-
-                //this is to check if user had multiple selection on apiaries list. Only 1 allowed to be modified.
-                ObservableList<Apiaries> modList = lvApiaries.getSelectionModel().getSelectedItems();
-                if (modList.size() > 1) {
-                    alert.setContentText("Seleccione una sola colmena.");
-                    alert.show();
-                } else if (modList.size() == 1) {
-                    //fd.setApiary(modList.get(0));
-                    stage.showAndWait();
-                }
-            } else {
+            //this is to check if user had multiple selection on apiaries list. Only 1 allowed to be modified.
+            ObservableList<Beehives> modList = tvBeehives.getSelectionModel().getSelectedItems();
+            if (modList.size() > 1) {
+                alert.setContentText("Seleccione solo una colmena.");
+                alert.show();
+            } else if (modList.size() == 1) {
+                dm.setSelectedBeehive(modList.get(0));
                 stage.showAndWait();
+            }else{
+                alert.setContentText("Seleccione una colmena.");
+                alert.show();
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
-
 }

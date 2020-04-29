@@ -20,7 +20,7 @@ public class BaseController {
     }
 
     @FXML
-    public void cerrarVentana() {
+    public void closeWindow() {
         if (null != actualStage) {
             actualStage.close();
         }

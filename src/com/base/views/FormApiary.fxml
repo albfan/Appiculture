@@ -26,7 +26,7 @@
       <TextField fx:id="TFname" layoutX="124.0" layoutY="101.0" prefHeight="17.0" prefWidth="216.0" />
       <TextField fx:id="TFaddress" layoutX="124.0" layoutY="161.0" prefHeight="25.0" prefWidth="425.0" />
       <Button fx:id="BtnOk" layoutX="151.0" layoutY="251.0" mnemonicParsing="false" onAction="#validate" prefHeight="25.0" prefWidth="62.0" text="Ok" />
-      <Button fx:id="BtnCancel" layoutX="417.0" layoutY="251.0" mnemonicParsing="false" onAction="#cerrarVentana" text="Cancelar" />
+      <Button fx:id="BtnCancel" layoutX="417.0" layoutY="251.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancelar" />
       <Label layoutX="349.0" layoutY="108.0" text="Obligatorio">
          <font>
             <Font size="10.0" />
