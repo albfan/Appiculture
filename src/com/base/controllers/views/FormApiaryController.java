@@ -48,7 +48,7 @@ public class FormApiaryController extends BaseController implements Initializabl
         if(!"".equals(TFname.getText()) || !"".equals(TFaddress.getText())){
             if(id!=-2){
                 ap.setId(id);
-                DBmanager.getINSTANCE().modifyApiaryInDB(ap);
+                DBmanager.getINSTANCE().updateApiaryInDB(ap);
             }else {
                 DBmanager.getINSTANCE().insertApiaryInDB(ap);
             }

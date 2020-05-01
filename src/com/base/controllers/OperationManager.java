@@ -34,7 +34,7 @@ public class OperationManager {
 
         diseaseTypes=FXCollections.observableArrayList();
         diseaseTypes.addAll("Varroosis","Acarapisosis","Loque americana","Loque europea"
-                ,"Escarabajo (Aethina tumida)","Ácaro Tropilaelaps","Otro");
+                ,"Escarabajo (Aethina tumida)","Ácaro Tropilaelaps","IAPV","Otro");
 
     }
 

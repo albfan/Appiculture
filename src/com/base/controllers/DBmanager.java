@@ -82,7 +82,7 @@ public class DBmanager {
             preparedStatement = connection.prepareStatement(s);
             preparedStatement.setString(1, ap.getName());
             preparedStatement.setString(2, ap.getAdress());
-            int i = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -141,7 +141,7 @@ public class DBmanager {
         return null;
     }
 
-    public void modifyApiaryInDB(Apiaries a) {
+    public void updateApiaryInDB(Apiaries a) {
         try {
 
             s = "UPDATE apiaries SET name=?, address=? WHERE id=?";
@@ -223,7 +223,7 @@ public class DBmanager {
             preparedStatement.setDate(3, bh.getDate());
             preparedStatement.setString(4, bh.getType());
             preparedStatement.setBoolean(5, bh.isFavorite());
-            int i = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -258,6 +258,27 @@ public class DBmanager {
         }
 
         return exist;
+    }
+
+    public void updateBeehiveInDB(Beehives beehive,int oldID){
+        //todo- verificar que cuando modificamos una colmena, también se modifican las foreign keys de las enfermedades
+
+        try {
+
+            s = "UPDATE beehives SET number=?, id_apiary=?, date=?, type=?, favorite=? WHERE number=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, beehive.getNumber());
+            preparedStatement.setInt(2, beehive.getId_apiary());
+            preparedStatement.setDate(3, beehive.getDate());
+            preparedStatement.setString(4, beehive.getType());
+            preparedStatement.setBoolean(5, beehive.isFavorite());
+            preparedStatement.setInt(6, oldID);
+
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteBeehivesInDB(ObservableList<Beehives> delList) {
@@ -325,6 +346,61 @@ public class DBmanager {
     }
 
     public void insertDiseaseInDB(Diseases disease){
+
+        try {
+
+            s = "INSERT INTO diseases ( id_beehive, id_apiary, disease, treatment," +
+                    "start_treat_date, end_treat_date ) VALUES( ?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, disease.getId_beehive());
+            preparedStatement.setInt(2, disease.getId_apiary());
+            preparedStatement.setString(3, disease.getDisease());
+            preparedStatement.setString(4, disease.getTreatment());
+            preparedStatement.setDate(5, disease.getStartingDate());
+            preparedStatement.setDate(6, disease.getEndingDate());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void updateDiseaseInDb(Diseases disease){
+
+        try {
+
+            s = "UPDATE diseases SET disease=?, treatment=?, start_treat_date=?, end_treat_date=? WHERE id=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setString(1, disease.getDisease());
+            preparedStatement.setString(2, disease.getTreatment());
+            preparedStatement.setDate(3, disease.getStartingDate());
+            preparedStatement.setDate(4, disease.getEndingDate());
+            preparedStatement.setInt(5, disease.getId());
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void deleteDiseaseInDB(ObservableList<Diseases> delList){
+
+            if (delList.size() > 0) {
+                try {
+                    for (Diseases di : delList) {
+
+                        s = "DELETE FROM diseases where id= ?";
+                        preparedStatement = connection.prepareStatement(s);
+                        preparedStatement.setInt(1, di.getId());
+                        preparedStatement.execute();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
 
     }
 

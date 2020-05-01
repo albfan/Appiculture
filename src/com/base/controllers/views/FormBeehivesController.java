@@ -49,6 +49,7 @@ public class FormBeehivesController extends BaseController implements Initializa
     @FXML
     private Button btnCancel;
 
+    private Beehives selectedBeehive = null;
     private ObservableList<Apiaries> apiariesList = FXCollections.observableArrayList();
 
 
@@ -76,14 +77,15 @@ public class FormBeehivesController extends BaseController implements Initializa
 
     /**
      * Receive the selected apiary from the main window and select it by default on the form apiary combobox
+     *
      * @param ap - the apiary from the listview in the main window controller
      */
-    public void setApiary(Apiaries ap){
+    public void setApiary(Apiaries ap) {
 
         cbHiveApiary.getSelectionModel().select(ap);
     }
 
-    private void configureInputs(){
+    private void configureInputs() {
         tfHiveNum.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 tfHiveNum.setText(newValue.replaceAll("[^\\d]", ""));
@@ -118,7 +120,7 @@ public class FormBeehivesController extends BaseController implements Initializa
 
     }
 
-    private void loadHiveTypesComboBox(){
+    private void loadHiveTypesComboBox() {
         cbHiveType.setItems(OperationManager.getInstance().getHiveTypes());
         cbHiveType.getSelectionModel().selectFirst();
     }
@@ -126,17 +128,17 @@ public class FormBeehivesController extends BaseController implements Initializa
     //this method check on the database if the beehives number is already used in that apiary
     private boolean verifyNumberIsUsed() {//todo hacer este método y el que está abajo de validar
 
-        return DBmanager.getINSTANCE().beehiveExist(Integer.parseInt(tfHiveNum.getText()),cbHiveApiary.getSelectionModel().getSelectedItem().getId());
+        return DBmanager.getINSTANCE().beehiveExist(Integer.parseInt(tfHiveNum.getText()), cbHiveApiary.getSelectionModel().getSelectedItem().getId());
     }
 
     @FXML
     @Override
     public void validate() {//todo hacer pruebas de validaciones
 
-        Apiaries apiary= cbHiveApiary.getSelectionModel().getSelectedItem();
+        Apiaries apiary = cbHiveApiary.getSelectionModel().getSelectedItem();
         int number = Integer.parseInt(tfHiveNum.getText());
         //this date is to verify the datepicker value
-        LocalDate localDate=dpHive.getValue();
+        LocalDate localDate = dpHive.getValue();
         //this date is for the beehive
         Date date = null;
         String type = null;
@@ -144,7 +146,7 @@ public class FormBeehivesController extends BaseController implements Initializa
         String s = "";
 
         //we check if apiary is not null
-        if (null == apiary ) {
+        if (null == apiary) {
             s = s + "-Debe elegir un apiario.\n";
         } else {
             //we check if the number is already used in that apiary
@@ -154,27 +156,27 @@ public class FormBeehivesController extends BaseController implements Initializa
             } else {
 
                 //we verify the something is selected in the datepicker. by default set to current date
-                if ( null==localDate){
-                    date= new Date(System.currentTimeMillis());
-                }else{
+                if (null == localDate) {
+                    date = new Date(System.currentTimeMillis());
+                } else {
                     date = Date.valueOf(dpHive.getValue());
                 }
 
-                type=cbHiveType.getValue();
+                type = cbHiveType.getValue();
 
-                favorite=cbFavorite.isSelected();
+                favorite = cbFavorite.isSelected();
 
             }
         }
 
-        if(!s.equals("")){
+        if (!s.equals("")) {
 
             alert.setContentText(s);
             alert.show();
 
-        }else{
+        } else {
 
-            Beehives beehive= new Beehives();
+            Beehives beehive = new Beehives();
             beehive.setId_apiary(apiary.getId());
             beehive.setNumber(number);
             beehive.setDate(date);
@@ -188,8 +190,9 @@ public class FormBeehivesController extends BaseController implements Initializa
 
     public void setBeehive(Beehives beehive) {//todo - no permite modificar si ya existe. y como estamos modificando, ya existe.
 
+        selectedBeehive = beehive;
         cbHiveApiary.setValue(DBmanager.getINSTANCE().getApiary(beehive.getId_apiary()));
-        tfHiveNum.setText(""+beehive.getNumber());
+        tfHiveNum.setText("" + beehive.getNumber());
         dpHive.setValue(beehive.getDate().toLocalDate());
         cbHiveType.getSelectionModel().select(beehive.getType());
 

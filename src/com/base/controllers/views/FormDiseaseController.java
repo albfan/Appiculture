@@ -50,13 +50,21 @@ public class FormDiseaseController extends BaseController implements Initializab
 
     }
 
+    /**
+     * This metod is used when you want to modify an existing disease
+     * @param selectedDisease
+     */
     public void setSelectedDisease(Diseases selectedDisease) {
 
         this.selectedDisease = selectedDisease;
         cbDisease.getSelectionModel().select(selectedDisease.getDisease());
         tfTreatment.setText(selectedDisease.getTreatment());
         dpStartDate.setValue(selectedDisease.getStartingDate().toLocalDate());
-        dpEndDate.setValue(selectedDisease.getEndingDate().toLocalDate());
+        if(null!=selectedDisease.getEndingDate()) {
+
+            dpEndDate.setValue(selectedDisease.getEndingDate().toLocalDate());
+
+        }
     }
 
     public void setSelectedBeehive(Beehives selectedBeehive) {
@@ -66,18 +74,38 @@ public class FormDiseaseController extends BaseController implements Initializab
     @FXML
     public void validate(ActionEvent actionEvent) {
 
-        Diseases disease= new Diseases();
+        Diseases disease = new Diseases();
+
 
         disease.setId_beehive(selectedBeehive.getNumber());
         disease.setId_apiary(selectedBeehive.getId_apiary());
         disease.setDisease(cbDisease.getSelectionModel().getSelectedItem());
         disease.setTreatment(tfTreatment.getText());
-        disease.setStartingDate(Date.valueOf(dpStartDate.getValue()));
-        disease.setEndingDate(Date.valueOf(dpEndDate.getValue()));
+        if (null == dpStartDate.getValue()) {
 
-        DBmanager.getINSTANCE().insertDiseaseInDB(disease);
+            alert.setContentText("Debe añadir una fecha de inicio para el tratamiento");
+            alert.show();
 
-        actualStage.close();
+        } else {
+
+            disease.setStartingDate(Date.valueOf(dpStartDate.getValue()));
+            if (null != dpEndDate.getValue()) {
+
+                disease.setEndingDate(Date.valueOf(dpEndDate.getValue()));
+
+            }
+
+            //this is to modify or add a new disease depending if the selectedDisease parameter is null.
+            if(null!=selectedDisease){
+                disease.setId(selectedDisease.getId());
+                DBmanager.getINSTANCE().updateDiseaseInDb(disease);
+            }else {
+                DBmanager.getINSTANCE().insertDiseaseInDB(disease);
+            }
+            actualStage.close();
+        }
+
+
     }
 
 }

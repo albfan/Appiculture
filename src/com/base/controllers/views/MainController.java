@@ -266,7 +266,7 @@ public class MainController extends BaseController implements Initializable {
             fb.setApiary(currentApiarySelected);
 
 
-            //this part is used when we modify a beehive instead creating a new one
+            //this is used when we modify a beehive instead creating a new one
             if (((Button) actionEvent.getSource()).getId().equalsIgnoreCase("btnModHive")) {
 
                 //this is to check if user had multiple selection on beehives tableview. Only 1 allowed to be modified.
@@ -321,5 +321,6 @@ public class MainController extends BaseController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        refreshHivesTableView();
     }
 }
