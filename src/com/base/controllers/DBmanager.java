@@ -259,20 +259,20 @@ public class DBmanager {
 
         return exist;
     }
-
-    public void updateBeehiveInDB(Beehives beehive,int oldID){
-        //todo- verificar que cuando modificamos una colmena, también se modifican las foreign keys de las enfermedades
+    //todo- verificar que cuando modificamos una colmena, también se modifican las foreign keys de las enfermedades
+    public void updateBeehiveInDB(Beehives newBeehive,Beehives oldBeehive){
 
         try {
 
-            s = "UPDATE beehives SET number=?, id_apiary=?, date=?, type=?, favorite=? WHERE number=?";
+            s = "UPDATE beehives SET number=?, id_apiary=?, date=?, type=?, favorite=? WHERE number=? and id_apiary=? ";
             preparedStatement = connection.prepareStatement(s);
-            preparedStatement.setInt(1, beehive.getNumber());
-            preparedStatement.setInt(2, beehive.getId_apiary());
-            preparedStatement.setDate(3, beehive.getDate());
-            preparedStatement.setString(4, beehive.getType());
-            preparedStatement.setBoolean(5, beehive.isFavorite());
-            preparedStatement.setInt(6, oldID);
+            preparedStatement.setInt(1, newBeehive.getNumber());
+            preparedStatement.setInt(2, newBeehive.getId_apiary());
+            preparedStatement.setDate(3, newBeehive.getDate());
+            preparedStatement.setString(4, newBeehive.getType());
+            preparedStatement.setBoolean(5, newBeehive.isFavorite());
+            preparedStatement.setInt(6, oldBeehive.getNumber());
+            preparedStatement.setInt(7,oldBeehive.getId_apiary());
 
             int i = preparedStatement.executeUpdate();
 

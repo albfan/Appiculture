@@ -44,6 +44,8 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     private Button btnDeseases;
     @FXML
+    private Button btnFeedings;
+    @FXML
     private Button btnDelHive;
     @FXML
     private Button btnShowAllHives;

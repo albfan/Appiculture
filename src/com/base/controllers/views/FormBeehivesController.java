@@ -85,6 +85,9 @@ public class FormBeehivesController extends BaseController implements Initializa
         cbHiveApiary.getSelectionModel().select(ap);
     }
 
+    /**
+     * this force the user to input only numbers
+     */
     private void configureInputs() {
         tfHiveNum.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -92,6 +95,7 @@ public class FormBeehivesController extends BaseController implements Initializa
             }
         });
         cbHiveApiary.requestFocus();
+        dpHive.setValue(LocalDate.now());
 
     }
 
@@ -126,7 +130,7 @@ public class FormBeehivesController extends BaseController implements Initializa
     }
 
     //this method check on the database if the beehives number is already used in that apiary
-    private boolean verifyNumberIsUsed() {//todo hacer este método y el que está abajo de validar
+    private boolean verifyNumberIsUsed() {
 
         return DBmanager.getINSTANCE().beehiveExist(Integer.parseInt(tfHiveNum.getText()), cbHiveApiary.getSelectionModel().getSelectedItem().getId());
     }
@@ -136,39 +140,35 @@ public class FormBeehivesController extends BaseController implements Initializa
     public void validate() {//todo hacer pruebas de validaciones
 
         Apiaries apiary = cbHiveApiary.getSelectionModel().getSelectedItem();
-        int number = Integer.parseInt(tfHiveNum.getText());
+
         //this date is to verify the datepicker value
         LocalDate localDate = dpHive.getValue();
-        //this date is for the beehive
+        //this date is for the beehive in the database
         Date date = null;
         String type = null;
         boolean favorite = false;
+        //this string is used to prompt a message in case of error
         String s = "";
 
-        //we check if apiary is not null
-        if (null == apiary) {
-            s = s + "-Debe elegir un apiario.\n";
-        } else {
-            //we check if the number is already used in that apiary
-            if (verifyNumberIsUsed()) {
-                s = s + "-Este número ya existe en este apiario." +
-                        "Elija otro número o cambie de apiario.\n";
-            } else {
+        //Validations.....................................
+        if(tfHiveNum.getText().equalsIgnoreCase("")){
 
-                //we verify the something is selected in the datepicker. by default set to current date
-                if (null == localDate) {
-                    date = new Date(System.currentTimeMillis());
-                } else {
-                    date = Date.valueOf(dpHive.getValue());
-                }
+            s=s+"Debe introducir un número de indentificación para su colmena.\n";
 
-                type = cbHiveType.getValue();
+        }else if(null == selectedBeehive && verifyNumberIsUsed()){
 
-                favorite = cbFavorite.isSelected();
+            s = s + "Este número ya existe en este apiario. " +
+                    "Elija otro número o cambie de apiario.\n";
 
-            }
         }
 
+        if (null == apiary) {
+            s = s + "Debe elegir un apiario.\n";
+        }
+
+
+
+        //check if there is an error
         if (!s.equals("")) {
 
             alert.setContentText(s);
@@ -176,14 +176,37 @@ public class FormBeehivesController extends BaseController implements Initializa
 
         } else {
 
+            //we verify that something is selected in the datepicker. by default set to current date
+            if (null == localDate) {
+                date = new Date(System.currentTimeMillis());
+            } else {
+                date = Date.valueOf(dpHive.getValue());
+            }
+            type = cbHiveType.getValue();
+            favorite = cbFavorite.isSelected();
+
             Beehives beehive = new Beehives();
+
             beehive.setId_apiary(apiary.getId());
-            beehive.setNumber(number);
+            beehive.setNumber(Integer.parseInt(tfHiveNum.getText()));
             beehive.setDate(date);
             beehive.setType(type);
             beehive.setFavorite(favorite);
 
-            DBmanager.getINSTANCE().insertBeehiveInDB(beehive);
+            //check if we are modifying o creating a new beehive. This is when we create a new beehive
+            if (null == selectedBeehive) {
+
+                DBmanager.getINSTANCE().insertBeehiveInDB(beehive);
+                actualStage.close();
+
+                // this is when we modify an existing beehive
+            } else {
+
+                DBmanager.getINSTANCE().updateBeehiveInDB(beehive,selectedBeehive);
+                actualStage.close();
+
+            }
+
             actualStage.close();
         }
     }
@@ -195,6 +218,7 @@ public class FormBeehivesController extends BaseController implements Initializa
         tfHiveNum.setText("" + beehive.getNumber());
         dpHive.setValue(beehive.getDate().toLocalDate());
         cbHiveType.getSelectionModel().select(beehive.getType());
+        cbFavorite.setSelected(beehive.isFavorite());
 
     }
 
