@@ -211,7 +211,7 @@ public class FormBeehivesController extends BaseController implements Initializa
         }
     }
 
-    public void setBeehive(Beehives beehive) {//todo - no permite modificar si ya existe. y como estamos modificando, ya existe.
+    public void setBeehive(Beehives beehive) {
 
         selectedBeehive = beehive;
         cbHiveApiary.setValue(DBmanager.getINSTANCE().getApiary(beehive.getId_apiary()));
