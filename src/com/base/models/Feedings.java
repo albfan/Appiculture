@@ -1,6 +1,7 @@
 package com.base.models;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -14,8 +15,10 @@ public class Feedings implements Serializable {
     //this is the id of the hive to which belongs.
     private int id_beehive;
 
+    private int id_Apiary;
+
     //this is the date of when the feedings have been made.
-    private LocalDate date;
+    private Date date;
 
     //this is the quantity in solid food.
     private double solid_quant;
@@ -23,10 +26,13 @@ public class Feedings implements Serializable {
     //this is the quantity of the liquid food.
     private double liquid_quant;
 
+    //this is the food used
+    private String feeding_used;
+
     public Feedings() {
     }
 
-    public Feedings(int id, int id_beehive, LocalDate date, double solid_quant, double liquid_quant) {
+    public Feedings(int id, int id_beehive, Date date, double solid_quant, double liquid_quant) {
         this.id = id;
         this.id_beehive = id_beehive;
         this.date = date;
@@ -50,11 +56,11 @@ public class Feedings implements Serializable {
         this.id_beehive = id_beehive;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -72,5 +78,21 @@ public class Feedings implements Serializable {
 
     public void setLiquid_quant(double liquid_quant) {
         this.liquid_quant = liquid_quant;
+    }
+
+    public int getId_Apiary() {
+        return id_Apiary;
+    }
+
+    public void setId_Apiary(int id_Apiary) {
+        this.id_Apiary = id_Apiary;
+    }
+
+    public String getFeeding_used() {
+        return feeding_used;
+    }
+
+    public void setFeeding_used(String feeding_used) {
+        this.feeding_used = feeding_used;
     }
 }

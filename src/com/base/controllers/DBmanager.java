@@ -3,6 +3,7 @@ package com.base.controllers;
 import com.base.models.Apiaries;
 import com.base.models.Beehives;
 import com.base.models.Diseases;
+import com.base.models.Feedings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.sqlite.SQLiteConfig;
@@ -21,12 +22,14 @@ public class DBmanager {
     private ObservableList<Apiaries> apiariesList;
     private ObservableList<Beehives> beehivesList;
     private ObservableList<Diseases> diseasesList;
+    private ObservableList<Feedings> feedingsList;
 
     //Constructor--------------
     private DBmanager() {
         apiariesList = FXCollections.observableArrayList();
         beehivesList = FXCollections.observableArrayList();
         diseasesList = FXCollections.observableArrayList();
+        feedingsList = FXCollections.observableArrayList();
     }
 
     //Singleton Method-------------
@@ -46,7 +49,7 @@ public class DBmanager {
 
             SQLiteConfig config = new SQLiteConfig();
             config.enforceForeignKeys(true);
-            connection = DriverManager.getConnection(dbPath,config.toProperties());
+            connection = DriverManager.getConnection(dbPath, config.toProperties());
 
             return connection;
 
@@ -263,8 +266,9 @@ public class DBmanager {
 
         return exist;
     }
+
     //todo- verificar que cuando modificamos una colmena, también se modifican las foreign keys de las enfermedades
-    public void updateBeehiveInDB(Beehives newBeehive,Beehives oldBeehive){
+    public void updateBeehiveInDB(Beehives newBeehive, Beehives oldBeehive) {
 
         try {
 
@@ -276,7 +280,7 @@ public class DBmanager {
             preparedStatement.setString(4, newBeehive.getType());
             preparedStatement.setBoolean(5, newBeehive.isFavorite());
             preparedStatement.setInt(6, oldBeehive.getNumber());
-            preparedStatement.setInt(7,oldBeehive.getId_apiary());
+            preparedStatement.setInt(7, oldBeehive.getId_apiary());
 
             int i = preparedStatement.executeUpdate();
 //            s = "UPDATE beehives SET number="+newBeehive.getNumber()
@@ -359,7 +363,7 @@ public class DBmanager {
         return null;
     }
 
-    public void insertDiseaseInDB(Diseases disease){
+    public void insertDiseaseInDB(Diseases disease) {
 
         try {
 
@@ -380,7 +384,7 @@ public class DBmanager {
 
     }
 
-    public void updateDiseaseInDb(Diseases disease){
+    public void updateDiseaseInDb(Diseases disease) {
 
         try {
 
@@ -400,23 +404,60 @@ public class DBmanager {
     }
 
 
-    public void deleteDiseaseInDB(ObservableList<Diseases> delList){
+    public void deleteDiseaseInDB(ObservableList<Diseases> delList) {
 
-            if (delList.size() > 0) {
-                try {
-                    for (Diseases di : delList) {
+        if (delList.size() > 0) {
+            try {
+                for (Diseases di : delList) {
 
-                        s = "DELETE FROM diseases where id= ?";
-                        preparedStatement = connection.prepareStatement(s);
-                        preparedStatement.setInt(1, di.getId());
-                        preparedStatement.execute();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                    s = "DELETE FROM diseases where id= ?";
+                    preparedStatement = connection.prepareStatement(s);
+                    preparedStatement.setInt(1, di.getId());
+                    preparedStatement.execute();
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+        }
 
     }
+    //FEEDINGS---(id, id_beehive, id_apiary, feeding_date, solid_quant, liquid_quant ) id is pk -------------
+
+    public ObservableList<Feedings> getFeedings(Beehives beehive) {
+
+        try {
+            feedingsList.clear();
+            if (null == beehive) {
+                s = "SELECT * FROM feedings";
+            } else {
+                s = "SELECT * FROM feedings WHERE id_beehive=" + beehive.getNumber()
+                        + " AND id_apiary=" + beehive.getId_apiary();
+            }
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(s);
+            while (resultSet.next()) {
+
+                Feedings fe = new Feedings();
+                fe.setId(resultSet.getInt(1));
+                fe.setId_beehive(resultSet.getInt(2));
+                fe.setId_Apiary(resultSet.getInt(3));
+                fe.setDate(resultSet.getDate(4));
+                fe.setSolid_quant(resultSet.getInt(5));
+                fe.setLiquid_quant(resultSet.getInt(6));
+                fe.setFeeding_used(resultSet.getString(7));
+
+                feedingsList.add(fe);
+
+            }
+            return feedingsList;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+
+    }
+
 
 
 }

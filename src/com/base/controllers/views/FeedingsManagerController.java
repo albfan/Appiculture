@@ -1,13 +1,14 @@
 package com.base.controllers.views;
 
+import com.base.controllers.DBmanager;
+import com.base.models.Apiaries;
+import com.base.models.Beehives;
+import com.base.models.Feedings;
 import com.base.models.structure.BaseController;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,8 +42,29 @@ public class FeedingsManagerController extends BaseController implements Initial
     @FXML
     private Button btnAdd;
 
+    private Beehives selectedBeehive = null;
+    private ObservableList<Feedings> feedingsList;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        tvFeedings.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
     }
+
+    public void setSelectedBeehive(Beehives beehive) {
+
+        this.selectedBeehive = beehive;
+        refreshTableView();
+
+    }
+
+    private void refreshTableView() {
+
+        feedingsList = DBmanager.getINSTANCE().getFeedings(selectedBeehive);
+
+    }
+
+
 }
