@@ -5,6 +5,7 @@ import com.base.models.Beehives;
 import com.base.models.Diseases;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.sqlite.SQLiteConfig;
 
 import java.sql.*;
 
@@ -42,7 +43,10 @@ public class DBmanager {
 
             String dbPath = "jdbc:sqlite:resources/db/datab.db";
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(dbPath);
+
+            SQLiteConfig config = new SQLiteConfig();
+            config.enforceForeignKeys(true);
+            connection = DriverManager.getConnection(dbPath,config.toProperties());
 
             return connection;
 
@@ -275,6 +279,16 @@ public class DBmanager {
             preparedStatement.setInt(7,oldBeehive.getId_apiary());
 
             int i = preparedStatement.executeUpdate();
+//            s = "UPDATE beehives SET number="+newBeehive.getNumber()
+//                    +", id_apiary="+newBeehive.getId_apiary()
+//                    +", date="+newBeehive.getDate()
+//                    +", type="+newBeehive.getType()
+//                    +", favorite="+newBeehive.isFavorite()
+//                    +" WHERE number="+oldBeehive.getNumber()
+//                    +" and id_apiary="+oldBeehive.getId_apiary();
+//
+//            statement = connection.createStatement();
+//            statement.executeUpdate(s);
 
         } catch (SQLException e) {
             e.printStackTrace();
