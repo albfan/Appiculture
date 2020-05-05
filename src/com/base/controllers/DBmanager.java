@@ -458,6 +458,62 @@ public class DBmanager {
 
     }
 
+    public void insertFeedingInDB(Feedings feeding) {
+
+        try {
+
+            s = "INSERT INTO feedings ( id_beehive, id_apiary, feeding_date, solid_quant," +
+                    "liquid_quant, feeding_used ) VALUES( ?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, feeding.getId_beehive());
+            preparedStatement.setInt(2, feeding.getId_Apiary());
+            preparedStatement.setDate(3, feeding.getDate());
+            preparedStatement.setDouble(4, feeding.getSolid_quant());
+            preparedStatement.setDouble(5, feeding.getLiquid_quant());
+            preparedStatement.setString(6, feeding.getFeeding_used());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
+    public void deleteFeedingsInDB(ObservableList<Feedings> delList) {
+
+        if (delList.size() > 0) {
+            try {
+                for (Feedings fe : delList) {
+
+                    s = "DELETE FROM feedings where id= ?";
+                    preparedStatement = connection.prepareStatement(s);
+                    preparedStatement.setInt(1, fe.getId());
+                    preparedStatement.execute();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void updateFeedingInDB(Feedings feeding) {
+
+        try {
+
+            s = "UPDATE feedings SET feeding_date=?, solid_quant=?, liquid_quant=?, feeding_used=? WHERE id=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setDate(1, feeding.getDate());
+            preparedStatement.setDouble(2, feeding.getSolid_quant());
+            preparedStatement.setDouble(3, feeding.getLiquid_quant());
+            preparedStatement.setString(4, feeding.getFeeding_used());
+            preparedStatement.setInt(5, feeding.getId());
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

@@ -137,7 +137,7 @@ public class FormBeehivesController extends BaseController implements Initializa
 
     @FXML
     @Override
-    public void validate() {//todo hacer pruebas de validaciones
+    public void validate() {//todo hacer pruebas de validaciones. validar fecha
 
         Apiaries apiary = cbHiveApiary.getSelectionModel().getSelectedItem();
 

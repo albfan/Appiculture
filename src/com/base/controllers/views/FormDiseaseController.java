@@ -74,13 +74,13 @@ public class FormDiseaseController extends BaseController implements Initializab
     @FXML
     public void validate(ActionEvent actionEvent) {
 
-        Diseases disease = new Diseases();
+        Diseases actualDisease = new Diseases();
 
 
-        disease.setId_beehive(selectedBeehive.getNumber());
-        disease.setId_apiary(selectedBeehive.getId_apiary());
-        disease.setDisease(cbDisease.getSelectionModel().getSelectedItem());
-        disease.setTreatment(tfTreatment.getText());
+        actualDisease.setId_beehive(selectedBeehive.getNumber());
+        actualDisease.setId_apiary(selectedBeehive.getId_apiary());
+        actualDisease.setDisease(cbDisease.getSelectionModel().getSelectedItem());
+        actualDisease.setTreatment(tfTreatment.getText());
         if (null == dpStartDate.getValue()) {
 
             alert.setContentText("Debe añadir una fecha de inicio para el tratamiento");
@@ -88,19 +88,19 @@ public class FormDiseaseController extends BaseController implements Initializab
 
         } else {
 
-            disease.setStartingDate(Date.valueOf(dpStartDate.getValue()));
+            actualDisease.setStartingDate(Date.valueOf(dpStartDate.getValue()));
             if (null != dpEndDate.getValue()) {
 
-                disease.setEndingDate(Date.valueOf(dpEndDate.getValue()));
+                actualDisease.setEndingDate(Date.valueOf(dpEndDate.getValue()));
 
             }
 
             //this is to modify or add a new disease depending if the selectedDisease parameter is null.
             if(null!=selectedDisease){
-                disease.setId(selectedDisease.getId());
-                DBmanager.getINSTANCE().updateDiseaseInDb(disease);
+                actualDisease.setId(selectedDisease.getId());
+                DBmanager.getINSTANCE().updateDiseaseInDb(actualDisease);
             }else {
-                DBmanager.getINSTANCE().insertDiseaseInDB(disease);
+                DBmanager.getINSTANCE().insertDiseaseInDB(actualDisease);
             }
             actualStage.close();
         }

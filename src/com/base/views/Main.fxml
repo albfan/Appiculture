@@ -109,8 +109,12 @@
                                           <Button fx:id="btnModHive" layoutX="51.0" layoutY="25.0" mnemonicParsing="false" onAction="#openFormHives" text="Modificar" />
                                           <Button fx:id="btnDelHive" layoutX="118.0" layoutY="25.0" mnemonicParsing="false" onAction="#deleteHives" text="Quitar" />
                                           <Separator layoutX="175.0" layoutY="25.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="5.0" />
-                                          <Button fx:id="btnDeseases" layoutX="181.0" layoutY="25.0" mnemonicParsing="false" onAction="#openDiseasesManager" text="Enfermedades" />
-                                          <Button fx:id="btnFeedings" layoutX="273.0" layoutY="25.0" mnemonicParsing="false" onAction="#openFeedingsManager" text="Alimento" />
+                                          <Button fx:id="btnDeseases" layoutX="188.0" layoutY="25.0" mnemonicParsing="false" onAction="#openDiseasesManager" text="Enfermedades" />
+                                          <Button fx:id="btnFeedings" layoutX="280.0" layoutY="25.0" mnemonicParsing="false" onAction="#openFeedingsManager" text="Alimento" />
+                                          <Button fx:id="btnProductions" layoutX="345.0" layoutY="25.0" mnemonicParsing="false" text="Producción" />
+                                          <Button layoutX="421.0" layoutY="25.0" mnemonicParsing="false" text="Reinas" />
+                                          <Button layoutX="472.0" layoutY="25.0" mnemonicParsing="false" text="Alzas" />
+                                          <Button layoutX="516.0" layoutY="25.0" mnemonicParsing="false" text="Enjambres" />
                                        </children></AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>

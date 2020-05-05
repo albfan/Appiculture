@@ -50,7 +50,7 @@ public class DiseasesManagerController extends BaseController implements Initial
     }
 
     @FXML
-    public void openFormDisease(ActionEvent actionEvent) { //TODO- pendiente arreglar modificar y borrar enfermedades
+    public void openFormDisease(ActionEvent actionEvent) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormDisease.fxml"));
         try {
