@@ -267,7 +267,6 @@ public class DBmanager {
         return exist;
     }
 
-    //todo- verificar que cuando modificamos una colmena, también se modifican las foreign keys de las enfermedades
     public void updateBeehiveInDB(Beehives newBeehive, Beehives oldBeehive) {
 
         try {

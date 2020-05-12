@@ -47,8 +47,7 @@ public class MainController extends BaseController implements Initializable {
     private Button btnFeedings;
     @FXML
     private Button btnDelHive;
-    @FXML
-    private Button btnShowAllHives;
+
 
     //this is the apiary actually selected in listview
     Apiaries currentApiarySelected = null;

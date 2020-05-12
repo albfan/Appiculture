@@ -38,7 +38,7 @@ public class FormApiaryController extends BaseController implements Initializabl
 
     @FXML
     @Override
-    public void validate(){ //todo verificar que deja modificar
+    public void validate(){ 
 
         Apiaries ap= new Apiaries();
         ap.setName(TFname.getText());

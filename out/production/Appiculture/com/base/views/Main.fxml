@@ -39,7 +39,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.6526315789473685" layoutX="1.0" layoutY="24.0" orientation="VERTICAL" prefHeight="676.0" prefWidth="1034.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+      <SplitPane dividerPositions="0.4198830409356725" layoutX="1.0" layoutY="24.0" orientation="VERTICAL" prefHeight="676.0" prefWidth="1034.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
@@ -52,65 +52,94 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <ListView fx:id="lvApiaries" layoutY="78.0" prefHeight="450.0" prefWidth="176.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
+                              <ListView fx:id="lvApiaries" layoutY="78.0" prefHeight="475.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0" />
                               <Button fx:id="btnAddApiary" layoutY="25.0" mnemonicParsing="false" onAction="#openFormApiary" prefHeight="25.0" prefWidth="87.0" text="Añadir" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
                               <Button fx:id="btnRmvApiary" layoutX="88.0" layoutY="25.0" mnemonicParsing="false" onAction="#deleteApiaries" prefHeight="25.0" prefWidth="87.0" text="Quitar" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
                               <Button fx:id="btnModApiary" layoutY="50.0" mnemonicParsing="false" onAction="#openFormApiary" prefHeight="25.0" prefWidth="176.0" text="Modificar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <Button fx:id="btnShowAllHives" layoutX="-1.0" layoutY="528.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" text="Ver todas las colmenas" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                            </children></AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="404.0" prefWidth="886.0">
                            <children>
-                              <SplitPane dividerPositions="0.8083491461100569" layoutY="-1.0" prefHeight="402.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <SplitPane dividerPositions="0.8358633776091081" layoutY="-1.0" prefHeight="402.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="352.0" prefWidth="794.0">
                                        <children>
-                                          <Label alignment="CENTER" layoutY="-8.0" prefHeight="25.0" prefWidth="849.0" text="Colmenas" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <TableView fx:id="tvBeehives" layoutX="-1.0" layoutY="76.0" prefHeight="447.0" prefWidth="849.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
-                                            <columns>
-                                              <TableColumn prefWidth="132.0" text="Numero">
-                                                  <cellValueFactory>
-                                                      <PropertyValueFactory property="number" />
-                                                  </cellValueFactory>
-                                              </TableColumn>
-                                              <TableColumn prefWidth="102.0" text="Apiario">
-                                                  <cellValueFactory>
-                                                      <PropertyValueFactory property="id_apiary" />
-                                                  </cellValueFactory>
-                                              </TableColumn>
-                                                <TableColumn prefWidth="94.0" text="Fecha">
-                                                    <cellValueFactory>
-                                                        <PropertyValueFactory property="date" />
-                                                    </cellValueFactory>
-                                                </TableColumn>
-                                                <TableColumn prefWidth="167.0" text="Tipo">
-                                                    <cellValueFactory>
-                                                        <PropertyValueFactory property="type" />
-                                                    </cellValueFactory>
-                                                </TableColumn>
-                                                <TableColumn prefWidth="160.0" text="Enfermas">
-                                                    <cellValueFactory>
-                                                        <PropertyValueFactory property="tableViewDiseased" />
-                                                    </cellValueFactory>
-                                                </TableColumn>
-                                                <TableColumn prefWidth="193.0" text="Favoritas">
-                                                    <cellValueFactory>
-                                                        <PropertyValueFactory property="tableViewFavorite" />
-                                                    </cellValueFactory>
-                                                </TableColumn>
-                                            </columns>
-                                          </TableView>
-                                          <Label layoutY="51.0" prefHeight="25.0" prefWidth="188.0" text="Buscar por el número de colmena:" />
-                                          <TextField layoutX="188.0" layoutY="51.0" prefHeight="25.0" prefWidth="100.0" />
-                                          <Button fx:id="btnAddHive" layoutY="25.0" mnemonicParsing="false" onAction="#openFormHives" text="Añadir" />
-                                          <Button fx:id="btnModHive" layoutX="51.0" layoutY="25.0" mnemonicParsing="false" onAction="#openFormHives" text="Modificar" />
-                                          <Button fx:id="btnDelHive" layoutX="118.0" layoutY="25.0" mnemonicParsing="false" onAction="#deleteHives" text="Quitar" />
-                                          <Separator layoutX="175.0" layoutY="25.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="5.0" />
-                                          <Button fx:id="btnDeseases" layoutX="181.0" layoutY="25.0" mnemonicParsing="false" onAction="#openDiseasesManager" text="Enfermedades" />
-                                          <Button fx:id="btnFeedings" layoutX="273.0" layoutY="25.0" mnemonicParsing="false" onAction="#openFeedingsManager" text="Alimento" />
+                                          <SplitPane dividerPositions="0.6493506493506493" layoutY="-3.0" prefHeight="356.0" prefWidth="878.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="803.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" prefHeight="25.0" prefWidth="849.0" text="Colmenas" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TableView fx:id="tvBeehives" layoutX="6.0" prefHeight="278.0" prefWidth="561.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="76.0">
+                                                        <columns>
+                                                          <TableColumn prefWidth="76.0" text="Numero">
+                                                              <cellValueFactory>
+                                                                  <PropertyValueFactory property="number" />
+                                                              </cellValueFactory>
+                                                          </TableColumn>
+                                                          <TableColumn prefWidth="136.0" text="Apiario">
+                                                              <cellValueFactory>
+                                                                  <PropertyValueFactory property="id_apiary" />
+                                                              </cellValueFactory>
+                                                          </TableColumn>
+                                                            <TableColumn prefWidth="73.0" text="Fecha">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="date" />
+                                                                </cellValueFactory>
+                                                            </TableColumn>
+                                                            <TableColumn prefWidth="119.0" text="Tipo">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="type" />
+                                                                </cellValueFactory>
+                                                            </TableColumn>
+                                                            <TableColumn prefWidth="67.0" text="Enfermas">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="tableViewDiseased" />
+                                                                </cellValueFactory>
+                                                            </TableColumn>
+                                                            <TableColumn prefWidth="62.0" text="Favoritas">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="tableViewFavorite" />
+                                                                </cellValueFactory>
+                                                            </TableColumn>
+                                                        </columns>
+                                                      </TableView>
+                                                      <Label layoutX="9.0" layoutY="50.0" prefHeight="25.0" prefWidth="188.0" text="Buscar por el número de colmena:" />
+                                                      <TextField layoutX="194.0" layoutY="50.0" prefHeight="25.0" prefWidth="100.0" />
+                                                      <Button fx:id="btnAddHive" layoutX="9.0" layoutY="25.0" mnemonicParsing="false" onAction="#openFormHives" text="Añadir" />
+                                                      <Button fx:id="btnModHive" layoutX="110.0" layoutY="25.0" mnemonicParsing="false" onAction="#openFormHives" text="Modificar" />
+                                                      <Button fx:id="btnDelHive" layoutX="60.0" layoutY="25.0" mnemonicParsing="false" onAction="#deleteHives" text="Quitar" />
+                                                      <Separator layoutX="188.0" layoutY="25.0" orientation="VERTICAL" prefHeight="25.0" prefWidth="5.0" />
+                                                      <Button fx:id="btnDeseases" layoutX="449.0" layoutY="50.0" mnemonicParsing="false" onAction="#openDiseasesManager" text="Enfermedades" />
+                                                      <Button fx:id="btnFeedings" layoutX="476.0" layoutY="25.0" mnemonicParsing="false" onAction="#openFeedingsManager" text="Alimento" />
+                                                      <Button fx:id="btnProductions" layoutX="398.0" layoutY="25.0" mnemonicParsing="false" text="Producción" />
+                                                      <Button layoutX="232.0" layoutY="25.0" mnemonicParsing="false" text="Reinas" />
+                                                      <Button layoutX="354.0" layoutY="25.0" mnemonicParsing="false" text="Alzas" />
+                                                      <Button layoutX="283.0" layoutY="25.0" mnemonicParsing="false" text="Enjambres" />
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="317.0">
+                                                   <children>
+                                                      <Label layoutX="119.0" text="Nucleos">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TableView layoutX="6.0" layoutY="70.0" prefHeight="284.0" prefWidth="282.0">
+                                                        <columns>
+                                                          <TableColumn prefWidth="75.0" text="C1" />
+                                                          <TableColumn prefWidth="75.0" text="C2" />
+                                                        </columns>
+                                                      </TableView>
+                                                      <Button layoutY="29.0" mnemonicParsing="false" text="Añadir" />
+                                                      <Button layoutX="51.0" layoutY="29.0" mnemonicParsing="false" text="Quitar" />
+                                                      <Button layoutX="101.0" layoutY="29.0" mnemonicParsing="false" text="modificar" />
+                                                   </children>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
                                        </children></AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
