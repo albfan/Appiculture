@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="673.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.base.controllers.views.QueenManagerController">
+<AnchorPane prefHeight="673.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.base.controllers.views.ManagerQueensController">
    <children>
       <Label layoutX="348.0" layoutY="14.0" text="Reinas">
          <font>
@@ -19,15 +18,15 @@
         <columns>
           <TableColumn prefWidth="174.0" text="Apiario" />
           <TableColumn prefWidth="70.0" text="Colmena" />
-            <TableColumn prefWidth="132.0" text="fecha nacimiento" />
+            <TableColumn prefWidth="132.0" text="Fecha nacimiento" />
             <TableColumn prefWidth="90.0" text="Fecha muerte" />
             <TableColumn prefWidth="156.0" text="Edad en años" />
         </columns>
       </TableView>
-      <Button fx:id="btnAdd" layoutX="668.0" layoutY="311.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Añadir" />
-      <Button fx:id="btnMod" layoutX="668.0" layoutY="357.0" mnemonicParsing="false" text="Modificar" />
+      <Button fx:id="btnAdd" layoutX="668.0" layoutY="311.0" mnemonicParsing="false" onAction="#openFormQueens" prefHeight="25.0" prefWidth="67.0" text="Añadir" />
+      <Button fx:id="btnModify" layoutX="668.0" layoutY="357.0" mnemonicParsing="false" onAction="#openFormQueens" text="Modificar" />
       <Button fx:id="btnDel" layoutX="668.0" layoutY="403.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Borrar" />
-      <Button fx:id="btnClose" layoutX="345.0" layoutY="612.0" mnemonicParsing="false" text="Cerrar" />
+      <Button fx:id="btnClose" layoutX="345.0" layoutY="612.0" mnemonicParsing="false" onAction="#closeWindow" text="Cerrar" />
       <Label layoutX="19.0" layoutY="74.0" prefHeight="49.0" prefWidth="720.0" text="Esta ventana sirve para registrar las reinas de la colmena que ha seleccionado. Recuerde que si cambia el numero de colmena, desaparecerá de esta tabla, ya que pertence a otra colmena." wrapText="true">
          <font>
             <Font size="14.0" />

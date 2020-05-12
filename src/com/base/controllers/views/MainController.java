@@ -294,10 +294,10 @@ public class MainController extends BaseController implements Initializable {
     public void openDiseasesManager(ActionEvent actionEvent) {
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/DiseasesManager.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/ManagerDiseases.fxml"));
         try {
             Parent root = fxmlLoader.load();
-            DiseasesManagerController dm = fxmlLoader.getController();
+            ManagerDiseasesController dm = fxmlLoader.getController();
             Stage stage = new Stage();
             dm.setActualStage(stage);
             Scene scene = new Scene(root);
@@ -306,7 +306,7 @@ public class MainController extends BaseController implements Initializable {
             stage.setScene(scene);
             stage.sizeToScene();
 
-            //this is to check if user had multiple selection on apiaries list. Only 1 allowed to be modified.
+            //this is to check if user had multiple selection on beehives tableview. Only 1 allowed to be modified.
             ObservableList<Beehives> modList = tvBeehives.getSelectionModel().getSelectedItems();
             if (modList.size() > 1) {
                 alert.setContentText("Seleccione solo una colmena.");
@@ -328,10 +328,10 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     private void openFeedingsManager(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FeedingsManager.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/ManagerFeedings.fxml"));
         try {
             Parent root = fxmlLoader.load();
-            FeedingsManagerController fm = fxmlLoader.getController();
+            ManagerFeedingsController fm = fxmlLoader.getController();
             Stage stage = new Stage();
             fm.setActualStage(stage);
             Scene scene = new Scene(root);
@@ -340,13 +340,48 @@ public class MainController extends BaseController implements Initializable {
             stage.setScene(scene);
             stage.sizeToScene();
 
-            //this is to check if user had multiple selection on apiaries list. Only 1 allowed to be modified.
+            //this is to check if user had multiple selection on beehives tableview. Only 1 allowed to be modified.
             ObservableList<Beehives> modList = tvBeehives.getSelectionModel().getSelectedItems();
             if (modList.size() > 1) {
                 alert.setContentText("Seleccione solo una colmena.");
                 alert.show();
             } else if (modList.size() == 1) {
                 fm.setSelectedBeehive(modList.get(0));
+                stage.showAndWait();
+            } else {
+                alert.setContentText("Seleccione una colmena.");
+                alert.show();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        refreshHivesTableView();
+    }
+
+    @FXML
+    public void openQueensManager(ActionEvent actionEvent) {
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/ManagerQueens.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
+            ManagerQueensController qm = fxmlLoader.getController();
+            Stage stage = new Stage();
+            qm.setActualStage(stage);
+            Scene scene = new Scene(root);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.sizeToScene();
+
+            //this is to check if user had multiple selection on beehiveives tableview. Only 1 allowed to be modified.
+            ObservableList<Beehives> modList = tvBeehives.getSelectionModel().getSelectedItems();
+            if (modList.size() > 1) {
+                alert.setContentText("Seleccione solo una colmena.");
+                alert.show();
+            } else if (modList.size() == 1) {
+                qm.setSelectedBeehive(modList.get(0));
                 stage.showAndWait();
             } else {
                 alert.setContentText("Seleccione una colmena.");

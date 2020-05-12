@@ -115,7 +115,7 @@
                                                       <Button fx:id="btnDeseases" layoutX="449.0" layoutY="50.0" mnemonicParsing="false" onAction="#openDiseasesManager" text="Enfermedades" />
                                                       <Button fx:id="btnFeedings" layoutX="476.0" layoutY="25.0" mnemonicParsing="false" onAction="#openFeedingsManager" text="Alimento" />
                                                       <Button fx:id="btnProductions" layoutX="398.0" layoutY="25.0" mnemonicParsing="false" text="Producción" />
-                                                      <Button layoutX="232.0" layoutY="25.0" mnemonicParsing="false" text="Reinas" />
+                                                      <Button layoutX="232.0" layoutY="25.0" mnemonicParsing="false" onAction="#openQueensManager" text="Reinas" />
                                                       <Button layoutX="354.0" layoutY="25.0" mnemonicParsing="false" text="Alzas" />
                                                       <Button layoutX="283.0" layoutY="25.0" mnemonicParsing="false" text="Enjambres" />
                                                    </children>

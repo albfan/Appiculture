@@ -3,6 +3,8 @@ package com.base.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Calendar;
+
 public class OperationManager {
 
     ObservableList<String> hiveTypes;
@@ -36,6 +38,13 @@ public class OperationManager {
         diseaseTypes.addAll("Varroosis","Acarapisosis","Loque americana","Loque europea"
                 ,"Escarabajo (Aethina tumida)","Ácaro Tropilaelaps","IAPV","Otro");
 
+    }
+
+    public float millisToYears(Long millis){
+
+        float years=( ( ( (millis/1000)/60 )/60 )/24 )/365 ;
+
+        return years;
     }
 
 

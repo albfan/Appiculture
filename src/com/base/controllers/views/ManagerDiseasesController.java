@@ -22,7 +22,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class DiseasesManagerController extends BaseController implements Initializable {
+public class ManagerDiseasesController extends BaseController implements Initializable {
 
     @FXML
     private Button btnModify;

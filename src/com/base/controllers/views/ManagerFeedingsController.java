@@ -22,7 +22,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class FeedingsManagerController extends BaseController implements Initializable {
+public class ManagerFeedingsController extends BaseController implements Initializable {
 
     @FXML
     private Button btnClose;

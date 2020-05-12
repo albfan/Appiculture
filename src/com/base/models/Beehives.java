@@ -143,4 +143,9 @@ public class Beehives implements Serializable {
         }
         return tableViewFavorite;
     }
+
+    @Override
+    public String toString() {
+        return ""+number;
+    }
 }

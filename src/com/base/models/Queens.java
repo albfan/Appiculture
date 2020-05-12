@@ -1,6 +1,9 @@
 package com.base.models;
 
+import com.base.controllers.OperationManager;
+
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -14,16 +17,22 @@ public class Queens implements Serializable {
     //this is the id of the hive to which belongs.
     private int id_beehive;
 
-    private LocalDate birthdate;
+    private int id_apiary;
 
-    private LocalDate death_date;
+    private Date birthdate = null;
+
+    private Date death_date = null;
+
+    //this age is automaticcly calculated with the birthadte and deathdate
+    private float ageInYears = 0;
 
     public Queens() {
     }
 
-    public Queens(int id, int id_beehive, LocalDate birthdate, LocalDate death_date) {
+    public Queens(int id, int id_beehive, int id_apiary, Date birthdate, Date death_date) {
         this.id = id;
         this.id_beehive = id_beehive;
+        this.id_apiary = id_apiary;
         this.birthdate = birthdate;
         this.death_date = death_date;
     }
@@ -44,19 +53,54 @@ public class Queens implements Serializable {
         this.id_beehive = id_beehive;
     }
 
-    public LocalDate getBirthdate() {
+    public int getId_apiary() {
+        return id_apiary;
+    }
+
+    public void setId_apiary(int id_apiary) {
+        this.id_apiary = id_apiary;
+    }
+
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
-    public LocalDate getDeath_date() {
+    public Date getDeath_date() {
         return death_date;
     }
 
-    public void setDeath_date(LocalDate death_date) {
+    public void setDeath_date(Date death_date) {
         this.death_date = death_date;
+    }
+
+    public float getAgeInYears() {
+
+        Date actualdate = Date.valueOf(LocalDate.now());
+        LocalDate localDate;
+        Long millis = 0L;
+
+        if (birthdate != null && death_date == null) {
+
+            millis = birthdate.getTime() - actualdate.getTime();
+            ageInYears = OperationManager.getInstance().millisToYears(millis);
+
+        } else if (birthdate != null && death_date != null) {
+
+            millis = birthdate.getTime() - death_date.getTime();
+            ageInYears = OperationManager.getInstance().millisToYears(millis);
+
+        }
+
+        if (ageInYears < 0) {
+
+            ageInYears = 0;
+
+        }
+
+        return ageInYears;
     }
 }

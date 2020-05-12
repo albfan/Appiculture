@@ -1,9 +1,6 @@
 package com.base.controllers;
 
-import com.base.models.Apiaries;
-import com.base.models.Beehives;
-import com.base.models.Diseases;
-import com.base.models.Feedings;
+import com.base.models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.sqlite.SQLiteConfig;
@@ -23,6 +20,7 @@ public class DBmanager {
     private ObservableList<Beehives> beehivesList;
     private ObservableList<Diseases> diseasesList;
     private ObservableList<Feedings> feedingsList;
+    private ObservableList<Queens> queensList;
 
     //Constructor--------------
     private DBmanager() {
@@ -30,6 +28,7 @@ public class DBmanager {
         beehivesList = FXCollections.observableArrayList();
         diseasesList = FXCollections.observableArrayList();
         feedingsList = FXCollections.observableArrayList();
+        queensList = FXCollections.observableArrayList();
     }
 
     //Singleton Method-------------
@@ -515,4 +514,47 @@ public class DBmanager {
         }
 
     }
+
+    //QUEENS---(id, id_beehive, id_apiary, birthdate, deathdate ) id is pk -----------
+
+    /**
+     * Returns Queens list from the beehive parameter. If parameter is null,
+     * returns all Queens from database
+     * @param beehive
+     * @return Queens list
+     */
+    public ObservableList<Queens> getQueens(Beehives beehive) {
+
+        try {
+            queensList.clear();
+            if (null == beehive) {
+                s = "SELECT * FROM Queens";
+            } else {
+                s = "SELECT * FROM Queens WHERE id_beehive=" + beehive.getNumber()
+                        + " AND id_apiary=" + beehive.getId_apiary();
+            }
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(s);
+            while (resultSet.next()) {
+
+                Queens qu = new Queens();
+                qu.setId(resultSet.getInt(1));
+                qu.setId_beehive(resultSet.getInt(2));
+                qu.setId_apiary(resultSet.getInt(3));
+                qu.setBirthdate(resultSet.getDate(4));
+                qu.setDeath_date(resultSet.getDate(5));
+
+                queensList.add(qu);
+
+            }
+            return queensList;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+
+    }
+
+
 }
