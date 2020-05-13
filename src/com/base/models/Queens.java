@@ -77,7 +77,7 @@ public class Queens implements Serializable {
         this.death_date = death_date;
     }
 
-    public float getAgeInYears() {
+    public float getAgeInYears() {//todo arreglar que siemplre devuelve 0 en la edad en años
 
         Date actualdate = Date.valueOf(LocalDate.now());
         LocalDate localDate;
@@ -85,12 +85,12 @@ public class Queens implements Serializable {
 
         if (birthdate != null && death_date == null) {
 
-            millis = birthdate.getTime() - actualdate.getTime();
+            millis = actualdate.getTime() - birthdate.getTime();
             ageInYears = OperationManager.getInstance().millisToYears(millis);
 
         } else if (birthdate != null && death_date != null) {
 
-            millis = birthdate.getTime() - death_date.getTime();
+            millis =death_date.getTime() - birthdate.getTime();
             ageInYears = OperationManager.getInstance().millisToYears(millis);
 
         }

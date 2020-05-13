@@ -24,8 +24,8 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dpBirthDate" layoutX="178.0" layoutY="252.0" prefHeight="25.0" prefWidth="228.0" />
-      <DatePicker fx:id="dpDeathDate" layoutX="178.0" layoutY="294.0" prefHeight="25.0" prefWidth="228.0" />
+      <DatePicker fx:id="dpBirthDate" layoutX="178.0" layoutY="252.0" prefHeight="25.0" prefWidth="228.0" promptText="16/5/1979" />
+      <DatePicker fx:id="dpDeathDate" layoutX="178.0" layoutY="294.0" prefHeight="25.0" prefWidth="228.0" promptText="16/5/1979" />
       <Label layoutX="41.0" layoutY="255.0" text="Fecha de nacimiento">
          <font>
             <Font size="14.0" />
@@ -36,8 +36,8 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnValidate" layoutX="96.0" layoutY="402.0" mnemonicParsing="false" text="Validar" />
-      <Button fx:id="btnCancel" layoutX="325.0" layoutY="402.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="btnValidate" layoutX="96.0" layoutY="402.0" mnemonicParsing="false" onAction="#validate" text="Validar" />
+      <Button fx:id="btnCancel" layoutX="325.0" layoutY="402.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancelar" />
       <ComboBox fx:id="cbBeehive" layoutX="178.0" layoutY="212.0" prefHeight="25.0" prefWidth="228.0" />
       <ComboBox fx:id="cbApiary" layoutX="178.0" layoutY="169.0" prefHeight="25.0" prefWidth="228.0" />
       <Label layoutX="27.0" layoutY="57.0" prefHeight="61.0" prefWidth="409.0" text="Cuidado, está creando/modificando la reina de la colmena seleccionada. Si modifica los campos de apiario o colmena, los datos de esta reina aparecerán en la colmena recíen seleccionada." textAlignment="JUSTIFY" wrapText="true" />

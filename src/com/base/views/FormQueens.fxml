@@ -24,8 +24,8 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dpBirthDate" layoutX="178.0" layoutY="252.0" prefHeight="25.0" prefWidth="228.0" />
-      <DatePicker fx:id="dpDeathDate" layoutX="178.0" layoutY="294.0" prefHeight="25.0" prefWidth="228.0" />
+      <DatePicker fx:id="dpBirthDate" layoutX="178.0" layoutY="252.0" prefHeight="25.0" prefWidth="228.0" promptText="16/5/1979" />
+      <DatePicker fx:id="dpDeathDate" layoutX="178.0" layoutY="294.0" prefHeight="25.0" prefWidth="228.0" promptText="16/5/1979" />
       <Label layoutX="41.0" layoutY="255.0" text="Fecha de nacimiento">
          <font>
             <Font size="14.0" />

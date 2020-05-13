@@ -9,14 +9,17 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 
-import java.awt.event.ActionEvent;
+
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class FormQueensController extends BaseController implements Initializable {
@@ -49,7 +52,6 @@ public class FormQueensController extends BaseController implements Initializabl
 
         apiariesList = DBmanager.getINSTANCE().getApiariesFromDB();
         cbApiary.setItems(apiariesList);
-        //cbApiary.getSelectionModel().select(selectedBeehive.getId_apiary());
         cbApiary.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Apiaries>() {
             @Override
             public void changed(ObservableValue<? extends Apiaries> observable, Apiaries oldValue, Apiaries newValue) {
@@ -59,6 +61,7 @@ public class FormQueensController extends BaseController implements Initializabl
 
             }
         });
+        dpBirthDate.setValue(LocalDate.now());
 
 
     }
@@ -72,29 +75,80 @@ public class FormQueensController extends BaseController implements Initializabl
     }
 
     public void setSelectedQueen(Queens queen) {
-        selectedQueen=queen;
+        selectedQueen = queen;
+        cbApiary.getSelectionModel().select(DBmanager.getINSTANCE().getApiary(queen.getId_apiary()));
+        cbBeehive.getSelectionModel().select(selectedBeehive);
+        dpBirthDate.setValue(queen.getBirthdate().toLocalDate());
+        if(null!=queen.getDeath_date()){
+            dpDeathDate.setValue(queen.getDeath_date().toLocalDate());
+        }
     }
 
-    private boolean checkIfQueenExist(Queens queen){
-        return true;
-    }
 
     @FXML
-    public void validate(ActionEvent actionEvent){
-        //todo seguir a partir de aquí. poner validaciones y terminar este método.
-        //if we create a new queen or we modify
-        if(null==selectedQueen){
+    public void validate(ActionEvent actionEvent) {
 
+        String s = "";
 
-            Queens queen= new Queens();
-            queen.setId_apiary(cbApiary.getValue().getId());
-            queen.setId_beehive((cbBeehive.getValue().getNumber()));
-
-
-
-        }else{
-
+        if (null == cbApiary.getValue()) {
+            s = s + "Debe seleccionar un apiario.\n";
         }
+        if (null == cbBeehive.getValue()) {
+            s = s + "Debe seleccionar una colmena.\n";
+        }
+        if (null == dpBirthDate.getValue()) {
+            s = s + "Debe introducir la fecha de nacimiento de la reina.\n";
+        }
+
+        if (s.equals("")) {
+
+            try {
+
+                Queens queen = new Queens();
+                queen.setId_apiary(cbApiary.getValue().getId());
+                queen.setId_beehive((cbBeehive.getValue().getNumber()));
+                queen.setBirthdate(Date.valueOf(dpBirthDate.getValue()));
+                if (null != dpDeathDate.getValue()) {
+                    queen.setDeath_date(Date.valueOf(dpDeathDate.getValue()));
+                }
+
+                //if we create a new queen or we modify
+                if (null == selectedQueen) {
+
+                    if (DBmanager.getINSTANCE().checkIfQueenExist(queen)) {
+
+                        alert.setContentText("Esta reina ya existe con esa fecha de nacimiento.");
+                        alert.showAndWait();
+                    } else {
+
+                        DBmanager.getINSTANCE().insertQueenInDB(queen);
+                        actualStage.close();
+                    }
+
+                } else {
+
+                    DBmanager.getINSTANCE().updateQueenInDB(queen,selectedQueen);
+                    actualStage.close();
+
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                s = s + "Error. Recuerde que debe añadir las fechas en el formato correcto\n" +
+                        "y que debe seleccionar correctamente una colmena y apiario";
+                alert.setContentText(s);
+                alert.showAndWait();
+            }
+
+        } else {
+            alert.setContentText(s);
+            alert.showAndWait();
+        }
+
+
+        //todo seguir a partir de aquí. poner validaciones y terminar este método.
+
     }
 
 

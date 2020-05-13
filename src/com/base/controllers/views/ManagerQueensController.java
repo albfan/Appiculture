@@ -13,14 +13,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ManagerQueensController extends BaseController implements Initializable {
@@ -104,6 +103,21 @@ public class ManagerQueensController extends BaseController implements Initializ
 
     @FXML
     public void deleteQueens(ActionEvent actionEvent) {
+        if (tvQueens.getSelectionModel().getSelectedItems().size() > 0) {
 
+            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmation.setTitle(null);
+            confirmation.setHeaderText(null);
+            confirmation.setContentText("¿Está seguro de borrar las reinas seleccionadas?");
+            Optional<ButtonType> result = confirmation.showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+                DBmanager.getINSTANCE().deleteQueensInDB(tvQueens.getSelectionModel().getSelectedItems());
+                refreshTableView();
+
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
+        }
     }
 }

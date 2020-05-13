@@ -556,5 +556,89 @@ public class DBmanager {
 
     }
 
+    public void insertQueenInDB(Queens queen) {
+
+        try {
+
+            s = "INSERT INTO queens ( id_beehive, id_apiary, birthdate, deathdate)" +
+                    " VALUES( ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, queen.getId_beehive());
+            preparedStatement.setInt(2, queen.getId_apiary());
+            preparedStatement.setDate(3, queen.getBirthdate());
+            preparedStatement.setDate(4, queen.getDeath_date());
+
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+    /**
+     * Given the queen in parameter, this method check if it already exists in dabase
+     * @param queen
+     * @return true if exist, false if not.
+     */
+    public boolean checkIfQueenExist(Queens queen){
+
+        try {
+            s = "SELECT * FROM queens WHERE id_beehive=? AND id_apiary=? AND birthdate=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, queen.getId_beehive());
+            preparedStatement.setInt(2, queen.getId_apiary());
+            preparedStatement.setDate(3, queen.getBirthdate());
+            resultSet=preparedStatement.executeQuery();
+
+            return resultSet.next();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return true;
+    }
+
+    public void updateQueenInDB(Queens queen,Queens oldQueen) {
+
+        try {
+
+            s = "UPDATE queens SET id_beehive=?, id_apiary=?, birthdate=?, deathdate=? WHERE id=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, queen.getId_beehive());
+            preparedStatement.setInt(2, queen.getId_apiary());
+            preparedStatement.setDate(3, queen.getBirthdate());
+            preparedStatement.setDate(4, queen.getDeath_date());
+            preparedStatement.setInt(5, oldQueen.getId());
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void deleteQueensInDB(ObservableList<Queens> delList){
+
+        if (delList.size() > 0) {
+
+            try {
+                for (Queens qu : delList) {
+
+                    s = "DELETE FROM queens where id= ?";
+                    preparedStatement = connection.prepareStatement(s);
+                    preparedStatement.setInt(1, qu.getId());
+                    preparedStatement.execute();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
 
 }

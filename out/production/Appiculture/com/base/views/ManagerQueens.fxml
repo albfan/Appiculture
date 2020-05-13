@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -16,16 +17,36 @@
       </Label>
       <TableView fx:id="tvQueens" layoutX="24.0" layoutY="147.0" prefHeight="444.0" prefWidth="623.0">
         <columns>
-          <TableColumn prefWidth="174.0" text="Apiario" />
-          <TableColumn prefWidth="70.0" text="Colmena" />
-            <TableColumn prefWidth="132.0" text="Fecha nacimiento" />
-            <TableColumn prefWidth="90.0" text="Fecha muerte" />
-            <TableColumn prefWidth="156.0" text="Edad en años" />
+          <TableColumn prefWidth="174.0" text="Apiario">
+              <cellValueFactory>
+                  <PropertyValueFactory property="id_apiary" />
+              </cellValueFactory>
+          </TableColumn>
+          <TableColumn prefWidth="70.0" text="Colmena">
+              <cellValueFactory>
+                  <PropertyValueFactory property="id_beehive" />
+              </cellValueFactory>
+          </TableColumn>
+            <TableColumn prefWidth="132.0" text="Fecha nacimiento">
+                <cellValueFactory>
+                    <PropertyValueFactory property="birthdate" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="90.0" text="Fecha muerte">
+                <cellValueFactory>
+                    <PropertyValueFactory property="death_date" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="156.0" text="Edad en años">
+                <cellValueFactory>
+                    <PropertyValueFactory property="ageInYears" />
+                </cellValueFactory>
+            </TableColumn>
         </columns>
       </TableView>
       <Button fx:id="btnAdd" layoutX="668.0" layoutY="311.0" mnemonicParsing="false" onAction="#openFormQueens" prefHeight="25.0" prefWidth="67.0" text="Añadir" />
       <Button fx:id="btnModify" layoutX="668.0" layoutY="357.0" mnemonicParsing="false" onAction="#openFormQueens" text="Modificar" />
-      <Button fx:id="btnDel" layoutX="668.0" layoutY="403.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Borrar" />
+      <Button fx:id="btnDel" layoutX="668.0" layoutY="403.0" mnemonicParsing="false" onAction="#deleteQueens" prefHeight="25.0" prefWidth="67.0" text="Borrar" />
       <Button fx:id="btnClose" layoutX="345.0" layoutY="612.0" mnemonicParsing="false" onAction="#closeWindow" text="Cerrar" />
       <Label layoutX="19.0" layoutY="74.0" prefHeight="49.0" prefWidth="720.0" text="Esta ventana sirve para registrar las reinas de la colmena que ha seleccionado. Recuerde que si cambia el numero de colmena, desaparecerá de esta tabla, ya que pertence a otra colmena." wrapText="true">
          <font>
