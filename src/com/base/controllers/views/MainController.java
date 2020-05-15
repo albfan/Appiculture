@@ -107,7 +107,7 @@ public class MainController extends BaseController implements Initializable {
             }
         });
     }
-
+    //todo hacer hikes y quitar fechas
     @FXML
     public void deleteApiaries() {
 
