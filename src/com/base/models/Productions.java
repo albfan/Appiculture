@@ -12,6 +12,8 @@ public class Productions implements Serializable {
     //this is the id of the hive to which belongs.
     private int id_beehive;
 
+    private int id_apiary;
+
     //this is the date when the beekeeper take the production out of the hive
     private Date date;
 
@@ -29,7 +31,7 @@ public class Productions implements Serializable {
 
     private double royalJelly_quant;
 
-    private int id_apiary;
+
 
     public Productions() {
     }

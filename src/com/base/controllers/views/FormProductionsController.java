@@ -55,6 +55,12 @@ public class FormProductionsController extends BaseController implements Initial
     public void initialize(URL location, ResourceBundle resources) {
 
         datePicker.setValue(LocalDate.now());
+        tfBreedFrames.setText("0");
+        tfHoney.setText("0.0");
+        tfRoyals.setText("0");
+        tfPollen.setText("0.0");
+        tfRoyalJelly.setText("0.0");
+        tfWax.setText("0.0");
 
     }
 
@@ -82,61 +88,53 @@ public class FormProductionsController extends BaseController implements Initial
 
         String s = "";
 
-//        if (null == cbApiary.getValue()) {
-//            s = s + "Debe seleccionar un apiario.\n";
-//        }
-//        if (null == cbBeehive.getValue()) {
-//            s = s + "Debe seleccionar una colmena.\n";
-//        }
-//        if (null == dpBirthDate.getValue()) {
-//            s = s + "Debe introducir la fecha de nacimiento de la reina.\n";
-//        }
-//
-//        if (s.equals("")) {
-//
-//            try {
-//
-//                Queens queen = new Queens();
-//                queen.setId_apiary(cbApiary.getValue().getId());
-//                queen.setId_beehive((cbBeehive.getValue().getNumber()));
-//                queen.setBirthdate(Date.valueOf(dpBirthDate.getValue()));
-//                if (null != dpDeathDate.getValue()) {
-//                    queen.setDeath_date(Date.valueOf(dpDeathDate.getValue()));
-//                }
-//
-//                //if we create a new queen or we modify
-//                if (null == selectedQueen) {
-//
-//                    if (DBmanager.getINSTANCE().checkIfQueenExist(queen)) {
-//
-//                        alert.setContentText("Esta reina ya existe con esa fecha de nacimiento.");
-//                        alert.showAndWait();
-//                    } else {
-//
-//                        DBmanager.getINSTANCE().insertQueenInDB(queen);
-//                        actualStage.close();
-//                    }
-//
-//                } else {
-//
-//                    DBmanager.getINSTANCE().updateQueenInDB(queen,selectedQueen);
-//                    actualStage.close();
-//
-//                }
-//
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                s = s + "Error. Recuerde que debe añadir las fechas en el formato correcto\n" +
-//                        "y que debe seleccionar correctamente una colmena y apiario";
-//                alert.setContentText(s);
-//                alert.showAndWait();
-//            }
-//
-//        } else {
-//            alert.setContentText(s);
-//            alert.showAndWait();
-//        }
+                if (null == datePicker.getValue()) {
+            s = s + "Debe introducir la fecha de la producción.\n";
+        }
+
+        if (s.equals("")) {
+
+            try {
+
+                Productions production = new Productions();
+                production.setId_beehive((selectedBeehive.getNumber()));
+                production.setId_apiary(selectedBeehive.getId_apiary());
+                production.setDate(Date.valueOf(datePicker.getValue()));
+                production.setBreed_frames_quant(Integer.parseInt(tfBreedFrames.getText()));
+                production.setHoney_quant(Double.parseDouble(tfHoney.getText()));
+                production.setRoyals_quant(Integer.parseInt(tfRoyals.getText()));
+                production.setPollen_quant(Double.parseDouble(tfPollen.getText()));
+                production.setWax_quant(Double.parseDouble(tfWax.getText()));
+                production.setRoyalJelly_quant(Double.parseDouble(tfRoyalJelly.getText()));
+
+                //if we create a new queen or we modify
+                if (null == selectedProduction) {
+
+                        DBmanager.getINSTANCE().insertProductionInDB(production);
+                        actualStage.close();
+
+
+                } else {
+
+                    DBmanager.getINSTANCE().updateProductionInDB(production,selectedProduction);
+                    actualStage.close();
+
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                s = s + "Error. Recuerde que debe añadir la fechas en el formato correcto\n" +
+                        "y que debe introducir solo números en los campos de texto.\n" +
+                        "Los decimales deben ir separadas por puntos.";
+                alert.setContentText(s);
+                alert.showAndWait();
+            }
+
+        } else {
+            alert.setContentText(s);
+            alert.showAndWait();
+        }
 
 
 

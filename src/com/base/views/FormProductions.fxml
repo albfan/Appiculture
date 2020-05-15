@@ -41,12 +41,12 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="661.0" layoutY="107.0" prefHeight="44.0" prefWidth="36.0" text="Cera kg" textAlignment="CENTER" wrapText="true">
+      <Label layoutX="579.0" layoutY="106.0" prefHeight="44.0" prefWidth="36.0" text="Cera kg" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="567.0" layoutY="106.0" prefHeight="44.0" prefWidth="57.0" text="Jalea real kg" textAlignment="CENTER" wrapText="true">
+      <Label layoutX="650.0" layoutY="107.0" prefHeight="44.0" prefWidth="57.0" text="Jalea real kg" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
@@ -56,8 +56,8 @@
       <TextField fx:id="tfHoney" layoutX="294.0" layoutY="154.0" prefHeight="25.0" prefWidth="75.0" />
       <TextField fx:id="tfRoyals" layoutX="380.0" layoutY="154.0" prefHeight="25.0" prefWidth="75.0" />
       <TextField fx:id="tfPollen" layoutX="471.0" layoutY="154.0" prefHeight="25.0" prefWidth="75.0" />
-      <TextField fx:id="tfRoyalJelly" layoutX="558.0" layoutY="154.0" prefHeight="25.0" prefWidth="75.0" />
-      <TextField fx:id="tfWax" layoutX="641.0" layoutY="154.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="tfRoyalJelly" layoutX="641.0" layoutY="154.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="tfWax" layoutX="559.0" layoutY="154.0" prefHeight="25.0" prefWidth="75.0" />
       <Label layoutX="421.0" layoutY="66.0" text="Cantidades">
          <font>
             <Font size="14.0" />
