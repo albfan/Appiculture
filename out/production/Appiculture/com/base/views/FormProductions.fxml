@@ -63,7 +63,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnValidate" layoutX="200.0" layoutY="269.0" mnemonicParsing="false" text="Validar" />
-      <Button fx:id="btnCancel" layoutX="483.0" layoutY="269.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="btnValidate" layoutX="200.0" layoutY="269.0" mnemonicParsing="false" onAction="#validate" text="Validar" />
+      <Button fx:id="btnCancel" layoutX="483.0" layoutY="269.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancelar" />
    </children>
 </AnchorPane>

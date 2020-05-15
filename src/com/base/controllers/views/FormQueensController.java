@@ -147,7 +147,6 @@ public class FormQueensController extends BaseController implements Initializabl
         }
 
 
-        //todo seguir a partir de aquí. poner validaciones y terminar este método.
 
     }
 

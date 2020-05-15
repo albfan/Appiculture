@@ -21,6 +21,7 @@ public class DBmanager {
     private ObservableList<Diseases> diseasesList;
     private ObservableList<Feedings> feedingsList;
     private ObservableList<Queens> queensList;
+    private ObservableList<Productions> productionsList;
 
     //Constructor--------------
     private DBmanager() {
@@ -29,6 +30,7 @@ public class DBmanager {
         diseasesList = FXCollections.observableArrayList();
         feedingsList = FXCollections.observableArrayList();
         queensList = FXCollections.observableArrayList();
+        productionsList = FXCollections.observableArrayList();
     }
 
     //Singleton Method-------------
@@ -640,5 +642,113 @@ public class DBmanager {
 
     }
 
+    //PRODUCTIONS---(id, id_beehive, id_apiary, date, breed_frames_quant
+    // , honey_quant, royals_quant, pollen_quant, wax_quant, roy_jelly_quant ) id is pk -----------
 
+
+    public ObservableList<Productions> getProductions(Beehives beehive) {
+        try {
+            productionsList.clear();
+            if (null == beehive) {
+                s = "SELECT * FROM productions";
+            } else {
+                s = "SELECT * FROM productions WHERE id_beehive=" + beehive.getNumber()
+                        + " AND id_apiary=" + beehive.getId_apiary();
+            }
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(s);
+            while (resultSet.next()) {
+
+                Productions pr = new Productions();
+                pr.setId(resultSet.getInt(1));
+                pr.setId_beehive(resultSet.getInt(2));
+                pr.setId_apiary(resultSet.getInt(3));
+                pr.setDate(resultSet.getDate(4));
+                pr.setBreed_frames_quant(resultSet.getInt(5));
+                pr.setHoney_quant(resultSet.getDouble(6));
+                pr.setRoyals_quant(resultSet.getInt(7));
+                pr.setPollen_quant(resultSet.getDouble(8));
+                pr.setWax_quant(resultSet.getDouble(9));
+                pr.setRoyalJelly_quant(resultSet.getDouble(10));
+
+                productionsList.add(pr);
+
+            }
+            return productionsList;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public void insertProductionInDB(Productions production) {
+
+        try {
+
+            s = "INSERT INTO productions ( id_beehive, id_apiary, date, breed_frames_quant, honey_quant," +
+                    "royals_quant, pollen_quant, wax_quant, roy_jelly_quant)" +
+                    " VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, production.getId_beehive());
+            preparedStatement.setInt(2, production.getId_apiary());
+            preparedStatement.setDate(3, production.getDate());
+            preparedStatement.setInt(4, production.getBreed_frames_quant());
+            preparedStatement.setDouble(5, production.getHoney_quant());
+            preparedStatement.setInt(6, production.getRoyals_quant());
+            preparedStatement.setDouble(7, production.getPollen_quant());
+            preparedStatement.setDouble(8, production.getWax_quant());
+            preparedStatement.setDouble(9, production.getRoyalJelly_quant());
+
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void updateProductionInDB(Productions production,Productions oldProduction) {
+
+        try {
+
+            s = "UPDATE productions SET id_beehive=?, id_apiary=?, date=?, breed_frames_quant=?, honey_quant=?," +
+                    "royals_quant=?, pollen_quant=?, wax_quant=?, roy_jelly_quant=? WHERE id=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, production.getId_beehive());
+            preparedStatement.setInt(2, production.getId_apiary());
+            preparedStatement.setDate(3, production.getDate());
+            preparedStatement.setInt(4, production.getBreed_frames_quant());
+            preparedStatement.setDouble(5, production.getHoney_quant());
+            preparedStatement.setInt(6, production.getRoyals_quant());
+            preparedStatement.setDouble(7, production.getPollen_quant());
+            preparedStatement.setDouble(8, production.getWax_quant());
+            preparedStatement.setDouble(9, production.getRoyalJelly_quant());
+            preparedStatement.setInt(10, oldProduction.getId());
+
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void deleteProductionsInDB(ObservableList<Productions> delList) {
+
+        if (delList.size() > 0) {
+            try {
+                for (Productions pr : delList) {
+
+                    s = "DELETE FROM productions where id= ?";
+                    preparedStatement = connection.prepareStatement(s);
+                    preparedStatement.setInt(1, pr.getId());
+                    preparedStatement.execute();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }

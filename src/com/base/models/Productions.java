@@ -1,6 +1,7 @@
 package com.base.models;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Productions implements Serializable {
@@ -12,7 +13,7 @@ public class Productions implements Serializable {
     private int id_beehive;
 
     //this is the date when the beekeeper take the production out of the hive
-    private LocalDate date;
+    private Date date;
 
     //this is the breeding frames quantity that have produced the hive
     private int breed_frames_quant;
@@ -28,11 +29,14 @@ public class Productions implements Serializable {
 
     private double royalJelly_quant;
 
+    private int id_apiary;
+
     public Productions() {
     }
 
-    public Productions(int id, int id_beehive, LocalDate date, int breed_frames_quant, double honey_quant,
-                       int royals_quant, double pollen_quant, double wax_quant, double royalJelly_quant) {
+    public Productions(int id, int id_beehive, Date date, int breed_frames_quant,
+                       double honey_quant, int royals_quant, double pollen_quant,
+                       double wax_quant, double royalJelly_quant, int id_apiary) {
         this.id = id;
         this.id_beehive = id_beehive;
         this.date = date;
@@ -42,6 +46,7 @@ public class Productions implements Serializable {
         this.pollen_quant = pollen_quant;
         this.wax_quant = wax_quant;
         this.royalJelly_quant = royalJelly_quant;
+        this.id_apiary = id_apiary;
     }
 
     public int getId() {
@@ -60,12 +65,20 @@ public class Productions implements Serializable {
         this.id_beehive = id_beehive;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getId_apiary() {
+        return id_apiary;
+    }
+
+    public void setId_apiary(int id_apiary) {
+        this.id_apiary = id_apiary;
     }
 
     public int getBreed_frames_quant() {

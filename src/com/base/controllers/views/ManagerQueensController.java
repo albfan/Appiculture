@@ -97,12 +97,15 @@ public class ManagerQueensController extends BaseController implements Initializ
     }
 
     public void setSelectedBeehive(Beehives selectedBeehive) {
+
         this.selectedBeehive = selectedBeehive;
         refreshTableView();
+
     }
 
     @FXML
     public void deleteQueens(ActionEvent actionEvent) {
+
         if (tvQueens.getSelectionModel().getSelectedItems().size() > 0) {
 
             Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
@@ -119,5 +122,6 @@ public class ManagerQueensController extends BaseController implements Initializ
                 // ... user chose CANCEL or closed the dialog
             }
         }
+
     }
 }

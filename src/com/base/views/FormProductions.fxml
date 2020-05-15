@@ -51,7 +51,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker layoutX="14.0" layoutY="154.0" promptText="datePicker" />
+      <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="154.0" promptText="11/08/1992" />
       <TextField fx:id="tfBreedFrames" layoutX="208.0" layoutY="154.0" prefHeight="25.0" prefWidth="75.0" />
       <TextField fx:id="tfHoney" layoutX="294.0" layoutY="154.0" prefHeight="25.0" prefWidth="75.0" />
       <TextField fx:id="tfRoyals" layoutX="380.0" layoutY="154.0" prefHeight="25.0" prefWidth="75.0" />
@@ -63,7 +63,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnValidate" layoutX="200.0" layoutY="269.0" mnemonicParsing="false" text="Validar" />
-      <Button fx:id="btnCancel" layoutX="483.0" layoutY="269.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="btnValidate" layoutX="200.0" layoutY="269.0" mnemonicParsing="false" onAction="#validate" text="Validar" />
+      <Button fx:id="btnCancel" layoutX="483.0" layoutY="269.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancelar" />
    </children>
 </AnchorPane>
