@@ -4,6 +4,7 @@ package com.base.controllers.views;
 import com.base.controllers.DBmanager;
 import com.base.models.Apiaries;
 import com.base.models.Beehives;
+import com.base.models.Cores;
 import com.base.models.structure.BaseController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -49,7 +50,7 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     private Button btnDelHive;
     @FXML
-    private TableView<?> tvCores;
+    private TableView<Cores> tvCores;
     @FXML
     private Button btnAddCores;
     @FXML
