@@ -8,8 +8,9 @@ import java.text.DecimalFormat;
 
 public class OperationManager {
 
-    ObservableList<String> hiveTypes;
-    ObservableList<String> diseaseTypes;
+    private ObservableList<String> hiveTypes;
+    private ObservableList<String> diseaseTypes;
+    private ObservableList<String> hikesTypes;
 
     private static OperationManager INSTANCE=null;
 
@@ -39,6 +40,9 @@ public class OperationManager {
         diseaseTypes.addAll("Varroosis","Acarapisosis","Loque americana","Loque europea"
                 ,"Escarabajo (Aethina tumida)","Ácaro Tropilaelaps","IAPV","Otro");
 
+        hiveTypes=FXCollections.observableArrayList();
+        hiveTypes.addAll("Alza, Media alza");
+
     }
 
     public float millisToYears(Long millis){
@@ -56,5 +60,9 @@ public class OperationManager {
 
     public ObservableList<String> getDiseaseTypes() {
         return diseaseTypes;
+    }
+
+    public ObservableList<String> getHikesTypes() {
+        return hikesTypes;
     }
 }

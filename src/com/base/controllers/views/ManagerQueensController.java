@@ -49,6 +49,7 @@ public class ManagerQueensController extends BaseController implements Initializ
         tvQueens.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
     }
+    //todo retocar la carga de las colmenas cuando cambias de apiario
 
     @FXML
     public void openFormQueens(ActionEvent actionEvent){
