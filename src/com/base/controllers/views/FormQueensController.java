@@ -56,8 +56,10 @@ public class FormQueensController extends BaseController implements Initializabl
             @Override
             public void changed(ObservableValue<? extends Apiaries> observable, Apiaries oldValue, Apiaries newValue) {
 
-                beehivesList = DBmanager.getINSTANCE().getHivesFromDB(newValue);
+                beehivesList = DBmanager.getINSTANCE().getBeehivesFromDB(newValue);
                 cbBeehive.setItems(beehivesList);
+                cbBeehive.getSelectionModel().clearSelection();
+                cbBeehive.setValue(null);
 
             }
         });

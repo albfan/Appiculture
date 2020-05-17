@@ -105,7 +105,10 @@ public class MainController extends BaseController implements Initializable {
 
                 if (newValue != null) {
                     currentApiarySelected = newValue;
-                    refreshHivesTableView();
+                    //get from database all beehives from the current selected apiary
+                    setBeehivesList();
+                    //refresh beehive tableview using the beehiveList recently updated.
+                    refreshBeehivesTableView();
                 }
             }
         });
@@ -174,10 +177,13 @@ public class MainController extends BaseController implements Initializable {
 
     //Beehives methods =================================================================================
 
-
+    /**
+     * update the beehiveList with the newest data from database. this method is mainly called when user do a CRUD
+     * query to the database.
+     */
     private void setBeehivesList(){
 
-        beehivesList= FXCollections.observableArrayList(DBmanager.getINSTANCE().getHivesFromDB(currentApiarySelected));
+        beehivesList= FXCollections.observableArrayList(DBmanager.getINSTANCE().getBeehivesFromDB(currentApiarySelected));
 
     }
 
@@ -185,7 +191,7 @@ public class MainController extends BaseController implements Initializable {
 
         tvBeehives.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         setListenersForBeehivesTableView();
-        refreshHivesTableView();
+        refreshBeehivesTableView();
         ObservableList<Apiaries> list = DBmanager.getINSTANCE().getApiariesFromDB();
         if (list.size() > 0) {
 
@@ -196,6 +202,9 @@ public class MainController extends BaseController implements Initializable {
 
     }
 
+    /**
+     * everytime you select a beehive in the table view, it got stored on the variable "currentBeehiveSelected".
+     */
     private void setListenersForBeehivesTableView() {
 
 //        lvApiaries.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Apiaries>() {
@@ -215,6 +224,7 @@ public class MainController extends BaseController implements Initializable {
             public void changed(ObservableValue<? extends Beehives> observable, Beehives oldValue, Beehives newValue) {
 
                 if (newValue != null) {
+
                     currentBeehiveSelected = newValue;
                 }
             }
@@ -222,15 +232,18 @@ public class MainController extends BaseController implements Initializable {
 
     }
 
-    public void refreshHivesTableView() {
+    /**
+     * refresh the table view.
+     */
+    public void refreshBeehivesTableView() {
 
         //since multiselection is enabled for delete option we need to use a list to check if
         //only one item is selected
         ObservableList<Apiaries> templist = lvApiaries.getSelectionModel().getSelectedItems();
         //we only refresh the table when we select 1 apiary
         if (templist.size() <= 1) {
-
-            tvBeehives.setItems(DBmanager.getINSTANCE().getHivesFromDB(currentApiarySelected));
+            //setBeehivesList();
+            tvBeehives.setItems(beehivesList);
         }
     }
 
@@ -246,7 +259,8 @@ public class MainController extends BaseController implements Initializable {
             if (result.get() == ButtonType.OK) {
                 DBmanager.getINSTANCE().deleteApiariesInDB(lvApiaries.getSelectionModel().getSelectedItems());
                 DBmanager.getINSTANCE().deleteBeehivesInDB(tvBeehives.getSelectionModel().getSelectedItems());
-                refreshHivesTableView();
+                setBeehivesList();
+                refreshBeehivesTableView();
             } else {
                 // ... user chose CANCEL or closed the dialog
             }
@@ -297,7 +311,8 @@ public class MainController extends BaseController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        refreshHivesTableView();
+        setBeehivesList();
+        refreshBeehivesTableView();
     }
 
     @FXML
@@ -332,7 +347,8 @@ public class MainController extends BaseController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        refreshHivesTableView();
+        setBeehivesList();
+        refreshBeehivesTableView();
     }
 
     @FXML
@@ -366,7 +382,7 @@ public class MainController extends BaseController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        refreshHivesTableView();
+        refreshBeehivesTableView();
     }
 
     @FXML
@@ -401,7 +417,7 @@ public class MainController extends BaseController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        refreshHivesTableView();
+        refreshBeehivesTableView();
     }
 
     @FXML
@@ -435,7 +451,7 @@ public class MainController extends BaseController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        refreshHivesTableView();
+        refreshBeehivesTableView();
     }
 
     @FXML
@@ -469,7 +485,7 @@ public class MainController extends BaseController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        refreshHivesTableView();
+        refreshBeehivesTableView();
     }
 
 

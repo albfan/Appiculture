@@ -41,7 +41,7 @@ public class OperationManager {
                 ,"Escarabajo (Aethina tumida)","Ácaro Tropilaelaps","IAPV","Otro");
 
         hikeTypes=FXCollections.observableArrayList();
-        hikeTypes.addAll("Alza"," Media alza");
+        hikeTypes.addAll("Alza","Media alza");
 
     }
 

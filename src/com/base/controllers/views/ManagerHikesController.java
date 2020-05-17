@@ -106,7 +106,7 @@ public class ManagerHikesController extends BaseController implements Initializa
                     f.setSelectedHike(modList.get(0));
                     stage.showAndWait();
                 } else {
-                    alert.setContentText("Seleccione una reina para modificarla.");
+                    alert.setContentText("Seleccione una alza para modificarla.");
                     alert.show();
                 }
             } else {

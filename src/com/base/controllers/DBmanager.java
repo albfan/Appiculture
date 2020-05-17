@@ -191,7 +191,7 @@ public class DBmanager {
      * @param ap
      * @return beehivesList
      */
-    public ObservableList<Beehives> getHivesFromDB(Apiaries ap) {
+    public ObservableList<Beehives> getBeehivesFromDB(Apiaries ap) {
 
         try {
 
@@ -759,6 +759,7 @@ public class DBmanager {
 
 
     public ObservableList<Hikes> getHikes(Beehives beehive) {
+        hikesList.clear();
         try {
             productionsList.clear();
             if (null == beehive) {
@@ -826,7 +827,7 @@ public class DBmanager {
             preparedStatement.setString(3, hike.getType());
             preparedStatement.setDate(4, hike.getPlacement_date());
             preparedStatement.setDate(5, hike.getWithdrawal_date());
-            preparedStatement.setInt(10, oldhike.getId());
+            preparedStatement.setInt(6, oldhike.getId());
 
             int i = preparedStatement.executeUpdate();
 
@@ -853,5 +854,6 @@ public class DBmanager {
         }
 
     }
+
 
 }
