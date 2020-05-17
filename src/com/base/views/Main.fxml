@@ -72,7 +72,7 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TableView fx:id="tvBeehives" layoutX="6.0" prefHeight="278.0" prefWidth="561.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="76.0">
+                                                      <TableView fx:id="tvBeehives" layoutX="6.0" layoutY="78.0" prefHeight="276.0" prefWidth="551.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="78.0">
                                                         <columns>
                                                           <TableColumn prefWidth="76.0" text="Numero">
                                                               <cellValueFactory>
@@ -94,12 +94,12 @@
                                                                     <PropertyValueFactory property="type" />
                                                                 </cellValueFactory>
                                                             </TableColumn>
-                                                            <TableColumn prefWidth="67.0" text="Enfermas">
+                                                            <TableColumn prefWidth="83.0" text="Enfermas">
                                                                 <cellValueFactory>
                                                                     <PropertyValueFactory property="tableViewDiseased" />
                                                                 </cellValueFactory>
                                                             </TableColumn>
-                                                            <TableColumn prefWidth="62.0" text="Favoritas">
+                                                            <TableColumn prefWidth="64.0" text="Favoritas">
                                                                 <cellValueFactory>
                                                                     <PropertyValueFactory property="tableViewFavorite" />
                                                                 </cellValueFactory>
@@ -126,15 +126,16 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TableView layoutX="6.0" layoutY="70.0" prefHeight="284.0" prefWidth="282.0">
+                                                      <TableView fx:id="tvCores" layoutX="6.0" layoutY="70.0" prefHeight="284.0" prefWidth="282.0">
                                                         <columns>
-                                                          <TableColumn prefWidth="75.0" text="C1" />
-                                                          <TableColumn prefWidth="75.0" text="C2" />
+                                                          <TableColumn prefWidth="62.0" text="Fecha" />
+                                                          <TableColumn prefWidth="101.0" text="Cuadros de cría" />
+                                                            <TableColumn prefWidth="118.0" text="Notas" />
                                                         </columns>
                                                       </TableView>
-                                                      <Button layoutY="29.0" mnemonicParsing="false" text="Añadir" />
-                                                      <Button layoutX="51.0" layoutY="29.0" mnemonicParsing="false" text="Quitar" />
-                                                      <Button layoutX="101.0" layoutY="29.0" mnemonicParsing="false" text="modificar" />
+                                                      <Button fx:id="btnAddCores" layoutY="29.0" mnemonicParsing="false" text="Añadir" />
+                                                      <Button fx:id="btnDelCores" layoutX="51.0" layoutY="29.0" mnemonicParsing="false" text="Quitar" />
+                                                      <Button fx:id="btnModCores" layoutX="101.0" layoutY="29.0" mnemonicParsing="false" text="modificar" />
                                                    </children>
                                                 </AnchorPane>
                                             </items>

@@ -48,6 +48,14 @@ public class MainController extends BaseController implements Initializable {
     private Button btnFeedings;
     @FXML
     private Button btnDelHive;
+    @FXML
+    private TableView<?> tvCores;
+    @FXML
+    private Button btnAddCores;
+    @FXML
+    private Button btnDelCores;
+    @FXML
+    private Button btnModCores;
 
     private ObservableList<Beehives> beehivesList;
 
