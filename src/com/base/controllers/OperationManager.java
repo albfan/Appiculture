@@ -8,9 +8,9 @@ import java.text.DecimalFormat;
 
 public class OperationManager {
 
-    private ObservableList<String> hiveTypes;
+    private ObservableList<String> beehiveTypes;
     private ObservableList<String> diseaseTypes;
-    private ObservableList<String> hikesTypes;
+    private ObservableList<String> hikeTypes;
 
     private static OperationManager INSTANCE=null;
 
@@ -33,15 +33,15 @@ public class OperationManager {
 
     private void createLists(){
 
-        hiveTypes= FXCollections.observableArrayList();
-        hiveTypes.addAll("Langstroth","Dadant", "Layens","Otro");
+        beehiveTypes = FXCollections.observableArrayList();
+        beehiveTypes.addAll("Langstroth","Dadant", "Layens","Otro");
 
         diseaseTypes=FXCollections.observableArrayList();
         diseaseTypes.addAll("Varroosis","Acarapisosis","Loque americana","Loque europea"
                 ,"Escarabajo (Aethina tumida)","Ácaro Tropilaelaps","IAPV","Otro");
 
-        hiveTypes=FXCollections.observableArrayList();
-        hiveTypes.addAll("Alza, Media alza");
+        hikeTypes=FXCollections.observableArrayList();
+        hikeTypes.addAll("Alza"," Media alza");
 
     }
 
@@ -54,15 +54,15 @@ public class OperationManager {
     }
 
 
-    public ObservableList<String> getHiveTypes() {
-        return hiveTypes;
+    public ObservableList<String> getBeehiveTypes() {
+        return beehiveTypes;
     }
 
     public ObservableList<String> getDiseaseTypes() {
         return diseaseTypes;
     }
 
-    public ObservableList<String> getHikesTypes() {
-        return hikesTypes;
+    public ObservableList<String> getHikeTypes() {
+        return hikeTypes;
     }
 }

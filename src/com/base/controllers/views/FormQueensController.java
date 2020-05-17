@@ -79,8 +79,10 @@ public class FormQueensController extends BaseController implements Initializabl
         cbApiary.getSelectionModel().select(DBmanager.getINSTANCE().getApiary(queen.getId_apiary()));
         cbBeehive.getSelectionModel().select(selectedBeehive);
         dpBirthDate.setValue(queen.getBirthdate().toLocalDate());
-        if(null!=queen.getDeath_date()){
+        if (null != queen.getDeath_date()) {
+
             dpDeathDate.setValue(queen.getDeath_date().toLocalDate());
+
         }
     }
 
@@ -127,7 +129,7 @@ public class FormQueensController extends BaseController implements Initializabl
 
                 } else {
 
-                    DBmanager.getINSTANCE().updateQueenInDB(queen,selectedQueen);
+                    DBmanager.getINSTANCE().updateQueenInDB(queen, selectedQueen);
                     actualStage.close();
 
                 }
@@ -145,7 +147,6 @@ public class FormQueensController extends BaseController implements Initializabl
             alert.setContentText(s);
             alert.showAndWait();
         }
-
 
 
     }

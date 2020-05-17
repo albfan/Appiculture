@@ -22,6 +22,7 @@ public class DBmanager {
     private ObservableList<Feedings> feedingsList;
     private ObservableList<Queens> queensList;
     private ObservableList<Productions> productionsList;
+    private ObservableList<Hikes> hikesList;
 
     //Constructor--------------
     private DBmanager() {
@@ -31,6 +32,7 @@ public class DBmanager {
         feedingsList = FXCollections.observableArrayList();
         queensList = FXCollections.observableArrayList();
         productionsList = FXCollections.observableArrayList();
+        hikesList = FXCollections.observableArrayList();
     }
 
     //Singleton Method-------------
@@ -522,6 +524,7 @@ public class DBmanager {
     /**
      * Returns Queens list from the beehive parameter. If parameter is null,
      * returns all Queens from database
+     *
      * @param beehive
      * @return Queens list
      */
@@ -579,13 +582,13 @@ public class DBmanager {
     }
 
 
-
     /**
      * Given the queen in parameter, this method check if it already exists in dabase
+     *
      * @param queen
      * @return true if exist, false if not.
      */
-    public boolean checkIfQueenExist(Queens queen){
+    public boolean checkIfQueenExist(Queens queen) {
 
         try {
             s = "SELECT * FROM queens WHERE id_beehive=? AND id_apiary=? AND birthdate=?";
@@ -593,7 +596,7 @@ public class DBmanager {
             preparedStatement.setInt(1, queen.getId_beehive());
             preparedStatement.setInt(2, queen.getId_apiary());
             preparedStatement.setDate(3, queen.getBirthdate());
-            resultSet=preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
             return resultSet.next();
 
@@ -603,7 +606,7 @@ public class DBmanager {
         return true;
     }
 
-    public void updateQueenInDB(Queens queen,Queens oldQueen) {
+    public void updateQueenInDB(Queens queen, Queens oldQueen) {
 
         try {
 
@@ -622,7 +625,7 @@ public class DBmanager {
 
     }
 
-    public void deleteQueensInDB(ObservableList<Queens> delList){
+    public void deleteQueensInDB(ObservableList<Queens> delList) {
 
         if (delList.size() > 0) {
 
@@ -708,7 +711,7 @@ public class DBmanager {
 
     }
 
-    public void updateProductionInDB(Productions production,Productions oldProduction) {
+    public void updateProductionInDB(Productions production, Productions oldProduction) {
 
         try {
 
@@ -751,4 +754,104 @@ public class DBmanager {
         }
 
     }
+
+    //Hikes---(id, id_beehive, id_apiary, type, placement_date, withdrawal_date) id is pk -----------
+
+
+    public ObservableList<Hikes> getHikes(Beehives beehive) {
+        try {
+            productionsList.clear();
+            if (null == beehive) {
+                s = "SELECT * FROM hikes";
+            } else {
+                s = "SELECT * FROM hikes WHERE id_beehive=" + beehive.getNumber()
+                        + " AND id_apiary=" + beehive.getId_apiary();
+            }
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(s);
+            while (resultSet.next()) {
+
+                Hikes hk = new Hikes();
+                hk.setId(resultSet.getInt(1));
+                hk.setId_beehive(resultSet.getInt(2));
+                hk.setId_apiary(resultSet.getInt(3));
+                hk.setType(resultSet.getString(4));
+                hk.setPlacement_date(resultSet.getDate(5));
+                hk.setWithdrawal_date(resultSet.getDate(6));
+
+
+                hikesList.add(hk);
+
+            }
+            return hikesList;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public void insertHikeInDB(Hikes hike) {
+
+        try {
+
+            s = "INSERT INTO hikes ( id_beehive, id_apiary, type, placement_date, withdrawal_date)" +
+                    " VALUES( ?, ?, ?, ?, ?)";
+
+            preparedStatement = connection.prepareStatement(s);
+
+            preparedStatement.setInt(1, hike.getId_beehive());
+            preparedStatement.setInt(2, hike.getId_apiary());
+            preparedStatement.setString(3, hike.getType());
+            preparedStatement.setDate(4, hike.getPlacement_date());
+            preparedStatement.setDate(5, hike.getWithdrawal_date());
+
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void updateHikesInDB(Hikes hike, Hikes oldhike) {
+
+        try {
+
+            s = "UPDATE hikes SET id_beehive=?, id_apiary=?, type=?, placement_date=?, withdrawal_date=?" +
+                    " WHERE id=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, hike.getId_beehive());
+            preparedStatement.setInt(2, hike.getId_apiary());
+            preparedStatement.setString(3, hike.getType());
+            preparedStatement.setDate(4, hike.getPlacement_date());
+            preparedStatement.setDate(5, hike.getWithdrawal_date());
+            preparedStatement.setInt(10, oldhike.getId());
+
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void deleteHikesInDB(ObservableList<Hikes> delList) {
+
+        if (delList.size() > 0) {
+            try {
+                for (Hikes hk : delList) {
+
+                    s = "DELETE FROM hikes where id= ?";
+                    preparedStatement = connection.prepareStatement(s);
+                    preparedStatement.setInt(1, hk.getId());
+                    preparedStatement.execute();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 }

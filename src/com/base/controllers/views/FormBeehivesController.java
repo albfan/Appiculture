@@ -125,7 +125,7 @@ public class FormBeehivesController extends BaseController implements Initializa
     }
 
     private void loadHiveTypesComboBox() {
-        cbHiveType.setItems(OperationManager.getInstance().getHiveTypes());
+        cbHiveType.setItems(OperationManager.getInstance().getBeehiveTypes());
         cbHiveType.getSelectionModel().selectFirst();
     }
 

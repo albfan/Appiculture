@@ -7,6 +7,7 @@ import com.base.models.Beehives;
 import com.base.models.structure.BaseController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,6 +49,8 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     private Button btnDelHive;
 
+    private ObservableList<Beehives> beehivesList;
+
 
     //this is the apiary actually selected in listview
     Apiaries currentApiarySelected = null;
@@ -70,7 +73,7 @@ public class MainController extends BaseController implements Initializable {
      */
     private void initialApiaryConfig() {
 
-        lvApiaries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        lvApiaries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);//todo seguir desde aquí
         setListenersForApiaryList();
         refreshApiariesListView();
         ObservableList<Apiaries> list = DBmanager.getINSTANCE().getApiariesFromDB();
@@ -170,6 +173,13 @@ public class MainController extends BaseController implements Initializable {
     }
 
     //Beehives methods =================================================================================
+
+
+    private void setBeehivesList(){
+
+        beehivesList= FXCollections.observableArrayList(DBmanager.getINSTANCE().getHivesFromDB(currentApiarySelected));
+
+    }
 
     private void initialBeehivesConfig() {
 
@@ -452,7 +462,7 @@ public class MainController extends BaseController implements Initializable {
                 mh.setSelectedBeehive(modList.get(0));
                 stage.showAndWait();
             } else {
-                alert.setContentText("Seleccione una colmena.");
+                alert.setContentText("Seleccione una alza.");
                 alert.show();
             }
 

@@ -116,7 +116,7 @@
                                                       <Button fx:id="btnFeedings" layoutX="400.0" layoutY="25.0" mnemonicParsing="false" onAction="#openFeedingsManager" text="Alimento" />
                                                       <Button fx:id="btnProductions" layoutX="324.0" layoutY="25.0" mnemonicParsing="false" onAction="#openProductionsManager" text="Producción" />
                                                       <Button layoutX="465.0" layoutY="25.0" mnemonicParsing="false" onAction="#openQueensManager" text="Reinas" />
-                                                      <Button layoutX="516.0" layoutY="25.0" mnemonicParsing="false" text="Alzas" />
+                                                      <Button layoutX="516.0" layoutY="25.0" mnemonicParsing="false" onAction="#openHikesManager" text="Alzas" />
                                                    </children>
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="317.0">

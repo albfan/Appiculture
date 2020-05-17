@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="571.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.base.controllers.views.ManagerHikesController">
    <children>
       <Label layoutX="315.0" layoutY="14.0" text="Alzas">
@@ -23,9 +22,9 @@
         </columns>
       </TableView>
       <Label layoutX="52.0" layoutY="75.0" prefHeight="73.0" prefWidth="578.0" text="En esta tabla aparecen las alzas y medias alzas instaladas en la colmena que ha seleccionado. Si desea cambiar un alza a otra colmena, solo debe modificarla y seleccionar del listado la nueva colmena.  Si no la va a usar en ningúna colmena, puede borrarla de la lista. Recuerde que si cambia un alza de colmena, ya no aparecerá en esta tabla." textAlignment="JUSTIFY" wrapText="true" />
-      <Button fx:id="btnAdd" layoutX="515.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Añadir" />
-      <Button fx:id="btnModify" layoutX="515.0" layoutY="294.0" mnemonicParsing="false" text="Modificar" />
-      <Button fx:id="btnDel" layoutX="515.0" layoutY="341.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Borrar" />
+      <Button fx:id="btnAdd" layoutX="515.0" layoutY="248.0" mnemonicParsing="false" onAction="#openFormHikes" prefHeight="25.0" prefWidth="67.0" text="Añadir" />
+      <Button fx:id="btnModify" layoutX="515.0" layoutY="294.0" mnemonicParsing="false" onAction="#openFormHikes" text="Modificar" />
+      <Button fx:id="btnDel" layoutX="515.0" layoutY="341.0" mnemonicParsing="false" onAction="#deleteHikes" prefHeight="25.0" prefWidth="67.0" text="Borrar" />
       <Button layoutX="291.0" layoutY="518.0" mnemonicParsing="false" onAction="#closeWindow" text="Cerrar" />
    </children>
 </AnchorPane>
