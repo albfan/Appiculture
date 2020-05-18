@@ -83,6 +83,7 @@ public class FormBeehivesController extends BaseController implements Initializa
     public void setApiary(Apiaries ap) {
 
         cbHiveApiary.getSelectionModel().select(ap);
+
     }
 
     /**

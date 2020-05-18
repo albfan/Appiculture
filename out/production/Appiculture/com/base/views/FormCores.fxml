@@ -9,10 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="470.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.base.controllers.views.FormCoresController">
    <children>
-      <Label layoutX="279.0" layoutY="14.0" text="Nucleos">
+      <Label layoutX="279.0" layoutY="14.0" text="Núcleo">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -25,7 +24,7 @@
       <DatePicker fx:id="dpDate" layoutX="140.0" layoutY="114.0" />
       <TextField fx:id="tfBreedFrames" layoutX="140.0" layoutY="159.0" prefHeight="25.0" prefWidth="174.0" />
       <TextArea fx:id="taNotes" layoutX="140.0" layoutY="201.0" prefHeight="148.0" prefWidth="403.0" wrapText="true" />
-      <Button layoutX="160.0" layoutY="395.0" mnemonicParsing="false" text="Validar" />
-      <Button layoutX="402.0" layoutY="395.0" mnemonicParsing="false" text="Cancelar" />
+      <Button layoutX="160.0" layoutY="395.0" mnemonicParsing="false" onAction="#validate" text="Validar" />
+      <Button layoutX="402.0" layoutY="395.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancelar" />
    </children>
 </AnchorPane>

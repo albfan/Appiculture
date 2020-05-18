@@ -121,24 +121,24 @@
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="317.0">
                                                    <children>
-                                                      <Label layoutX="119.0" text="Nucleos">
+                                                      <Label layoutX="119.0" text="Núcleos">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
                                                       <TableView fx:id="tvCores" layoutX="6.0" layoutY="70.0" prefHeight="284.0" prefWidth="282.0">
                                                         <columns>
-                                                          <TableColumn prefWidth="62.0" text="Fecha">
+                                                          <TableColumn prefWidth="78.0" text="Fecha">
                                                               <cellValueFactory>
                                                                   <PropertyValueFactory property="date" />
                                                               </cellValueFactory>
                                                           </TableColumn>
-                                                          <TableColumn prefWidth="101.0" text="Cuadros de cría">
+                                                          <TableColumn prefWidth="99.0" text="Cuadros de cría">
                                                               <cellValueFactory>
                                                                   <PropertyValueFactory property="breeding_frames" />
                                                               </cellValueFactory>
                                                           </TableColumn>
-                                                            <TableColumn prefWidth="118.0" text="Notas">
+                                                            <TableColumn prefWidth="104.0" text="Notas">
                                                                 <cellValueFactory>
                                                                     <PropertyValueFactory property="notes" />
                                                                 </cellValueFactory>

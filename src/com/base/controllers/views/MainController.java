@@ -71,9 +71,10 @@ public class MainController extends BaseController implements Initializable {
 
         initialApiaryConfig();
         initialBeehivesConfig();
+        initialCoresConfig();
+
 
     }
-
     //Apiaries methods =======================================================
 
     /**
@@ -118,6 +119,7 @@ public class MainController extends BaseController implements Initializable {
                     setBeehivesList();
                     //refresh beehive tableview using the beehiveList recently updated.
                     refreshBeehivesTableView();
+                    refreshCoresTableView();
                 }
             }
         });
@@ -498,6 +500,12 @@ public class MainController extends BaseController implements Initializable {
     }
 
     // CORES =============================================================================
+
+    private void initialCoresConfig() {
+
+        tvCores.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+    }
 
     @FXML
     public void openCoresForm(ActionEvent actionEvent){
