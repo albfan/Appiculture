@@ -585,5 +585,36 @@ public class MainController extends BaseController implements Initializable {
 
     }
 
+    //ALARMS=========================================================
+
+    @FXML
+    public void openFormAlarm(ActionEvent actionEvent){
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormAlarm.fxml"));
+
+        try {
+            Parent root = fxmlLoader.load();
+            FormAlarmController fa = fxmlLoader.getController();
+            Stage stage = new Stage();
+            fa.setActualStage(stage);
+            Scene scene = new Scene(root);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.showAndWait();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        refreshAlarmListView();
+
+
+    }
+
+
+
+
 
 }
