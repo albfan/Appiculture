@@ -128,14 +128,26 @@
                                                       </Label>
                                                       <TableView fx:id="tvCores" layoutX="6.0" layoutY="70.0" prefHeight="284.0" prefWidth="282.0">
                                                         <columns>
-                                                          <TableColumn prefWidth="62.0" text="Fecha" />
-                                                          <TableColumn prefWidth="101.0" text="Cuadros de cría" />
-                                                            <TableColumn prefWidth="118.0" text="Notas" />
+                                                          <TableColumn prefWidth="62.0" text="Fecha">
+                                                              <cellValueFactory>
+                                                                  <PropertyValueFactory property="date" />
+                                                              </cellValueFactory>
+                                                          </TableColumn>
+                                                          <TableColumn prefWidth="101.0" text="Cuadros de cría">
+                                                              <cellValueFactory>
+                                                                  <PropertyValueFactory property="breeding_frames" />
+                                                              </cellValueFactory>
+                                                          </TableColumn>
+                                                            <TableColumn prefWidth="118.0" text="Notas">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="notes" />
+                                                                </cellValueFactory>
+                                                            </TableColumn>
                                                         </columns>
                                                       </TableView>
-                                                      <Button fx:id="btnAddCores" layoutY="29.0" mnemonicParsing="false" text="Añadir" />
-                                                      <Button fx:id="btnDelCores" layoutX="51.0" layoutY="29.0" mnemonicParsing="false" text="Quitar" />
-                                                      <Button fx:id="btnModCores" layoutX="101.0" layoutY="29.0" mnemonicParsing="false" text="modificar" />
+                                                      <Button fx:id="btnAddCores" layoutY="29.0" mnemonicParsing="false" onAction="#openCoresForm" text="Añadir" />
+                                                      <Button fx:id="btnDelCores" layoutX="51.0" layoutY="29.0" mnemonicParsing="false" onAction="#deleteCores" text="Quitar" />
+                                                      <Button fx:id="btnModCores" layoutX="101.0" layoutY="29.0" mnemonicParsing="false" onAction="#openCoresForm" text="modificar" />
                                                    </children>
                                                 </AnchorPane>
                                             </items>

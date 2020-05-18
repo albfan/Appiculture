@@ -23,6 +23,7 @@ public class DBmanager {
     private ObservableList<Queens> queensList;
     private ObservableList<Productions> productionsList;
     private ObservableList<Hikes> hikesList;
+    private ObservableList<Cores> coresList;
 
     //Constructor--------------
     private DBmanager() {
@@ -33,6 +34,7 @@ public class DBmanager {
         queensList = FXCollections.observableArrayList();
         productionsList = FXCollections.observableArrayList();
         hikesList = FXCollections.observableArrayList();
+        coresList= FXCollections.observableArrayList();
     }
 
     //Singleton Method-------------
@@ -846,6 +848,102 @@ public class DBmanager {
                     s = "DELETE FROM hikes where id= ?";
                     preparedStatement = connection.prepareStatement(s);
                     preparedStatement.setInt(1, hk.getId());
+                    preparedStatement.execute();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    //Cores---(id, id_apiary, date, breeding_frames, notes) id is pk -----------
+
+
+    public ObservableList<Cores> getCores(Apiaries apiary) {
+
+        coresList.clear();
+        try {
+            productionsList.clear();
+            if (null == apiary) {
+                s = "SELECT * FROM cores";
+            } else {
+                s = "SELECT * FROM cores WHERE id_apiary=" + apiary.getId();
+            }
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(s);
+            while (resultSet.next()) {
+
+                Cores co = new Cores();
+                co.setId(resultSet.getInt(1));
+                co.setId_apiary(resultSet.getInt(2));
+                co.setDate(resultSet.getDate(3));
+                co.setBreeding_frames(resultSet.getInt(4));
+                co.setNotes(resultSet.getString(5));
+
+
+                coresList.add(co);
+
+            }
+            return coresList;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public void insertCoresInDB(Cores core) {
+
+        try {
+
+            s = "INSERT INTO cores ( id_apiary, date, breeding_frames, notes)" +
+                    " VALUES( ?, ?, ?, ?)";
+
+            preparedStatement = connection.prepareStatement(s);
+
+            preparedStatement.setInt(1, core.getId_apiary());
+            preparedStatement.setDate(2, core.getDate());
+            preparedStatement.setInt(3, core.getBreeding_frames());
+            preparedStatement.setString(4, core.getNotes());
+
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void updateCoresInDB(Cores core, Cores oldCore) {
+
+        try {
+
+            s = "UPDATE cores SET id_apiary=?, date=?, breeding_frames=?, notes=?" +
+                    " WHERE id=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, core.getId_apiary());
+            preparedStatement.setDate(2, core.getDate());
+            preparedStatement.setInt(3, core.getBreeding_frames());
+            preparedStatement.setString(4, core.getNotes());
+            preparedStatement.setInt(5, oldCore.getId());
+
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void deleteCoresInDB(ObservableList<Cores> delList) {
+
+        if (delList.size() > 0) {
+            try {
+                for (Cores co : delList) {
+
+                    s = "DELETE FROM cores where id= ?";
+                    preparedStatement = connection.prepareStatement(s);
+                    preparedStatement.setInt(1, co.getId());
                     preparedStatement.execute();
                 }
             } catch (SQLException e) {

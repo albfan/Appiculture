@@ -122,7 +122,7 @@ public class MainController extends BaseController implements Initializable {
             }
         });
     }
-    //todo hacer hikes y quitar fechas
+
     @FXML
     public void deleteApiaries() {
 
@@ -497,8 +497,85 @@ public class MainController extends BaseController implements Initializable {
         refreshBeehivesTableView();
     }
 
+    // CORES =============================================================================
+
+    @FXML
+    public void openCoresForm(ActionEvent actionEvent){
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormCores.fxml"));
+
+        try {
+            Parent root = fxmlLoader.load();
+            FormCoresController fc = fxmlLoader.getController();
+            Stage stage = new Stage();
+            fc.setActualStage(stage);
+            Scene scene = new Scene(root);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.sizeToScene();
+            fc.setApiary(currentApiarySelected);
 
 
+            //this is used when we modify a beehive instead creating a new one
+            if (((Button) actionEvent.getSource()).getId().equalsIgnoreCase("btnModCores")) {
+
+                //this is to check if user had multiple selection on beehives tableview. Only 1 allowed to be modified.
+                ObservableList<Cores> modList = tvCores.getSelectionModel().getSelectedItems();
+                if (modList.size() > 1) {
+                    alert.setContentText("Solo puede modificar los nucelos de uno en uno");
+                    alert.show();
+                } else if (modList.size() == 1) {
+                    fc.setCore(tvCores.getSelectionModel().getSelectedItem());
+                    stage.showAndWait();
+                }
+            } else {
+                stage.showAndWait();
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        refreshCoresTableView();
+
+
+    }
+
+    private void refreshCoresTableView() {
+
+        //since multiselection is enabled for delete option we need to use a list to check if
+        //only one item is selected
+        ObservableList<Apiaries> templist = lvApiaries.getSelectionModel().getSelectedItems();
+        //we only refresh the table when we select 1 apiary
+        if (templist.size() <= 1) {
+
+            tvCores.setItems(DBmanager.getINSTANCE().getCores(currentApiarySelected));
+        }
+
+    }
+
+    @FXML
+    public void deleteCores(ActionEvent actionEvent) {
+
+        if (tvCores.getSelectionModel().getSelectedItems().size() > 0) {
+
+            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmation.setTitle(null);
+            confirmation.setHeaderText(null);
+            confirmation.setContentText("¿Está seguro de borrar los nucleos seleccionados?");
+            Optional<ButtonType> result = confirmation.showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+                DBmanager.getINSTANCE().deleteCoresInDB(tvCores.getSelectionModel().getSelectedItems());
+                refreshCoresTableView();
+
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
+        }
+
+    }
 
 
 }

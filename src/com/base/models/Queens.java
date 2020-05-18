@@ -77,7 +77,7 @@ public class Queens implements Serializable {
         this.death_date = death_date;
     }
 
-    public float getAgeInYears() {//todo arreglar que siemplre devuelve 0 en la edad en años
+    public float getAgeInYears() {
 
         Date actualdate = Date.valueOf(LocalDate.now());
         LocalDate localDate;
