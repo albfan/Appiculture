@@ -164,7 +164,7 @@
                                           <Button layoutX="99.0" layoutY="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Gestor" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
                                           <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="50.0" prefHeight="473.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                                              <content>
-                                                <VBox prefHeight="470.0" prefWidth="198.0" />
+                                                <VBox prefHeight="302.0" prefWidth="164.0" />
                                              </content>
                                           </ScrollPane>
                                        </children></AnchorPane>

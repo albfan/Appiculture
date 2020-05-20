@@ -9,14 +9,17 @@ public class Alarms implements Serializable {
 
     private LocalDateTime date;
 
+    private String name;
+
     private String text;
 
     public Alarms() {
     }
 
-    public Alarms(int id, LocalDateTime date, String text) {
+    public Alarms(int id, LocalDateTime date, String name, String text) {
         this.id = id;
         this.date = date;
+        this.name = name;
         this.text = text;
     }
 
@@ -42,5 +45,18 @@ public class Alarms implements Serializable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

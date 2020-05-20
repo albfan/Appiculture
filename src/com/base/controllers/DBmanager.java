@@ -24,6 +24,7 @@ public class DBmanager {
     private ObservableList<Productions> productionsList;
     private ObservableList<Hikes> hikesList;
     private ObservableList<Cores> coresList;
+    private ObservableList<Alarms>alarmsList;
 
     //Constructor--------------
     private DBmanager() {
@@ -35,6 +36,7 @@ public class DBmanager {
         productionsList = FXCollections.observableArrayList();
         hikesList = FXCollections.observableArrayList();
         coresList= FXCollections.observableArrayList();
+        alarmsList= FXCollections.observableArrayList();
     }
 
     //Singleton Method-------------
@@ -952,6 +954,100 @@ public class DBmanager {
         }
 
     }
+
+    //Alarms---(id, date, name, text) id is pk -----------
+
+
+    public ObservableList<Alarms> getAlarms() { // todo - seguir desde aquí
+
+        alarmsList.clear();
+        try {
+
+                s = "SELECT * FROM cores";
+
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(s);
+            while (resultSet.next()) {
+
+                Alarms al = new Alarms();
+                al.setId(resultSet.getInt(1));
+                al.setDate(resultSet.getTimestamp(2).toLocalDateTime());
+                al.setName(resultSet.getString(3));
+                al.setText(resultSet.getString(4));
+
+                alarmsList.add(al);
+
+            }
+            return alarmsList;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public void insertCoresInDB(Cores core) {
+
+        try {
+
+            s = "INSERT INTO cores ( id_apiary, date, breeding_frames, notes)" +
+                    " VALUES( ?, ?, ?, ?)";
+
+            preparedStatement = connection.prepareStatement(s);
+
+            preparedStatement.setInt(1, core.getId_apiary());
+            preparedStatement.setDate(2, core.getDate());
+            preparedStatement.setInt(3, core.getBreeding_frames());
+            preparedStatement.setString(4, core.getNotes());
+
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void updateCoresInDB(Cores core, Cores oldCore) {
+
+        try {
+
+            s = "UPDATE cores SET id_apiary=?, date=?, breeding_frames=?, notes=?" +
+                    " WHERE id=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, core.getId_apiary());
+            preparedStatement.setDate(2, core.getDate());
+            preparedStatement.setInt(3, core.getBreeding_frames());
+            preparedStatement.setString(4, core.getNotes());
+            preparedStatement.setInt(5, oldCore.getId());
+
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void deleteCoresInDB(ObservableList<Cores> delList) {
+
+        if (delList.size() > 0) {
+            try {
+                for (Cores co : delList) {
+
+                    s = "DELETE FROM cores where id= ?";
+                    preparedStatement = connection.prepareStatement(s);
+                    preparedStatement.setInt(1, co.getId());
+                    preparedStatement.execute();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
 
 
 }
