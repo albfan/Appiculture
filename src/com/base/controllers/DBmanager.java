@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import org.sqlite.SQLiteConfig;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 
 
 public class DBmanager {
@@ -958,12 +959,11 @@ public class DBmanager {
     //Alarms---(id, date, name, text) id is pk -----------
 
 
-    public ObservableList<Alarms> getAlarms() { // todo - seguir desde aquí
+    public ObservableList<Alarms> getAlarms() {
 
         alarmsList.clear();
         try {
-
-                s = "SELECT * FROM cores";
+                s = "SELECT * FROM alarms";
 
             statement = connection.createStatement();
             resultSet = statement.executeQuery(s);
@@ -971,7 +971,7 @@ public class DBmanager {
 
                 Alarms al = new Alarms();
                 al.setId(resultSet.getInt(1));
-                al.setDate(resultSet.getTimestamp(2).toLocalDateTime());
+                al.setDate(resultSet.getString(2));
                 al.setName(resultSet.getString(3));
                 al.setText(resultSet.getString(4));
 
@@ -986,19 +986,17 @@ public class DBmanager {
         return null;
     }
 
-    public void insertCoresInDB(Cores core) {
+    public void insertAlarmsInDB(Alarms alarm) {
 
         try {
 
-            s = "INSERT INTO cores ( id_apiary, date, breeding_frames, notes)" +
-                    " VALUES( ?, ?, ?, ?)";
+            s = "INSERT INTO alarms ( date, name, text) VALUES( ?, ?, ?)";
 
             preparedStatement = connection.prepareStatement(s);
 
-            preparedStatement.setInt(1, core.getId_apiary());
-            preparedStatement.setDate(2, core.getDate());
-            preparedStatement.setInt(3, core.getBreeding_frames());
-            preparedStatement.setString(4, core.getNotes());
+            preparedStatement.setString(1, alarm.getDateStringFormat());
+            preparedStatement.setString(2, alarm.getName());
+            preparedStatement.setString(3, alarm.getText());
 
             preparedStatement.execute();
 
@@ -1008,18 +1006,16 @@ public class DBmanager {
 
     }
 
-    public void updateCoresInDB(Cores core, Cores oldCore) {
+    public void updateAlarmsInDB(Alarms alarm, Alarms oldAlarm) {
 
         try {
 
-            s = "UPDATE cores SET id_apiary=?, date=?, breeding_frames=?, notes=?" +
-                    " WHERE id=?";
+            s = "UPDATE alarms SET date=?, name=?, text=? WHERE id=?";
             preparedStatement = connection.prepareStatement(s);
-            preparedStatement.setInt(1, core.getId_apiary());
-            preparedStatement.setDate(2, core.getDate());
-            preparedStatement.setInt(3, core.getBreeding_frames());
-            preparedStatement.setString(4, core.getNotes());
-            preparedStatement.setInt(5, oldCore.getId());
+            preparedStatement.setString(1, alarm.getDateStringFormat());
+            preparedStatement.setString(2, alarm.getName());
+            preparedStatement.setString(3, alarm.getText());
+            preparedStatement.setInt(4, oldAlarm.getId());
 
             int i = preparedStatement.executeUpdate();
 
@@ -1029,15 +1025,15 @@ public class DBmanager {
 
     }
 
-    public void deleteCoresInDB(ObservableList<Cores> delList) {
+    public void deleteAlarmsInDB(ObservableList<Alarms> delList) {
 
         if (delList.size() > 0) {
             try {
-                for (Cores co : delList) {
+                for (Alarms al : delList) {
 
-                    s = "DELETE FROM cores where id= ?";
+                    s = "DELETE FROM alarms where id= ?";
                     preparedStatement = connection.prepareStatement(s);
-                    preparedStatement.setInt(1, co.getId());
+                    preparedStatement.setInt(1, al.getId());
                     preparedStatement.execute();
                 }
             } catch (SQLException e) {

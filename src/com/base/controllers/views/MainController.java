@@ -2,6 +2,7 @@ package com.base.controllers.views;
 
 
 import com.base.controllers.DBmanager;
+import com.base.models.Alarms;
 import com.base.models.Apiaries;
 import com.base.models.Beehives;
 import com.base.models.Cores;
@@ -29,34 +30,40 @@ public class MainController extends BaseController implements Initializable {
 
     //Apiaries nodes ----------------
     @FXML
-    private Button btnAddApiary;
-    @FXML
-    private Button btnRmvApiary;
-    @FXML
     private ListView<Apiaries> lvApiaries;
+
+    @FXML
+    private Button btnAddApiary;
+
     @FXML
     private Button btnModApiary;
-    //Beehives nodes----------------
+
     @FXML
     private TableView<Beehives> tvBeehives;
+
     @FXML
     private Button btnAddHive;
+
     @FXML
     private Button btnModHive;
-    @FXML
-    private Button btnDeseases;
-    @FXML
-    private Button btnFeedings;
-    @FXML
-    private Button btnDelHive;
+
     @FXML
     private TableView<Cores> tvCores;
+
     @FXML
     private Button btnAddCores;
-    @FXML
-    private Button btnDelCores;
+
     @FXML
     private Button btnModCores;
+
+    @FXML
+    private ListView<Alarms> lvAlarms;
+
+    @FXML
+    private Button btnAddAlarm;
+
+    @FXML
+    private Button btnModAlarm;
 
     private ObservableList<Beehives> beehivesList;
 
@@ -72,9 +79,12 @@ public class MainController extends BaseController implements Initializable {
         initialApiaryConfig();
         initialBeehivesConfig();
         initialCoresConfig();
+        initialAlarmsConfig();
 
 
     }
+
+
     //Apiaries methods =======================================================
 
     /**
@@ -83,7 +93,7 @@ public class MainController extends BaseController implements Initializable {
      */
     private void initialApiaryConfig() {
 
-        lvApiaries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);//todo seguir desde aquí
+        lvApiaries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         setListenersForApiaryList();
         refreshApiariesListView();
         ObservableList<Apiaries> list = DBmanager.getINSTANCE().getApiariesFromDB();
@@ -259,7 +269,7 @@ public class MainController extends BaseController implements Initializable {
     }
 
     @FXML
-    public void deleteHives() {
+    public void deleteBeehives() {
 
         if (tvBeehives.getSelectionModel().getSelectedItems().size() > 0) {
             Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
@@ -267,8 +277,8 @@ public class MainController extends BaseController implements Initializable {
             confirmation.setHeaderText(null);
             confirmation.setContentText("¿Está seguro de borrar las colmenas seleccionadas?");
             Optional<ButtonType> result = confirmation.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                DBmanager.getINSTANCE().deleteApiariesInDB(lvApiaries.getSelectionModel().getSelectedItems());
+            if (result.get() == ButtonType.OK) {//todo- tenía lo de borrar apiarrios aquí. Lo he comentado pero hay que verificar si lo tenía por algo o si fué un error y se me olvido borrarlo despues de copiar y pegar.
+                //DBmanager.getINSTANCE().deleteApiariesInDB(lvApiaries.getSelectionModel().getSelectedItems());
                 DBmanager.getINSTANCE().deleteBeehivesInDB(tvBeehives.getSelectionModel().getSelectedItems());
                 setBeehivesList();
                 refreshBeehivesTableView();
@@ -587,6 +597,13 @@ public class MainController extends BaseController implements Initializable {
 
     //ALARMS=========================================================
 
+    private void initialAlarmsConfig() {
+
+        lvAlarms.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        refreshAlarmListView();
+
+    }
+
     @FXML
     public void openFormAlarm(ActionEvent actionEvent){
 
@@ -602,14 +619,53 @@ public class MainController extends BaseController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.sizeToScene();
-            stage.showAndWait();
 
+            //this is used when we modify an alarm instead creating a new one
+            if (((Button) actionEvent.getSource()).getId().equalsIgnoreCase("btnModAlarm")) {
 
-        }catch (Exception e){
+                //this is to check if user had multiple selection on beehives tableview. Only 1 allowed to be modified.
+                ObservableList<Alarms> modList = lvAlarms.getSelectionModel().getSelectedItems();
+                if (modList.size() > 1) {
+                    alert.setContentText("Solo puede modificar las alarmas de una en una");
+                    alert.show();
+                } else if (modList.size() == 1) {
+                    fa.setSelectedAlarm(lvAlarms.getSelectionModel().getSelectedItem());
+                    stage.showAndWait();
+                }
+            } else {
+                stage.showAndWait();
+            }
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
         refreshAlarmListView();
 
+
+    }
+    @FXML
+    public void deleteAlarms(ActionEvent actionEvent ){
+
+        if (lvAlarms.getSelectionModel().getSelectedItems().size() > 0) {
+            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmation.setTitle(null);
+            confirmation.setHeaderText(null);
+            confirmation.setContentText("¿Está seguro de borrar las alarmas seleccionadas?");
+            Optional<ButtonType> result = confirmation.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                DBmanager.getINSTANCE().deleteAlarmsInDB(lvAlarms.getSelectionModel().getSelectedItems());
+                refreshAlarmListView();
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
+        }
+
+
+    }
+
+    private void refreshAlarmListView(){
+
+      lvAlarms.setItems(DBmanager.getINSTANCE().getAlarms());
 
     }
 

@@ -1,5 +1,6 @@
 package com.base.controllers.views;
 
+import com.base.models.Alarms;
 import com.base.models.structure.BaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,8 +26,18 @@ public class FormAlarmController extends BaseController implements Initializable
     @FXML
     private TextArea taMessage;
 
+    private Alarms selectedAlarm = null;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void setSelectedAlarm(Alarms selectedAlarm) {
+        this.selectedAlarm = selectedAlarm;
+        System.out.println(selectedAlarm.getDate().toString());
+        dpDate.setValue(selectedAlarm.getDate().toLocalDate());
+        tfName.setText(selectedAlarm.getName());
+        taMessage.setText(selectedAlarm.getText());
     }
 }
