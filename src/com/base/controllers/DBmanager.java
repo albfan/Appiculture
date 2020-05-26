@@ -1047,6 +1047,22 @@ public class DBmanager {
 
     }
 
+    public void setAlarmFinished(Alarms a){
+
+        try {
+
+            s = "UPDATE alarms SET finished= 1 WHERE id=?";
+            preparedStatement = connection.prepareStatement(s);
+            preparedStatement.setInt(1, a.getId());
+
+            int i = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
 

@@ -2,6 +2,7 @@ package com.base.controllers.views;
 
 
 import com.base.controllers.DBmanager;
+import com.base.controllers.OperationManager;
 import com.base.models.Alarms;
 import com.base.models.Apiaries;
 import com.base.models.Beehives;
@@ -80,6 +81,7 @@ public class MainController extends BaseController implements Initializable {
         initialBeehivesConfig();
         initialCoresConfig();
         initialAlarmsConfig();
+
 
 
     }
@@ -601,6 +603,7 @@ public class MainController extends BaseController implements Initializable {
 
         tvAlarms.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         refreshAlarmListView();
+        OperationManager.getInstance().CheckAndStartAlarms(this);
 
     }
 
@@ -640,6 +643,7 @@ public class MainController extends BaseController implements Initializable {
             e.printStackTrace();
         }
         refreshAlarmListView();
+        OperationManager.getInstance().CheckAndStartAlarms(this);
 
 
     }
@@ -659,11 +663,12 @@ public class MainController extends BaseController implements Initializable {
                 // ... user chose CANCEL or closed the dialog
             }
         }
+        OperationManager.getInstance().CheckAndStartAlarms(this);
 
 
     }
 
-    private void refreshAlarmListView(){
+    public void refreshAlarmListView(){
 
       tvAlarms.setItems(DBmanager.getINSTANCE().getAlarms());
 
