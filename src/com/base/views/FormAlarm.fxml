@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -8,33 +9,55 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.base.controllers.views.FormAlarmController">
+<AnchorPane prefHeight="468.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.base.controllers.views.FormAlarmController">
    <children>
       <Label layoutX="272.0" layoutY="25.0" text="Alarma">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="70.0" layoutY="162.0" text="Fecha">
+      <Label layoutX="57.0" layoutY="164.0" text="Fecha">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="72.0" layoutY="134.0" text="Nombre">
+      <Label layoutX="57.0" layoutY="127.0" text="Nombre">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="72.0" layoutY="197.0" text="Mensaje">
+      <Label layoutX="57.0" layoutY="208.0" text="Mensaje">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnValidate" layoutX="138.0" layoutY="331.0" mnemonicParsing="false" onAction="#validate" text="Validar" />
-      <Button layoutX="396.0" layoutY="331.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
-      <TextField fx:id="tfName" layoutX="178.0" layoutY="130.0" prefHeight="25.0" prefWidth="174.0" />
-      <DatePicker fx:id="dpDate" layoutX="178.0" layoutY="167.0" />
-      <TextArea fx:id="taMessage" layoutX="178.0" layoutY="206.0" prefHeight="83.0" prefWidth="341.0" wrapText="true" />
+      <Button fx:id="btnValidate" layoutX="142.0" layoutY="384.0" mnemonicParsing="false" onAction="#validate" text="Validar" />
+      <Button layoutX="399.0" layoutY="384.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
+      <TextField fx:id="tfName" layoutX="138.0" layoutY="128.0" prefHeight="25.0" prefWidth="174.0" />
+      <DatePicker fx:id="dpDate" layoutX="138.0" layoutY="165.0" />
+      <TextArea fx:id="taMessage" layoutX="138.0" layoutY="204.0" prefHeight="83.0" prefWidth="341.0" wrapText="true" />
+      <Label layoutX="330.0" layoutY="168.0" text="Hora">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="436.0" layoutY="169.0" text="Minutos">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbHours" layoutX="371.0" layoutY="166.0" prefHeight="25.0" prefWidth="60.0" />
+      <ComboBox fx:id="cbMinutes" layoutX="495.0" layoutY="167.0" prefHeight="25.0" prefWidth="60.0" />
+      <Label fx:id="labelFinished" layoutX="57.0" layoutY="305.0" text="Terminada">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbFinished" layoutX="138.0" layoutY="302.0" prefHeight="25.0" prefWidth="114.0" />
+      <Label layoutX="35.0" layoutY="62.0" prefHeight="45.0" prefWidth="537.0" text="El nombre no es obligatorio, pero la fecha, hora, minutos y mensaje si.  La hora y minutos estan en formato de 24H." wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

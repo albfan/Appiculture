@@ -974,6 +974,7 @@ public class DBmanager {
                 al.setDate(resultSet.getString(2));
                 al.setName(resultSet.getString(3));
                 al.setText(resultSet.getString(4));
+                al.setFinished(resultSet.getInt(5));
 
                 alarmsList.add(al);
 
@@ -990,13 +991,14 @@ public class DBmanager {
 
         try {
 
-            s = "INSERT INTO alarms ( date, name, text) VALUES( ?, ?, ?)";
+            s = "INSERT INTO alarms ( date, name, text, finished) VALUES( ?, ?, ?, ?)";
 
             preparedStatement = connection.prepareStatement(s);
 
             preparedStatement.setString(1, alarm.getDateStringFormat());
             preparedStatement.setString(2, alarm.getName());
             preparedStatement.setString(3, alarm.getText());
+            preparedStatement.setInt(4,alarm.getFinishedIntegerFormat());
 
             preparedStatement.execute();
 
@@ -1010,12 +1012,14 @@ public class DBmanager {
 
         try {
 
-            s = "UPDATE alarms SET date=?, name=?, text=? WHERE id=?";
+            s = "UPDATE alarms SET date=?, name=?, text=?, finished=? WHERE id=?";
             preparedStatement = connection.prepareStatement(s);
             preparedStatement.setString(1, alarm.getDateStringFormat());
             preparedStatement.setString(2, alarm.getName());
             preparedStatement.setString(3, alarm.getText());
-            preparedStatement.setInt(4, oldAlarm.getId());
+            preparedStatement.setInt(4,alarm.getFinishedIntegerFormat());
+            preparedStatement.setInt(5, oldAlarm.getId());
+
 
             int i = preparedStatement.executeUpdate();
 

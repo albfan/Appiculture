@@ -57,13 +57,13 @@ public class MainController extends BaseController implements Initializable {
     private Button btnModCores;
 
     @FXML
-    private ListView<Alarms> lvAlarms;
-
-    @FXML
     private Button btnAddAlarm;
 
     @FXML
     private Button btnModAlarm;
+
+    @FXML
+    private TableView<Alarms> tvAlarms;
 
     private ObservableList<Beehives> beehivesList;
 
@@ -599,7 +599,7 @@ public class MainController extends BaseController implements Initializable {
 
     private void initialAlarmsConfig() {
 
-        lvAlarms.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tvAlarms.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         refreshAlarmListView();
 
     }
@@ -624,12 +624,12 @@ public class MainController extends BaseController implements Initializable {
             if (((Button) actionEvent.getSource()).getId().equalsIgnoreCase("btnModAlarm")) {
 
                 //this is to check if user had multiple selection on beehives tableview. Only 1 allowed to be modified.
-                ObservableList<Alarms> modList = lvAlarms.getSelectionModel().getSelectedItems();
+                ObservableList<Alarms> modList = tvAlarms.getSelectionModel().getSelectedItems();
                 if (modList.size() > 1) {
                     alert.setContentText("Solo puede modificar las alarmas de una en una");
                     alert.show();
                 } else if (modList.size() == 1) {
-                    fa.setSelectedAlarm(lvAlarms.getSelectionModel().getSelectedItem());
+                    fa.setSelectedAlarm(tvAlarms.getSelectionModel().getSelectedItem());
                     stage.showAndWait();
                 }
             } else {
@@ -646,14 +646,14 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     public void deleteAlarms(ActionEvent actionEvent ){
 
-        if (lvAlarms.getSelectionModel().getSelectedItems().size() > 0) {
+        if (tvAlarms.getSelectionModel().getSelectedItems().size() > 0) {
             Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
             confirmation.setTitle(null);
             confirmation.setHeaderText(null);
             confirmation.setContentText("¿Está seguro de borrar las alarmas seleccionadas?");
             Optional<ButtonType> result = confirmation.showAndWait();
             if (result.get() == ButtonType.OK) {
-                DBmanager.getINSTANCE().deleteAlarmsInDB(lvAlarms.getSelectionModel().getSelectedItems());
+                DBmanager.getINSTANCE().deleteAlarmsInDB(tvAlarms.getSelectionModel().getSelectedItems());
                 refreshAlarmListView();
             } else {
                 // ... user chose CANCEL or closed the dialog
@@ -665,7 +665,7 @@ public class MainController extends BaseController implements Initializable {
 
     private void refreshAlarmListView(){
 
-      lvAlarms.setItems(DBmanager.getINSTANCE().getAlarms());
+      tvAlarms.setItems(DBmanager.getINSTANCE().getAlarms());
 
     }
 
