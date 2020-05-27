@@ -27,7 +27,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="miExportDB" mnemonicParsing="false" text="Exportar base de datos" />
+                  <MenuItem fx:id="miImportDB" mnemonicParsing="false" text="Importar base de datos" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

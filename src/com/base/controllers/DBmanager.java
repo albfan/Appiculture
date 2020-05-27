@@ -3,6 +3,7 @@ package com.base.controllers;
 import com.base.models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import org.sqlite.SQLiteConfig;
 
 import java.sql.*;
@@ -47,7 +48,7 @@ public class DBmanager {
         return INSTANCE;
     }
 
-    //Methods-------------------
+    //Connection methods-------------------
     public Connection openConnection() {
 
         try {
@@ -87,6 +88,18 @@ public class DBmanager {
             e.printStackTrace();
         }
     }
+    //Import and export methods ----------------------------------------------------
+
+
+    public void importDB(){
+
+    }
+
+    public void exportDB(){
+
+    }
+
+
 
     //APIARIES-------(id, name, adress) id is PK and autoincremental-----------------
     public void insertApiaryInDB(Apiaries ap) {

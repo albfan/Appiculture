@@ -36,19 +36,13 @@ public class Launcher extends Application
             @Override
             public void handle(WindowEvent windowEvent) {
 
+                mainWindowController.terminateAlarmService();
                 DBmanager.getINSTANCE().closeConnection();
-//                Logica.getINSTANCE().guardarListaCuentasEmails();
-//                Logica.getINSTANCE().writeSettings();
-//                Logica.getINSTANCE().writeListaAlarmas();
-//                Reloj2 r = mainWindowController.getIdReloj();
-//                r.getTimer().cancel();
-//                r.getTimer().purge();
+
+
             }
         });
-        mainWindowController.setActualStage(stage);//le pasas el stage a tu controlador.
+        mainWindowController.setActualStage(stage);
         stage.show();
-//        if (Logica.getINSTANCE().getListaCuentasEmailSize() < 1) {
-//            mainWindowController.formularioLogin();
-//        }
     }
 }

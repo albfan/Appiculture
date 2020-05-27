@@ -8,6 +8,7 @@ import com.base.models.Apiaries;
 import com.base.models.Beehives;
 import com.base.models.Cores;
 import com.base.models.structure.BaseController;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,8 +25,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainController extends BaseController implements Initializable {
 
@@ -67,6 +72,9 @@ public class MainController extends BaseController implements Initializable {
     private TableView<Alarms> tvAlarms;
 
     private ObservableList<Beehives> beehivesList;
+    private Timer timer;
+    private TimerTask timerTask;
+    private ObservableList<Alarms> alarmList ;
 
 
     //this is the apiary actually selected in listview
@@ -81,9 +89,21 @@ public class MainController extends BaseController implements Initializable {
         initialBeehivesConfig();
         initialCoresConfig();
         initialAlarmsConfig();
+        checkAndStartAlarms();
 
 
+    }
 
+    //Menu methods ===========================================================
+
+    @FXML
+    public void importDB(){
+        DBmanager.getINSTANCE().importDB();
+    }
+
+    @FXML
+    public void exportDB(){
+        DBmanager.getINSTANCE().exportDB();
     }
 
 
@@ -204,9 +224,9 @@ public class MainController extends BaseController implements Initializable {
      * update the beehiveList with the newest data from database. this method is mainly called when user do a CRUD
      * query to the database.
      */
-    private void setBeehivesList(){
+    private void setBeehivesList() {
 
-        beehivesList= FXCollections.observableArrayList(DBmanager.getINSTANCE().getBeehivesFromDB(currentApiarySelected));
+        beehivesList = FXCollections.observableArrayList(DBmanager.getINSTANCE().getBeehivesFromDB(currentApiarySelected));
 
     }
 
@@ -444,7 +464,7 @@ public class MainController extends BaseController implements Initializable {
     }
 
     @FXML
-    public void openProductionsManager(ActionEvent actionEvent){
+    public void openProductionsManager(ActionEvent actionEvent) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/ManagerProductions.fxml"));
         try {
@@ -478,7 +498,7 @@ public class MainController extends BaseController implements Initializable {
     }
 
     @FXML
-    public void openHikesManager(ActionEvent actionEvent){
+    public void openHikesManager(ActionEvent actionEvent) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/ManagerHikes.fxml"));
         try {
@@ -520,7 +540,7 @@ public class MainController extends BaseController implements Initializable {
     }
 
     @FXML
-    public void openCoresForm(ActionEvent actionEvent){
+    public void openCoresForm(ActionEvent actionEvent) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormCores.fxml"));
 
@@ -603,12 +623,24 @@ public class MainController extends BaseController implements Initializable {
 
         tvAlarms.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         refreshAlarmListView();
-        OperationManager.getInstance().CheckAndStartAlarms(this);
+        alarmList = DBmanager.getINSTANCE().getAlarms();
+
+    }
+
+    private void refreshAlarmlist(){
+
+        alarmList = FXCollections.observableArrayList(DBmanager.getINSTANCE().getAlarms());
+
+    }
+
+    public void refreshAlarmListView() {
+
+        tvAlarms.setItems(FXCollections.observableArrayList(DBmanager.getINSTANCE().getAlarms()));
 
     }
 
     @FXML
-    public void openFormAlarm(ActionEvent actionEvent){
+    public void openFormAlarm(ActionEvent actionEvent) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormAlarm.fxml"));
 
@@ -643,12 +675,12 @@ public class MainController extends BaseController implements Initializable {
             e.printStackTrace();
         }
         refreshAlarmListView();
-        OperationManager.getInstance().CheckAndStartAlarms(this);
 
 
     }
+
     @FXML
-    public void deleteAlarms(ActionEvent actionEvent ){
+    public void deleteAlarms(ActionEvent actionEvent) {
 
         if (tvAlarms.getSelectionModel().getSelectedItems().size() > 0) {
             Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
@@ -663,19 +695,63 @@ public class MainController extends BaseController implements Initializable {
                 // ... user chose CANCEL or closed the dialog
             }
         }
-        OperationManager.getInstance().CheckAndStartAlarms(this);
-
-
-    }
-
-    public void refreshAlarmListView(){
-
-      tvAlarms.setItems(DBmanager.getINSTANCE().getAlarms());
-
     }
 
 
 
+    public void checkAndStartAlarms() {
+
+
+        timer = new Timer();
+
+
+        //if its not the first time that this method have been called, first we will clean the tasks
+        // to update the task list. Otherwise, it will create a new timer and task.
+
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        refreshAlarmlist();
+
+                        if (alarmList.size() > 0) {
+
+                            for (Alarms a : alarmList) {
+
+                                if (a.getDate().until(LocalDateTime.now(), ChronoUnit.SECONDS) > 0 && !a.getFinished()) {
+
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Alarma");
+                                    alert.setHeaderText(a.getName());
+                                    alert.setContentText(a.getText());
+                                    alert.show();
+                                    DBmanager.getINSTANCE().setAlarmFinished(a);
+                                    refreshAlarmListView();
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+                });
+            }
+        };
+
+        timer.schedule(timerTask,0,1000);
+
+    }
+
+    public void terminateAlarmService(){
+        timerTask.cancel(); //optional
+        timer.cancel();
+        timer.purge();
+    }
 
 
 }

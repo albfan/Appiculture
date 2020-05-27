@@ -23,8 +23,7 @@ public class OperationManager {
     private ObservableList<String> hoursList;
     private ObservableList<String> minutesAndSecondsList;
     private ObservableList<String> yesOrNoList;
-    private Timer timer;
-    private TimerTask timerTask;
+
 
     private static OperationManager INSTANCE = null;
 
@@ -153,60 +152,5 @@ public class OperationManager {
         return yesOrNoList;
     }
 
-    public void CheckAndStartAlarms(MainController mc) { //todo - Seguir desde aquí, arreglar el concurrent modification. Replantear todo desde el principio.
 
-        ObservableList<Alarms> alarmList = DBmanager.getINSTANCE().getAlarms();
-
-        timer=new Timer();
-
-
-        if (alarmList.size() > 0) {
-
-            //if its not the first time that this method have been called, first we will clean the tasks
-            // to update the task list. Otherwise, it will create a new timer and task.
-
-            timerTask = new TimerTask() {
-                @Override
-                public void run() {
-
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            for (Alarms a : alarmList) {
-
-                                if (a.getDate().until(LocalDateTime.now(), ChronoUnit.SECONDS) > 0 && !a.getFinished()) {
-
-                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                    alert.setTitle("Alarma");
-                                    alert.setHeaderText(a.getName());
-                                    alert.setContentText(a.getText());
-                                    alert.show();
-                                    DBmanager.getINSTANCE().setAlarmFinished(a);
-                                    mc.refreshAlarmListView();
-
-                                }
-
-                            }
-
-                        }
-                    });
-                }
-            };
-
-//
-//            if (null != timer) {
-//
-//                timer.cancel();
-//                timer.purge();
-//
-//            }
-
-            timer.schedule(timerTask, 1000);
-
-
-        }
-
-
-    }
 }
