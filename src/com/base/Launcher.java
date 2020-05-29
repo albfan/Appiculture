@@ -44,5 +44,5 @@ public class Launcher extends Application
         });
         mainWindowController.setActualStage(stage);
         stage.show();
-    }
+    }//todo- verificar porque las alarmas modificadas se lanzan antes de tiempo
 }

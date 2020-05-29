@@ -70,6 +70,10 @@ public class DBmanager {
         return null;
     }
 
+    public Connection getConnection(){
+        return connection;
+    }
+
     public void closeConnection() {
 
         try {
@@ -88,7 +92,7 @@ public class DBmanager {
             e.printStackTrace();
         }
     }
-    //Import and export methods ----------------------------------------------------
+    //Import and export database methods ----------------------------------------------------
 
 
     public void importDB(){

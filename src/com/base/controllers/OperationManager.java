@@ -2,15 +2,23 @@ package com.base.controllers;
 
 import com.base.controllers.views.MainController;
 import com.base.models.Alarms;
+import com.base.models.Apiaries;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
+import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,6 +31,8 @@ public class OperationManager {
     private ObservableList<String> hoursList;
     private ObservableList<String> minutesAndSecondsList;
     private ObservableList<String> yesOrNoList;
+    private Connection connection = null;
+    private Map<String, Object> reportsParams = null;
 
 
     private static OperationManager INSTANCE = null;
@@ -151,6 +161,46 @@ public class OperationManager {
     public ObservableList<String> getYesOrNoList() {
         return yesOrNoList;
     }
+//Reports=====================================================================
 
+    public String printApiaryReport(String type, Apiaries... aplist) {
+
+        String s;
+        StringBuilder stb = new StringBuilder();
+        for (int i = 0; i <= aplist.length - 1; i++) {
+
+            stb.append(aplist[i].getId());
+            if (i < aplist.length - 1) {
+                stb.append(',');
+            }
+
+        }
+        connection = DBmanager.getINSTANCE().getConnection();
+        reportsParams = new HashMap<>();
+        reportsParams.put("listid", stb.toString());
+
+        try {
+            //JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream("/informes/factura.jasper"),parametros, conexion);
+            JasperPrint print = JasperFillManager.fillReport("reports/apiary.jasper", reportsParams, connection);
+            if (type.equals("pdf")) {
+
+                s = "reports/informeApiarios.pdf";
+                JasperExportManager.exportReportToPdfFile(print, s);
+                return s;
+            }
+            if (type.equals("html")) {
+                s = "reports/apiaries.html";
+                JasperExportManager.exportReportToHtmlFile(print, s);
+                return s;
+            }
+
+        } catch (JRException e) {
+            e.printStackTrace();
+
+        }
+        return null;
+    }
 
 }
+
+

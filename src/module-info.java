@@ -10,6 +10,7 @@ module Appiculture {
     requires javafx.swt;
     requires sqlite.jdbc;
     requires java.sql;
+    requires jasperreports;
 
     exports com.base.controllers.views;
     exports com.base.models;

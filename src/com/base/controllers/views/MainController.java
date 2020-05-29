@@ -20,9 +20,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -70,11 +73,14 @@ public class MainController extends BaseController implements Initializable {
 
     @FXML
     private TableView<Alarms> tvAlarms;
+    @FXML
+    private WebView webview;
 
     private ObservableList<Beehives> beehivesList;
     private Timer timer;
     private TimerTask timerTask;
-    private ObservableList<Alarms> alarmList ;
+    private ObservableList<Alarms> alarmList;
+    private ObservableList<Apiaries> selectedApiariesList;
 
 
     //this is the apiary actually selected in listview
@@ -97,12 +103,12 @@ public class MainController extends BaseController implements Initializable {
     //Menu methods ===========================================================
 
     @FXML
-    public void importDB(){
+    public void importDB() {
         DBmanager.getINSTANCE().importDB();
     }
 
     @FXML
-    public void exportDB(){
+    public void exportDB() {
         DBmanager.getINSTANCE().exportDB();
     }
 
@@ -116,6 +122,7 @@ public class MainController extends BaseController implements Initializable {
     private void initialApiaryConfig() {
 
         lvApiaries.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        selectedApiariesList = FXCollections.observableArrayList();
         setListenersForApiaryList();
         refreshApiariesListView();
         ObservableList<Apiaries> list = DBmanager.getINSTANCE().getApiariesFromDB();
@@ -146,12 +153,18 @@ public class MainController extends BaseController implements Initializable {
             public void changed(ObservableValue<? extends Apiaries> observable, Apiaries oldValue, Apiaries newValue) {
 
                 if (newValue != null) {
+
+                    //this is to save the selected apiary for the form windows.
                     currentApiarySelected = newValue;
+                    //this is to save the selected apiaries for reports and webview.
+                    selectedApiariesList = lvApiaries.getSelectionModel().getSelectedItems();
+                    refreshWebview();
                     //get from database all beehives from the current selected apiary
                     setBeehivesList();
                     //refresh beehive tableview using the beehiveList recently updated.
                     refreshBeehivesTableView();
                     refreshCoresTableView();
+
                 }
             }
         });
@@ -627,7 +640,7 @@ public class MainController extends BaseController implements Initializable {
 
     }
 
-    private void refreshAlarmlist(){
+    private void refreshAlarmlist() {
 
         alarmList = FXCollections.observableArrayList(DBmanager.getINSTANCE().getAlarms());
 
@@ -698,7 +711,6 @@ public class MainController extends BaseController implements Initializable {
     }
 
 
-
     public void checkAndStartAlarms() {
 
 
@@ -743,14 +755,33 @@ public class MainController extends BaseController implements Initializable {
             }
         };
 
-        timer.schedule(timerTask,0,1000);
+        timer.schedule(timerTask, 0, 1000);
 
     }
 
-    public void terminateAlarmService(){
+    public void terminateAlarmService() {
         timerTask.cancel(); //optional
         timer.cancel();
         timer.purge();
+    }
+
+    @FXML
+    public void printReport() {
+
+
+        OperationManager.getInstance().printApiaryReport("pdf",
+                selectedApiariesList.toArray(new Apiaries[selectedApiariesList.size()]));
+
+    }
+
+    private void refreshWebview() {
+
+        WebEngine engine = webview.getEngine();
+        String fileurl = OperationManager.getInstance().printApiaryReport("html",
+                selectedApiariesList.toArray(new Apiaries[selectedApiariesList.size()]));
+        File f=new File(fileurl);
+        engine.load(f.toURI().toString());
+
     }
 
 
