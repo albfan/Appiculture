@@ -4,8 +4,15 @@ import com.base.models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.sqlite.SQLiteConfig;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.time.LocalDateTime;
 
@@ -26,7 +33,7 @@ public class DBmanager {
     private ObservableList<Productions> productionsList;
     private ObservableList<Hikes> hikesList;
     private ObservableList<Cores> coresList;
-    private ObservableList<Alarms>alarmsList;
+    private ObservableList<Alarms> alarmsList;
 
     //Constructor--------------
     private DBmanager() {
@@ -37,8 +44,8 @@ public class DBmanager {
         queensList = FXCollections.observableArrayList();
         productionsList = FXCollections.observableArrayList();
         hikesList = FXCollections.observableArrayList();
-        coresList= FXCollections.observableArrayList();
-        alarmsList= FXCollections.observableArrayList();
+        coresList = FXCollections.observableArrayList();
+        alarmsList = FXCollections.observableArrayList();
     }
 
     //Singleton Method-------------
@@ -70,7 +77,7 @@ public class DBmanager {
         return null;
     }
 
-    public Connection getConnection(){
+    public Connection getConnection() {
         return connection;
     }
 
@@ -95,14 +102,67 @@ public class DBmanager {
     //Import and export database methods ----------------------------------------------------
 
 
-    public void importDB(){
+    public void importDB(Stage stage) {
 
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile;
+        fileChooser.setTitle("Importar base de datos");
+        fileChooser.getExtensionFilters().addAll(
+
+                new FileChooser.ExtensionFilter("base de datos", "*.db")
+
+        );
+        fileChooser.setInitialFileName("datab.db");
+        selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (null != selectedFile) {
+
+            try {
+
+                closeConnection();
+                Files.copy(selectedFile.toPath(), Path.of("resources/db/datab.db"), StandardCopyOption.REPLACE_EXISTING);
+                openConnection();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public void exportDB(){
+    //todo - verificar que deje borrar los apiarios directamente cuando tengas datos en las tablas
+    //todo - verificar constrains de las tablas
+
+    public void exportDB(Stage stage) {
+
+
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile;
+        fileChooser.setTitle("Exportar base de datos");
+        fileChooser.getExtensionFilters().addAll(
+
+                new FileChooser.ExtensionFilter("base de datos", "*.db")
+
+        );
+        fileChooser.setInitialFileName("datab.db");
+        selectedFile = fileChooser.showSaveDialog(stage);
+
+        if (null != selectedFile) {
+
+            try {
+
+                closeConnection();
+                Files.copy(Path.of("resources/db/datab.db"), selectedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                openConnection();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
 
     }
-
 
 
     //APIARIES-------(id, name, adress) id is PK and autoincremental-----------------
@@ -980,7 +1040,7 @@ public class DBmanager {
 
         alarmsList.clear();
         try {
-                s = "SELECT * FROM alarms";
+            s = "SELECT * FROM alarms";
 
             statement = connection.createStatement();
             resultSet = statement.executeQuery(s);
@@ -1015,7 +1075,7 @@ public class DBmanager {
             preparedStatement.setString(1, alarm.getDateStringFormat());
             preparedStatement.setString(2, alarm.getName());
             preparedStatement.setString(3, alarm.getText());
-            preparedStatement.setInt(4,alarm.getFinishedIntegerFormat());
+            preparedStatement.setInt(4, alarm.getFinishedIntegerFormat());
 
             preparedStatement.execute();
 
@@ -1034,7 +1094,7 @@ public class DBmanager {
             preparedStatement.setString(1, alarm.getDateStringFormat());
             preparedStatement.setString(2, alarm.getName());
             preparedStatement.setString(3, alarm.getText());
-            preparedStatement.setInt(4,alarm.getFinishedIntegerFormat());
+            preparedStatement.setInt(4, alarm.getFinishedIntegerFormat());
             preparedStatement.setInt(5, oldAlarm.getId());
 
 
@@ -1064,7 +1124,7 @@ public class DBmanager {
 
     }
 
-    public void setAlarmFinished(Alarms a){
+    public void setAlarmFinished(Alarms a) {
 
         try {
 
@@ -1079,8 +1139,6 @@ public class DBmanager {
         }
 
     }
-
-
 
 
 }

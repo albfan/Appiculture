@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -98,18 +99,25 @@ public class MainController extends BaseController implements Initializable {
         checkAndStartAlarms();
 
 
+
     }
 
     //Menu methods ===========================================================
 
     @FXML
     public void importDB() {
-        DBmanager.getINSTANCE().importDB();
+        DBmanager.getINSTANCE().importDB(actualStage);
+        refreshApiariesListView();
+        lvApiaries.getSelectionModel().selectFirst();
+        refreshBeehivesTableView();
+        refreshAlarmlist();
+        refreshCoresTableView();
+        refreshWebview();
     }
 
     @FXML
     public void exportDB() {
-        DBmanager.getINSTANCE().exportDB();
+        DBmanager.getINSTANCE().exportDB(actualStage);
     }
 
 
@@ -182,11 +190,15 @@ public class MainController extends BaseController implements Initializable {
             if (result.get() == ButtonType.OK) {
                 DBmanager.getINSTANCE().deleteApiariesInDB(lvApiaries.getSelectionModel().getSelectedItems());
                 refreshApiariesListView();
+
+                if(lvApiaries.getItems().size()<1 || null==lvApiaries.getItems()){
+
+                    refreshBeehivesTableView();
+                }
             } else {
                 // ... user chose CANCEL or closed the dialog
             }
         }
-
     }
 
     /**
@@ -636,19 +648,24 @@ public class MainController extends BaseController implements Initializable {
 
         tvAlarms.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         refreshAlarmListView();
-        alarmList = DBmanager.getINSTANCE().getAlarms();
 
     }
 
+    /**
+     * this method retreive and updated list of alarm from database and create a copied list.
+     */
     private void refreshAlarmlist() {
 
         alarmList = FXCollections.observableArrayList(DBmanager.getINSTANCE().getAlarms());
 
     }
 
+    /**
+     * This method refresh the ListView of alarms
+     */
     public void refreshAlarmListView() {
-
-        tvAlarms.setItems(FXCollections.observableArrayList(DBmanager.getINSTANCE().getAlarms()));
+        refreshAlarmlist();
+        tvAlarms.setItems(alarmList);
 
     }
 
@@ -696,14 +713,17 @@ public class MainController extends BaseController implements Initializable {
     public void deleteAlarms(ActionEvent actionEvent) {
 
         if (tvAlarms.getSelectionModel().getSelectedItems().size() > 0) {
+
             Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
             confirmation.setTitle(null);
             confirmation.setHeaderText(null);
             confirmation.setContentText("¿Está seguro de borrar las alarmas seleccionadas?");
             Optional<ButtonType> result = confirmation.showAndWait();
             if (result.get() == ButtonType.OK) {
+
                 DBmanager.getINSTANCE().deleteAlarmsInDB(tvAlarms.getSelectionModel().getSelectedItems());
                 refreshAlarmListView();
+
             } else {
                 // ... user chose CANCEL or closed the dialog
             }
@@ -728,7 +748,7 @@ public class MainController extends BaseController implements Initializable {
                     @Override
                     public void run() {
 
-                        refreshAlarmlist();
+                        //refreshAlarmlist(); todo - borrar si esto no lo necesito
 
                         if (alarmList.size() > 0) {
 
@@ -763,6 +783,7 @@ public class MainController extends BaseController implements Initializable {
         timerTask.cancel(); //optional
         timer.cancel();
         timer.purge();
+
     }
 
     @FXML
@@ -776,13 +797,14 @@ public class MainController extends BaseController implements Initializable {
 
     private void refreshWebview() {
 
+        webview.setZoom(1.25);
         WebEngine engine = webview.getEngine();
-        String fileurl = OperationManager.getInstance().printApiaryReport("html",
+        String fileURL = OperationManager.getInstance().printApiaryReport("html",
                 selectedApiariesList.toArray(new Apiaries[selectedApiariesList.size()]));
-        File f=new File(fileurl);
+        File f=new File(fileURL);
+
         engine.load(f.toURI().toString());
 
     }
-
 
 }

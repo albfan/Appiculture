@@ -27,8 +27,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem fx:id="miExportDB" mnemonicParsing="false" text="Exportar base de datos" />
-                  <MenuItem fx:id="miImportDB" mnemonicParsing="false" text="Importar base de datos" />
+              <MenuItem fx:id="miExportDB" mnemonicParsing="false" onAction="#exportDB" text="Exportar base de datos" />
+                  <MenuItem fx:id="miImportDB" mnemonicParsing="false" onAction="#importDB" text="Importar base de datos" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -155,7 +155,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <WebView fx:id="webview" prefHeight="269.0" prefWidth="1240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <WebView fx:id="webview" prefHeight="581.0" prefWidth="1381.0" />
                   <Button layoutY="2.0" mnemonicParsing="false" onAction="#printReport" text="Imprimir" />
                </children></AnchorPane>
         </items>

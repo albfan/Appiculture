@@ -34,7 +34,7 @@
 	<queryString>
 		<![CDATA[SELECT a.*	, count(b.number)
 FROM apiaries a, beehives b
-WHERE b.id_apiary IN (  $P!{listid}  )
+WHERE b.id_apiary = a.id and a.id IN (  $P!{listid}  )
 GROUP BY a.id
 ORDER BY a.id]]>
 	</queryString>

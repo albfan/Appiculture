@@ -196,7 +196,6 @@ public class OperationManager {
 
         } catch (JRException e) {
             e.printStackTrace();
-
         }
         return null;
     }
