@@ -3,6 +3,7 @@ package com.base.controllers;
 import com.base.controllers.views.MainController;
 import com.base.models.Alarms;
 import com.base.models.Apiaries;
+import com.base.models.Beehives;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
+import java.io.File;
 import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.time.*;
@@ -163,7 +165,7 @@ public class OperationManager {
     }
 //Reports=====================================================================
 
-    public String printApiaryReport(String type, Apiaries... aplist) {
+    public String printApiaryReport(File destinationFile, String type, Apiaries... aplist) {
 
         String s;
         StringBuilder stb = new StringBuilder();
@@ -184,12 +186,54 @@ public class OperationManager {
             JasperPrint print = JasperFillManager.fillReport("reports/apiary.jasper", reportsParams, connection);
             if (type.equals("pdf")) {
 
-                s = "reports/informeApiarios.pdf";
+                s = destinationFile.getPath();
                 JasperExportManager.exportReportToPdfFile(print, s);
                 return s;
             }
             if (type.equals("html")) {
                 s = "reports/apiaries.html";
+                JasperExportManager.exportReportToHtmlFile(print, s);
+                return s;
+            }
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String printBeehiveReport(File destinationFile, String type, Beehives... bhList) {
+
+        String s;
+        StringBuilder stb = new StringBuilder();
+        for (int i = 0; i <= bhList.length - 1; i++) {
+
+            stb.append("\'");
+            stb.append(bhList[i].getId_apiary());
+            stb.append("/");
+            stb.append(bhList[i].getNumber());
+            stb.append("\'");
+            if (i < bhList.length - 1) {
+                stb.append(',');
+            }
+
+        }
+
+        connection = DBmanager.getINSTANCE().getConnection();
+        reportsParams = new HashMap<>();
+        reportsParams.put("listid", stb.toString());
+
+        try {
+            //JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream("/informes/factura.jasper"),parametros, conexion);
+            JasperPrint print = JasperFillManager.fillReport("reports/beehive.jasper", reportsParams, connection);
+            if (type.equals("pdf")) {
+
+                s = destinationFile.getPath();
+                JasperExportManager.exportReportToPdfFile(print, s);
+                return s;
+            }
+            if (type.equals("html")) {
+                s = "reports/beehives.html";
                 JasperExportManager.exportReportToHtmlFile(print, s);
                 return s;
             }

@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -43,6 +44,8 @@ public class Launcher extends Application
             }
         });
         mainWindowController.setActualStage(stage);
+        stage.getIcons().add(new Image("file:resources/images/bee.png"));
+        stage.setTitle("APPiculture");
         stage.show();
-    }//todo- verificar porque las alarmas modificadas se lanzan antes de tiempo
+    }
 }

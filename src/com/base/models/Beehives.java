@@ -31,6 +31,11 @@ public class Beehives implements Serializable {
     //this parameter is to print in the mainwindow tableview a message if the the beehive is favorite or not.
     private String tableViewFavorite;
 
+
+
+    //this parameter retrieve the name of the apiary this beehive belongs and show it on the tableview.
+    private String tableViewApiary;
+
     private ObservableList<Diseases> diseasesList;
 
     private boolean favorite;
@@ -147,5 +152,10 @@ public class Beehives implements Serializable {
     @Override
     public String toString() {
         return ""+number;
+    }
+
+    public String getTableViewApiary() {
+
+        return DBmanager.getINSTANCE().getApiary(id_apiary).getName();
     }
 }

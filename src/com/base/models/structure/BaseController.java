@@ -3,6 +3,7 @@ package com.base.models.structure;
 import com.base.models.Cores;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class BaseController {

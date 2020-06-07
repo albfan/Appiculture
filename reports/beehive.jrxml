@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subr_apiary_production" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3162fa7e-08a6-4d70-aa29-4fcb6b8135a9">
-	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLite"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="beehive" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fde7d110-6750-407b-8fb5-773acb0cf123">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLite"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="414"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="577"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -39,11 +32,12 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<subDataset name="Empty Dataset1" uuid="d12c7848-0b87-412c-bc17-b16b2e7656ef"/>
-	<subDataset name="Dataset1" uuid="aed18909-a793-4067-8c7d-8bf732863682">
-		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="Dataset2" uuid="9dc674f5-b2cb-4034-95af-981870d3fcce">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLite"/>
-		<queryString language="SQL">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="paramidapiary" class="java.lang.String"/>
+		<parameter name="paramidbeehive" class="java.lang.String"/>
+		<queryString>
 			<![CDATA[SELECT
 sum(p.breed_frames_quant), 
 sum(p.honey_quant),
@@ -53,9 +47,10 @@ sum(p.wax_quant),
 sum(p.roy_jelly_quant),
 strftime('%Y',p.date/1000,'unixepoch') as year_ 
 FROM
-productions p, apiaries a
+productions p
 WHERE
-p.id_apiary =a.id 
+p.id_apiary =  $P{paramidapiary} AND  
+p.id_beehive =   $P{paramidbeehive} 
 GROUP BY
 year_
 ORDER BY
@@ -83,69 +78,143 @@ DESC]]>
 		<field name="year_" class="java.lang.Object">
 			<property name="com.jaspersoft.studio.field.label" value="year_"/>
 		</field>
-		<group name="year_">
-			<groupExpression><![CDATA[$F{year_}]]></groupExpression>
-		</group>
 	</subDataset>
-	<parameter name="paramid" class="java.lang.Integer"/>
-	<queryString>
+	<parameter name="listid" class="java.lang.String"/>
+	<queryString language="SQL">
 		<![CDATA[SELECT
-sum(p.breed_frames_quant), 
-sum(p.honey_quant),
-sum(p.royals_quant),
-sum(p.pollen_quant),
-sum(p.wax_quant),
-sum(p.roy_jelly_quant),
-strftime('%Y',p.date/1000,'unixepoch') as year_ 
-FROM
-productions p, apiaries a
-WHERE
-p.id_apiary =a.id AND a.id= $P{paramid} 
-GROUP BY
-year_
-ORDER BY
-year_
-DESC]]>
+b.number,
+b.id_apiary,
+b.number,
+date(b.date/1000,'unixepoch') ,
+ b.type,
+ a.name AS apiary_name
+FROM apiaries a, beehives b
+WHERE (b.id_apiary || '/' || b.number) in (  $P!{listid} )
+GROUP BY b.number
+ORDER BY b.number]]>
 	</queryString>
-	<field name="sum(p.breed_frames_quant)" class="java.lang.Object">
-		<property name="com.jaspersoft.studio.field.label" value="sum(p.breed_frames_quant)"/>
+	<field name="number" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="beehives"/>
 	</field>
-	<field name="sum(p.honey_quant)" class="java.lang.Object">
-		<property name="com.jaspersoft.studio.field.label" value="sum(p.honey_quant)"/>
+	<field name="id_apiary" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="id_apiary"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="beehives"/>
 	</field>
-	<field name="sum(p.royals_quant)" class="java.lang.Object">
-		<property name="com.jaspersoft.studio.field.label" value="sum(p.royals_quant)"/>
+	<field name="COLUMN_3" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="beehives"/>
 	</field>
-	<field name="sum(p.pollen_quant)" class="java.lang.Object">
-		<property name="com.jaspersoft.studio.field.label" value="sum(p.pollen_quant)"/>
+	<field name="date(b.date/1000,&apos;unixepoch&apos;)" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label">
+			<![CDATA[date(b.date/1000,'unixepoch')]]>
+		</property>
 	</field>
-	<field name="sum(p.wax_quant)" class="java.lang.Object">
-		<property name="com.jaspersoft.studio.field.label" value="sum(p.wax_quant)"/>
+	<field name="type" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="type"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="beehives"/>
 	</field>
-	<field name="sum(p.roy_jelly_quant)" class="java.lang.Object">
-		<property name="com.jaspersoft.studio.field.label" value="sum(p.roy_jelly_quant)"/>
+	<field name="apiary_name" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="apiary_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="apiaries"/>
 	</field>
-	<field name="year_" class="java.lang.Object">
-		<property name="com.jaspersoft.studio.field.label" value="year_"/>
-	</field>
-	<columnHeader>
-		<band height="64">
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="72" splitType="Stretch">
+			<rectangle>
+				<reportElement x="110" y="1" width="321" height="51" forecolor="#FFFFFF" backcolor="#A6D2FF" uuid="b338c893-2559-4319-b0a2-da7704780934"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="136" y="10" width="269" height="33" uuid="d0dcf5e7-f708-4d4e-a514-54f82dfefe50"/>
+				<textElement>
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Resumen de colmenas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="206" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="160" height="30" uuid="d9db057e-7df6-48ca-aace-cebc3ea87bd0"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numero de colmena:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="40" width="70" height="30" uuid="77a3a863-b535-4d5c-81f3-126b92f5fdb6"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="40" width="60" height="30" uuid="8e1bb0c2-f3d7-4a84-977e-c968f6dfb746"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="10" width="170" height="30" uuid="40d62afc-d947-4d94-b3e6-ff2f84c28902"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="40" width="100" height="30" uuid="7b47972c-3043-40e8-bb8a-5ad60bc4769f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="40" width="100" height="30" uuid="8d0e123c-9f38-4514-b7c5-b629d34fd551"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date(b.date/1000,'unixepoch')}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="70" width="100" height="30" uuid="63d05976-79a8-4cc2-bcfc-c9a5a64866f7"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apiary_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="70" width="160" height="30" uuid="1be36ffb-8ba1-4efb-bd00-1b682f6ac938"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pertenece al apiario:]]></text>
+			</staticText>
 			<componentElement>
-				<reportElement x="0" y="0" width="490" height="64" uuid="d502b07d-778b-41be-8f70-b91cc50d6994">
+				<reportElement x="0" y="110" width="554" height="80" uuid="124b46d9-10c2-4389-9cc4-fa57f1606e24">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Dataset1" uuid="d5601f75-c77b-4766-b289-865a27d55385">
+					<datasetRun subDataset="Dataset2" uuid="a775f6d9-7a37-43a5-bed2-0f420bf86fcf">
+						<datasetParameter name="paramidapiary">
+							<datasetParameterExpression><![CDATA[$F{id_apiary}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="paramidbeehive">
+							<datasetParameterExpression><![CDATA[$F{number}]]></datasetParameterExpression>
+						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="71" uuid="87231e57-7ef7-41c9-ae6a-f0c387856ed0">
+					<jr:column width="79" uuid="07b78fcd-e40b-471e-8e56-86f83b90db3f">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="71" height="30" uuid="fd361b67-dbfa-4d3b-9956-0e09b0dd53da"/>
+								<reportElement x="0" y="0" width="79" height="30" uuid="0a8bf188-2cc0-4cfb-ad56-ceaa27f4fe6b"/>
 								<textElement textAlignment="Center">
 									<font size="23"/>
 								</textElement>
@@ -154,19 +223,16 @@ DESC]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="71" height="30" uuid="6ebd8f01-43fe-467d-bba1-014c93a58759"/>
-								<textElement textAlignment="Center">
-									<font size="12"/>
-								</textElement>
+								<reportElement x="0" y="0" width="79" height="30" uuid="4a74a4e1-e3cc-40d0-a641-843ed7e92123"/>
 								<textFieldExpression><![CDATA[$F{year_}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="71" uuid="fc5c88a9-f405-4a5a-a821-27c38b6f05dc">
+					<jr:column width="79" uuid="8a8bd0c3-72b4-48e5-b50c-24d4ace51336">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="71" height="30" uuid="9dfdb3e4-8efc-44a2-a42c-4ce3dbd7d5bc"/>
+								<reportElement x="0" y="0" width="79" height="30" uuid="addb3e19-9b6a-4a24-aa0e-e10c53e3fd4a"/>
 								<textElement textAlignment="Center">
 									<font size="11"/>
 								</textElement>
@@ -175,19 +241,16 @@ DESC]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="71" height="30" uuid="b68c8f88-4528-4ea6-bdf5-b7220e358124"/>
-								<textElement textAlignment="Center">
-									<font size="12"/>
-								</textElement>
+								<reportElement x="0" y="0" width="79" height="30" uuid="867b5a17-4375-49b8-9853-640532da6798"/>
 								<textFieldExpression><![CDATA[$F{sum(p.breed_frames_quant)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="68" uuid="a8ec7e43-01f9-4317-b9f4-bc8efaf86aac">
+					<jr:column width="80" uuid="75292ebe-b985-400a-a398-260c46702b11">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="68" height="30" uuid="6949bab8-2581-4074-abb6-cab3c5f35407"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="b9c47034-9254-4a46-9912-734b0aa29cbf"/>
 								<textElement textAlignment="Center">
 									<font size="11"/>
 								</textElement>
@@ -196,19 +259,16 @@ DESC]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="68" height="30" uuid="1890c0fb-8e87-4868-bdaa-aff42e8a70d3"/>
-								<textElement textAlignment="Center">
-									<font size="12"/>
-								</textElement>
+								<reportElement x="0" y="0" width="80" height="30" uuid="282ea5f1-b091-4838-ae03-6c27ccc21a6a"/>
 								<textFieldExpression><![CDATA[$F{sum(p.honey_quant)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="68" uuid="baeb9676-b7dd-4f0f-bd7f-efbe3dec160e">
+					<jr:column width="79" uuid="347e4812-51e0-4ebc-bbc1-ff8a3509a706">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="68" height="30" uuid="a4f50c13-4c51-4e31-8dac-047e2688b05b"/>
+								<reportElement x="0" y="0" width="79" height="30" uuid="7307df18-e813-4297-99da-56fcf6920f70"/>
 								<textElement textAlignment="Center">
 									<font size="11"/>
 								</textElement>
@@ -217,19 +277,16 @@ DESC]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="68" height="30" uuid="b3b17dac-c227-4d74-b8af-5e2a73d5da16"/>
-								<textElement textAlignment="Center">
-									<font size="12"/>
-								</textElement>
+								<reportElement x="0" y="0" width="79" height="30" uuid="1a85e034-e2e6-4f64-b028-06d2d4685eba"/>
 								<textFieldExpression><![CDATA[$F{sum(p.royals_quant)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="69" uuid="e888a939-f4b1-437a-a903-e3541cc71427">
+					<jr:column width="79" uuid="b337dd9b-9780-492e-be42-2ad228a4795b">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="69" height="30" uuid="372f5fa5-3c93-413b-9677-e933d4aa2bdc"/>
+								<reportElement x="0" y="0" width="79" height="30" uuid="61855831-b6b3-4617-9d7f-ee95d0026fc2"/>
 								<textElement textAlignment="Center">
 									<font size="11"/>
 								</textElement>
@@ -238,19 +295,16 @@ DESC]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="69" height="30" uuid="1a53018d-1dde-4e23-8c28-88ac7f65c8de"/>
-								<textElement textAlignment="Center">
-									<font size="12"/>
-								</textElement>
+								<reportElement x="0" y="0" width="79" height="30" uuid="9daf342f-3c40-4d1f-ab45-fc4d49f880eb"/>
 								<textFieldExpression><![CDATA[$F{sum(p.pollen_quant)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="72" uuid="697ae335-3711-4b49-ac41-40a19f93602b">
+					<jr:column width="79" uuid="919338a0-4577-459c-8f95-8df6cb2761fa">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="72" height="30" uuid="db43fb74-106e-4dd4-98f8-60275edbdff8"/>
+								<reportElement x="0" y="0" width="79" height="30" uuid="ecd59b5d-8558-41d4-942c-aff366dea048"/>
 								<textElement textAlignment="Center">
 									<font size="11"/>
 								</textElement>
@@ -259,19 +313,16 @@ DESC]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="72" height="30" uuid="ca50a58f-cd23-4d61-ab6e-3b243aaccd75"/>
-								<textElement textAlignment="Center">
-									<font size="12"/>
-								</textElement>
+								<reportElement x="0" y="0" width="79" height="30" uuid="0fa23277-b3c1-44c1-bc8e-d204b82f6b9f"/>
 								<textFieldExpression><![CDATA[$F{sum(p.wax_quant)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="71" uuid="43da8ac4-98ae-4a1f-b69f-bb4d3495cbf9">
+					<jr:column width="79" uuid="e3bf6dde-a29e-46be-b531-37188adb6e9a">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="71" height="30" uuid="f97280ad-0196-4600-b3a7-2e066b9b4081"/>
+								<reportElement x="0" y="0" width="79" height="30" uuid="94b73dde-4329-4ee6-b958-2086064817ec"/>
 								<textElement textAlignment="Center">
 									<font size="11"/>
 								</textElement>
@@ -280,10 +331,7 @@ DESC]]>
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="71" height="30" uuid="85aa4af7-405d-459d-b37b-678c6011240b"/>
-								<textElement textAlignment="Center">
-									<font size="12"/>
-								</textElement>
+								<reportElement x="0" y="0" width="79" height="30" uuid="9f33d347-875e-4df1-bda2-077e6519967f"/>
 								<textFieldExpression><![CDATA[$F{sum(p.roy_jelly_quant)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -291,5 +339,5 @@ DESC]]>
 				</jr:table>
 			</componentElement>
 		</band>
-	</columnHeader>
+	</detail>
 </jasperReport>

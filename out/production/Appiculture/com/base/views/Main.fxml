@@ -20,20 +20,17 @@
    <children>
       <MenuBar layoutX="-51.0" layoutY="2.0" prefHeight="11.0" prefWidth="1197.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
+          <Menu mnemonicParsing="false" text="Archivo">
+               <items>
               <MenuItem fx:id="miExportDB" mnemonicParsing="false" onAction="#exportDB" text="Exportar base de datos" />
                   <MenuItem fx:id="miImportDB" mnemonicParsing="false" onAction="#importDB" text="Importar base de datos" />
-            </items>
+               </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Ayuda">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="miWikiDiseases" mnemonicParsing="false" onAction="#openWikiDiseases" text="Wiki enfermedades" />
+                  <MenuItem fx:id="miLicense" mnemonicParsing="false" onAction="#openLicenceWindown" onMenuValidation="#openAboutUsWindow" text="Licencia" />
+                  <MenuItem fx:id="miAboutUs" mnemonicParsing="false" onAction="#openAboutUsWindow" text="sobre nosotros" />
             </items>
           </Menu>
         </menus>
@@ -60,7 +57,7 @@
                       </TableColumn>
                       <TableColumn prefWidth="136.0" text="Apiario">
                           <cellValueFactory>
-                              <PropertyValueFactory property="id_apiary" />
+                              <PropertyValueFactory property="tableViewApiary" />
                           </cellValueFactory>
                       </TableColumn>
                         <TableColumn prefWidth="73.0" text="Fecha">
