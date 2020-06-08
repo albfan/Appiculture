@@ -320,14 +320,7 @@ public class MainController extends BaseController implements Initializable {
      */
     public void refreshBeehivesTableView() {
 
-        //since multiselection is enabled for delete option we need to use a list to check if
-        //only one item is selected
-        ObservableList<Apiaries> templist = lvApiaries.getSelectionModel().getSelectedItems();
-        //we only refresh the table when we select 1 apiary
-        if (templist.size() <= 1) {
-            //setBeehivesList();
             tvBeehives.setItems(beehivesList);
-        }
     }
 
     @FXML
@@ -622,15 +615,7 @@ public class MainController extends BaseController implements Initializable {
 
     private void refreshCoresTableView() {
 
-        //since multiselection is enabled for delete option we need to use a list to check if
-        //only one item is selected
-        ObservableList<Apiaries> templist = lvApiaries.getSelectionModel().getSelectedItems();
-        //we only refresh the table when we select 1 apiary
-        if (templist.size() <= 1) {
-
             tvCores.setItems(DBmanager.getINSTANCE().getCores(currentApiarySelected));
-        }
-
     }
 
     @FXML
