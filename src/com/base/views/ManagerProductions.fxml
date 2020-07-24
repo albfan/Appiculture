@@ -54,7 +54,7 @@
             </TableColumn>
         </columns>
       </TableView>
-      <Button fx:id="btnAdd" layoutX="758.0" layoutY="275.0" mnemonicParsing="false" onAction="#openFormProductions" prefHeight="25.0" prefWidth="67.0" text="añadir" />
+      <Button fx:id="btnAdd" layoutX="758.0" layoutY="275.0" mnemonicParsing="false" onAction="#openFormProductions" prefHeight="25.0" prefWidth="67.0" text="Añadir" />
       <Button fx:id="btnModify" layoutX="758.0" layoutY="313.0" mnemonicParsing="false" onAction="#openFormProductions" text="Modificar" />
       <Button fx:id="btnDel" layoutX="758.0" layoutY="354.0" mnemonicParsing="false" onAction="#deleteProductions" prefHeight="25.0" prefWidth="67.0" text="Borrar" />
       <Button fx:id="btnClose" layoutX="398.0" layoutY="591.0" mnemonicParsing="false" onAction="#closeWindow" text="Cerrar" />

@@ -30,7 +30,7 @@
             <items>
               <MenuItem fx:id="miWikiDiseases" mnemonicParsing="false" onAction="#openWikiDiseases" text="Wiki enfermedades" />
                   <MenuItem fx:id="miLicense" mnemonicParsing="false" onAction="#openLicenceWindown" onMenuValidation="#openAboutUsWindow" text="Licencia" />
-                  <MenuItem fx:id="miAboutUs" mnemonicParsing="false" onAction="#openAboutUsWindow" text="sobre nosotros" />
+                  <MenuItem fx:id="miAboutUs" mnemonicParsing="false" onAction="#openAboutUsWindow" text="Sobre nosotros" />
             </items>
           </Menu>
         </menus>

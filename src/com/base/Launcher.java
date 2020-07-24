@@ -29,11 +29,11 @@ public class Launcher extends Application
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("views/Main.fxml")); //recuperas todos los datos del fxml
         Parent root = fxmlLoader.load(); // guardas el contenedor padre del fxml
         MainController mainWindowController = fxmlLoader.getController();//creas una instancia de tu controlador para pasarle el stage
-        Scene scene = new Scene(root,1000,650);
+        Scene scene = new Scene(root);
 
         stage.setScene(scene);
-        stage.setMaximized(true);
-        //stage.sizeToScene();
+        //stage.setMaximized(true);
+        stage.sizeToScene();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent windowEvent) {
