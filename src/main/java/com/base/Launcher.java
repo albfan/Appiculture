@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
+
 /**
  * this class launch the app
  */
@@ -26,7 +28,8 @@ public class Launcher extends Application
 
         DBmanager.getINSTANCE().openConnection();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("views/Main.fxml")); //recuperas todos los datos del fxml
+        //FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("views/Main.fxml")); //recuperas todos los datos del fxml
+        FXMLLoader fxmlLoader = new FXMLLoader(new File("src/main/java/com/base/views/Main.fxml").toURI().toURL());
         Parent root = fxmlLoader.load(); // guardas el contenedor padre del fxml
         MainController mainWindowController = fxmlLoader.getController();//creas una instancia de tu controlador para pasarle el stage
         Scene scene = new Scene(root);
