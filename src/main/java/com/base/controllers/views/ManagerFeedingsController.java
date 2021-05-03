@@ -1,9 +1,7 @@
 package com.base.controllers.views;
 
 import com.base.controllers.DBmanager;
-import com.base.models.Apiaries;
 import com.base.models.Beehives;
-import com.base.models.Diseases;
 import com.base.models.Feedings;
 import com.base.models.structure.BaseController;
 import javafx.collections.ObservableList;
@@ -68,7 +66,7 @@ public class ManagerFeedingsController extends BaseController implements Initial
     @FXML
     public void openFormFeedings(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormFeedings.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FormFeedings.fxml"));
         try {
             Parent root = fxmlLoader.load();
             FormFeedingsController ff = fxmlLoader.getController();

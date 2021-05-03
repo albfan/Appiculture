@@ -3,7 +3,6 @@ package com.base.controllers.views;
 import com.base.controllers.DBmanager;
 import com.base.models.Beehives;
 import com.base.models.Productions;
-import com.base.models.Queens;
 import com.base.models.structure.BaseController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -86,7 +85,7 @@ public class ManagerProductionsController extends BaseController implements Init
 
     @FXML
     public void openFormProductions(ActionEvent actionEvent){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormProductions.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FormProductions.fxml"));
         try {
             Parent root = fxmlLoader.load();
             FormProductionsController f = fxmlLoader.getController();

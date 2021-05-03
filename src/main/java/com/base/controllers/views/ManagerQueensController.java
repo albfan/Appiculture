@@ -1,9 +1,7 @@
 package com.base.controllers.views;
 
 import com.base.controllers.DBmanager;
-import com.base.models.Apiaries;
 import com.base.models.Beehives;
-import com.base.models.Diseases;
 import com.base.models.Queens;
 import com.base.models.structure.BaseController;
 import javafx.collections.ObservableList;
@@ -53,7 +51,7 @@ public class ManagerQueensController extends BaseController implements Initializ
 
     @FXML
     public void openFormQueens(ActionEvent actionEvent){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormQueens.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FormQueens.fxml"));
         try {
             Parent root = fxmlLoader.load();
             FormQueensController f = fxmlLoader.getController();

@@ -12,16 +12,18 @@ module Appiculture {
     requires java.sql;
     requires jasperreports;
 
-    exports com.base.controllers.views;
-    exports com.base.models;
-    exports com.base;
-    //exports com.base.views;
+
 
     opens com.base.controllers.views;
     opens com.base.models.structure;
 //    opens com.stephane to javafx.fxml;
 //    opens com.stephane.views to javafx.fxml;
 // opens javafx.scene to org.controlsfx.controls; //añadido esto para testFX
+
+    exports com.base.controllers.views;
+    exports com.base.models;
+    exports com.base;
+    //exports com.base.views;
 
 
 }

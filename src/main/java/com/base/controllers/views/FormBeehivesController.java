@@ -103,7 +103,7 @@ public class FormBeehivesController extends BaseController implements Initializa
     @FXML
     private void newApiaryForm(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormApiary.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FormApiary.fxml"));
         try {
 
             Parent root = fxmlLoader.load();

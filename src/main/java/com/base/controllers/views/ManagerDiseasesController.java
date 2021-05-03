@@ -4,7 +4,6 @@ import com.base.controllers.DBmanager;
 import com.base.models.Beehives;
 import com.base.models.Diseases;
 import com.base.models.structure.BaseController;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,7 +51,7 @@ public class ManagerDiseasesController extends BaseController implements Initial
     @FXML
     public void openFormDisease(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormDisease.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FormDisease.fxml"));
         try {
             Parent root = fxmlLoader.load();
             FormDiseaseController fd = fxmlLoader.getController();

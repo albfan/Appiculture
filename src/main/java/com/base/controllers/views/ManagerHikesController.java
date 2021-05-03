@@ -3,7 +3,6 @@ package com.base.controllers.views;
 import com.base.controllers.DBmanager;
 import com.base.models.Beehives;
 import com.base.models.Hikes;
-import com.base.models.Queens;
 import com.base.models.structure.BaseController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -83,7 +82,7 @@ public class ManagerHikesController extends BaseController implements Initializa
 
     @FXML
     public void openFormHikes(ActionEvent actionEvent){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormHike.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FormHike.fxml"));
         try {
             Parent root = fxmlLoader.load();
             FormHikeController f = fxmlLoader.getController();

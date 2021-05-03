@@ -220,7 +220,7 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     public void openFormApiary(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormApiary.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FormApiary.fxml"));
         try {
             Parent root = fxmlLoader.load();
             FormApiaryController fa = fxmlLoader.getController();
@@ -352,7 +352,7 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     public void openFormHives(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormBeehives.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FormBeehives.fxml"));
 
         try {
             Parent root = fxmlLoader.load();
@@ -393,7 +393,7 @@ public class MainController extends BaseController implements Initializable {
     public void openDiseasesManager(ActionEvent actionEvent) {
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/ManagerDiseases.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ManagerDiseases.fxml"));
         try {
             Parent root = fxmlLoader.load();
             ManagerDiseasesController dm = fxmlLoader.getController();
@@ -428,7 +428,7 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     private void openFeedingsManager(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/ManagerFeedings.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ManagerFeedings.fxml"));
         try {
             Parent root = fxmlLoader.load();
             ManagerFeedingsController fm = fxmlLoader.getController();
@@ -463,7 +463,7 @@ public class MainController extends BaseController implements Initializable {
     public void openQueensManager(ActionEvent actionEvent) {
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/ManagerQueens.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ManagerQueens.fxml"));
         try {
             Parent root = fxmlLoader.load();
             ManagerQueensController qm = fxmlLoader.getController();
@@ -497,7 +497,7 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     public void openProductionsManager(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/ManagerProductions.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ManagerProductions.fxml"));
         try {
             Parent root = fxmlLoader.load();
             ManagerProductionsController mp = fxmlLoader.getController();
@@ -531,7 +531,7 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     public void openHikesManager(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/ManagerHikes.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ManagerHikes.fxml"));
         try {
             Parent root = fxmlLoader.load();
             ManagerHikesController mh = fxmlLoader.getController();
@@ -573,7 +573,7 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     public void openCoresForm(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormCores.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FormCores.fxml"));
 
         try {
             Parent root = fxmlLoader.load();
@@ -670,7 +670,7 @@ public class MainController extends BaseController implements Initializable {
     @FXML
     public void openFormAlarm(ActionEvent actionEvent) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/base/views/FormAlarm.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/FormAlarm.fxml"));
 
         try {
             Parent root = fxmlLoader.load();

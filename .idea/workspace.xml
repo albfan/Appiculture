@@ -22,78 +22,35 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="25c144a3-4e67-4380-bef4-71e0e0cf12f5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="25c144a3-4e67-4380-bef4-71e0e0cf12f5" name="Default Changelist" comment="Converted to Maven project and some fixes added to Launcher.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Appiculture.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Appiculture.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/FormAlarm.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/FormApiary.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/FormBeehives.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/FormCores.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/FormDisease.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/FormFeedings.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/FormHike.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/FormProductions.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/FormQueens.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/Main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/ManagerAlarms.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/ManagerDiseases.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/ManagerFeedings.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/ManagerHikes.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/ManagerProductions.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/com/base/views/ManagerQueens.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/db/datab.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Appiculture/images/bee.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/reports/apiaries.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/apiaries.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reports/beehives.html" beforeDir="false" afterPath="$PROJECT_DIR$/reports/beehives.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/db/datab.db" beforeDir="false" afterPath="$PROJECT_DIR$/resources/db/datab.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/DBmanager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/DBmanager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/OperationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/OperationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormAlarmController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormAlarmController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormApiaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormApiaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormBeehivesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormBeehivesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormCoresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormCoresController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormDiseaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormDiseaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormFeedingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormFeedingsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormHikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormHikeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormProductionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormProductionsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/FormQueensController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormQueensController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/ManagerAlarmsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerAlarmsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/ManagerDiseasesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerDiseasesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/ManagerFeedingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerFeedingsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/ManagerHikesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerHikesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/ManagerProductionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerProductionsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/controllers/views/ManagerQueensController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerQueensController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/Alarms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/Alarms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/Apiaries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/Apiaries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/Beehives.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/Beehives.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/Cores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/Cores.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/Diseases.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/Diseases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/Feedings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/Feedings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/Hikes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/Hikes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/Productions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/Productions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/Queens.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/Queens.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/Swarms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/Swarms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/models/structure/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/models/structure/BaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/FormAlarm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/FormAlarm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/FormApiary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/FormApiary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/FormBeehives.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/FormBeehives.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/FormCores.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/FormCores.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/FormDisease.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/FormDisease.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/FormFeedings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/FormFeedings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/FormHike.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/FormHike.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/FormProductions.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/FormProductions.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/FormQueens.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/FormQueens.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/ManagerAlarms.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerAlarms.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/ManagerDiseases.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerDiseases.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/ManagerFeedings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerFeedings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/ManagerHikes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerHikes.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/ManagerProductions.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerProductions.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/base/views/ManagerQueens.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerQueens.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormBeehivesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/FormBeehivesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerDiseasesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerDiseasesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerFeedingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerFeedingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerHikesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerHikesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerProductionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerProductionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerQueensController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/base/controllers/views/ManagerQueensController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/FormAlarm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/FormAlarm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/FormApiary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/FormApiary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/FormBeehives.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/FormBeehives.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/FormCores.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/FormCores.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/FormDisease.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/FormDisease.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/FormFeedings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/FormFeedings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/FormHike.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/FormHike.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/FormProductions.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/FormProductions.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/FormQueens.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/FormQueens.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerAlarms.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/ManagerAlarms.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerDiseases.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/ManagerDiseases.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerFeedings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/ManagerFeedings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerHikes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/ManagerHikes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerProductions.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/ManagerProductions.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/base/views/ManagerQueens.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/ManagerQueens.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +68,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -140,7 +98,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/base" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.proportion" value="0.1321004" />
     <property name="project.structure.side.proportion" value="0.2857143" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
@@ -154,6 +112,7 @@
       <recent name="C:\Users\stephane\Desktop\workspace\Appiculture" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Stephane\Desktop\workspace\Appiculture\src\main\resources" />
       <recent name="C:\Users\stephane\Desktop\workspace\Appiculture\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -196,6 +155,21 @@
       <option name="presentableId" value="Default" />
       <updated>1585750328824</updated>
     </task>
+    <task id="LOCAL-00001" summary="Converted to Maven project and some fixes added to Launcher.java">
+      <created>1619953780556</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619953780556</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Converted to Maven project and some fixes added to Launcher.java">
+      <created>1619954379787</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619954379787</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,6 +183,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Converted to Maven project and some fixes added to Launcher.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Converted to Maven project and some fixes added to Launcher.java" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Appiculture$Launcher.ic" NAME="Launcher Coverage Results" MODIFIED="1589539265645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
