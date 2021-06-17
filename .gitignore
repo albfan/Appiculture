@@ -26,3 +26,4 @@ mvn_repo
 
 # target (Maven output directory)
 target
+out
