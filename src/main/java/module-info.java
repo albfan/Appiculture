@@ -1,4 +1,5 @@
-module Appiculture {
+//module com.base.Appiculture {
+    module Appiculture {
 
     requires javafx.base;
     requires javafx.controls;
@@ -18,7 +19,9 @@ module Appiculture {
     exports com.base.controllers.views;
     exports com.base.models;
     exports com.base;
-    //exports com.base.views;
+
+
+
 
 
 }
