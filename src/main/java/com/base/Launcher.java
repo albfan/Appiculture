@@ -3,6 +3,7 @@ package com.base;
 
 import com.base.controllers.DBmanager;
 import com.base.controllers.views.MainController;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import java.io.File;
 
 /**
  * this class launch the app
